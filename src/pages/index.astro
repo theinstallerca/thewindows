@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import WindowArt from '../components/WindowArt.astro';
+---
+<Base title="Custom PVC Windows, Made in Winnipeg">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Custom PVC windows, built in Winnipeg for Winnipeg winters.</h1>
+        <p>We measure, fabricate and install energy-efficient PVC windows in our own shop — no middleman, no waiting on a factory across the country.</p>
+        <div class="hero-actions">
+          <a href="/contact" class="btn btn-primary">Request a free quote</a>
+          <a href="/gallery" class="btn btn-light">See our work</a>
+        </div>
+      </div>
+      <div class="hero-art"><WindowArt kind="casement" /></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>Why order from a local fabricator</h2>
+        <p class="lead">Every window is made to your opening, in our shop, by the same people who install it.</p>
+      </div>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon">📐</div>
+          <h3>Made to measure</h3>
+          <p>Each unit is built to your exact rough opening, so installation is clean and there's no filler to hide gaps.</p>
+        </div>
+        <div class="card">
+          <div class="icon">❄️</div>
+          <h3>Built for −40</h3>
+          <p>Multi-chamber PVC profiles, steel reinforcement and warm-edge double or triple glazing rated for Manitoba's climate.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⏱️</div>
+          <h3>Short lead times</h3>
+          <p>Because we fabricate locally, most orders are ready in weeks, not months — and we can fix things fast if anything ever needs service.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <h2>How it works</h2>
+      </div>
+      <ol class="steps">
+        <li><h3>Free measurement visit</h3><p>We come out, measure every opening and talk through the options with you.</p></li>
+        <li><h3>Written quote</h3><p>You get a clear price per window — no surprises, no pressure.</p></li>
+        <li><h3>Fabrication</h3><p>Your windows are cut, welded, glazed and tested in our Winnipeg shop.</p></li>
+        <li><h3>Installation</h3><p>We remove the old units, install the new ones, insulate, seal and clean up.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section cta-band">
+    <div class="container">
+      <h2>Ready to replace your windows?</h2>
+      <p>Tell us a bit about your house and we'll get back to you within one business day.</p>
+      <a href="/contact" class="btn btn-primary">Get a quote</a>
+    </div>
+  </section>
+</Base>

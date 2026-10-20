@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="Contact & Quote Request">
+  <section class="section">
+    <div class="container grid grid-2" style="align-items: start;">
+      <div>
+        <h1>Request a quote</h1>
+        <p class="lead">Tell us about your project and we'll reply within one business day. Measurement visits in Winnipeg are free.</p>
+
+        <div id="form-ok" class="alert alert-ok" hidden>Thanks — your message has been sent. We'll be in touch shortly.</div>
+        <div id="form-err" class="alert alert-err" hidden>Sorry, something went wrong sending your message. Please email us directly at info@thewindows.ca.</div>
+
+        <form class="form" id="contact-form" action="/api/contact.php" method="post">
+          <div class="form-row">
+            <div><label for="name">Name</label><input id="name" name="name" required autocomplete="name" /></div>
+            <div><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+          </div>
+          <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+          <div><label for="address">Address or neighbourhood</label><input id="address" name="address" autocomplete="street-address" /></div>
+          <div class="form-row">
+            <div><label for="count">Number of windows</label><input id="count" name="count" type="number" min="1" /></div>
+            <div>
+              <label for="project">Project type</label>
+              <select id="project" name="project">
+                <option>Replacement windows</option>
+                <option>New construction</option>
+                <option>Addition / renovation</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+          </div>
+          <div><label for="message">Details</label><textarea id="message" name="message" rows="5" placeholder="Sizes if you have them, which rooms, anything else we should know."></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <button type="submit" class="btn btn-primary">Send request</button>
+          <p class="form-note">We only use your details to reply to this request.</p>
+        </form>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Contact</h3>
+          <p>
+            <strong>Email</strong><br /><a href="mailto:info@thewindows.ca">info@thewindows.ca</a>
+          </p>
+          <p>
+            <strong>Phone</strong><br /><a href="tel:+12040000000">(204) 000-0000</a>
+          </p>
+          <p>
+            <strong>Shop</strong><br />Winnipeg, Manitoba<br /><span class="form-note">Visits by appointment</span>
+          </p>
+          <p>
+            <strong>Hours</strong><br />Mon–Fri 8:00–17:00<br />Sat by appointment
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const ok = document.getElementById('form-ok')!;
+    const err = document.getElementById('form-err')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button')!;
+      btn.disabled = true;
+      ok.hidden = err.hidden = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const data = await res.json();
+        if (res.ok && data.ok) { ok.hidden = false; form.reset(); }
+        else err.hidden = false;
+      } catch { err.hidden = false; }
+      btn.disabled = false;
+      ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</Base>

@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/wwwrvugc/thewindows.ca/
+    - /bin/cp -R dist/. $DEPLOYPATH

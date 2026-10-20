@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import WindowArt from '../components/WindowArt.astro';
+// Drop photos into public/images/gallery/ and list them here.
+// { src: '/images/gallery/filename.jpg', caption: 'Short caption' }
+const photos: { src: string; caption: string }[] = [];
+const placeholders = ['casement', 'slider', 'awning', 'picture', 'hung', 'tilt'] as const;
+---
+<Base title="Gallery">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1>Our work</h1>
+        <p class="lead">Windows we've fabricated and installed around Winnipeg and southern Manitoba.</p>
+      </div>
+      <div class="gallery">
+        {photos.length > 0
+          ? photos.map((p) => (
+              <figure>
+                <img src={p.src} alt={p.caption} loading="lazy" />
+                <figcaption>{p.caption}</figcaption>
+              </figure>
+            ))
+          : placeholders.map((k) => (
+              <figure>
+                <WindowArt kind={k} />
+                <figcaption>Photo coming soon</figcaption>
+              </figure>
+            ))}
+      </div>
+    </div>
+  </section>
+</Base>

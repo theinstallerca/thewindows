@@ -1,0 +1,20 @@
+---
+// Simple placeholder illustration of a window; replaced by photos later.
+interface Props { kind?: 'casement' | 'slider' | 'awning' | 'picture' | 'hung' | 'tilt'; }
+const { kind = 'casement' } = Astro.props;
+---
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={`${kind} window`}>
+  <rect width="400" height="300" fill="#e8f1fa" />
+  <rect x="60" y="30" width="280" height="240" rx="6" fill="#ffffff" stroke="#14213d" stroke-width="8" />
+  <rect x="76" y="46" width="248" height="208" fill="#cfe3f5" />
+  {kind === 'casement' && <line x1="200" y1="46" x2="200" y2="254" stroke="#14213d" stroke-width="8" />}
+  {kind === 'casement' && <path d="M90 150 L180 70 M90 150 L180 230" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
+  {kind === 'slider' && <line x1="200" y1="46" x2="200" y2="254" stroke="#14213d" stroke-width="8" />}
+  {kind === 'slider' && <path d="M240 150 L300 150 M290 140 L300 150 L290 160" stroke="#14213d" stroke-width="3" fill="none" />}
+  {kind === 'awning' && <path d="M90 240 L200 70 L310 240" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
+  {kind === 'hung' && <line x1="76" y1="150" x2="324" y2="150" stroke="#14213d" stroke-width="8" />}
+  {kind === 'hung' && <path d="M200 240 L200 180 M190 190 L200 180 L210 190" stroke="#14213d" stroke-width="3" fill="none" />}
+  {kind === 'tilt' && <path d="M90 240 L200 70 L310 240" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
+  {kind === 'tilt' && <path d="M90 150 L310 70 M90 150 L310 230" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
+  <rect x="40" y="270" width="320" height="12" rx="3" fill="#14213d" />
+</svg>
