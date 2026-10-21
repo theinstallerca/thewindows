@@ -1,21 +1,44 @@
 ---
 import Base from '../layouts/Base.astro';
+import WindowArt from '../components/WindowArt.astro';
 ---
 <Base title="About">
   <section class="section">
-    <div class="container" style="max-width: 760px;">
-      <h1>About The Windows</h1>
-      <p class="lead">A small Winnipeg shop that fabricates PVC windows and installs them itself.</p>
-      <p>We started The Windows because we were tired of seeing homeowners wait months for factory windows that still didn't fit right. Our shop cuts, welds and glazes every unit locally, which means we control the quality from the first measurement to the last bead of sealant.</p>
-      <p>Because the same crew measures, builds and installs, nothing gets lost between departments. If an opening is out of square, we see it on site and build the window to match it.</p>
-      <h2>What we stand behind</h2>
-      <ul class="checklist">
-        <li>Windows made to your opening, not a catalogue size</li>
-        <li>Profiles and glass rated for Manitoba winters</li>
-        <li>Honest pricing in writing before any work starts</li>
-        <li>Local service — if something ever needs attention, we're a short drive away</li>
-      </ul>
-      <p style="margin-top: 2rem;"><a href="/contact" class="btn btn-primary">Get in touch</a></p>
+    <div class="container split">
+      <div>
+        <h1>About The Windows</h1>
+        <p class="lead">A small Winnipeg shop that fabricates PVC windows and installs them itself.</p>
+        <p>We started The Windows because we were tired of seeing homeowners wait months for factory windows that still didn't fit right. Our shop cuts, welds and glazes every unit locally, which means we control the quality from the first measurement to the last bead of sealant.</p>
+        <p>Because the same crew measures, builds and installs, nothing gets lost between departments. If an opening is out of square, we see it on site and build the window to match it.</p>
+      </div>
+      <div class="media"><WindowArt kind="handle" /></div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container split" style="align-items: start;">
+      <div>
+        <h2>What we stand behind</h2>
+        <ul class="checklist">
+          <li>Windows made to your opening, not a catalogue size</li>
+          <li>Profiles and glass rated for Manitoba winters</li>
+          <li>Honest pricing in writing before any work starts</li>
+          <li>Local service — if something ever needs attention, we're a short drive away</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Commercial projects</h2>
+        <p>Storefront, curtain wall and commercial glazing are handled by our partner company, The Installer, with the same crew and the same standards.</p>
+        <a href="https://theinstaller.ca" class="more" rel="noopener">+ theinstaller.ca</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark cta-band">
+    <div class="container">
+      <h2>Talk to us about your windows</h2>
+      <p>Measurement visits in Winnipeg are free.</p>
+      <a href="/contact" class="btn btn-light">Get in touch</a>
     </div>
   </section>
 </Base>

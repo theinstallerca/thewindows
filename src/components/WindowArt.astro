@@ -1,20 +1,62 @@
 ---
-// Simple placeholder illustration of a window; replaced by photos later.
-interface Props { kind?: 'casement' | 'slider' | 'awning' | 'picture' | 'hung' | 'tilt'; }
+// Dark placeholder "product shot" of a window profile; replaced by photos later.
+interface Props { kind?: 'casement' | 'slider' | 'awning' | 'picture' | 'hung' | 'tilt' | 'hero' | 'corner' | 'handle'; }
 const { kind = 'casement' } = Astro.props;
+const w = kind === 'hero' ? 1600 : 800;
+const h = kind === 'hero' ? 900 : 600;
 ---
-<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label={`${kind} window`}>
-  <rect width="400" height="300" fill="#e8f1fa" />
-  <rect x="60" y="30" width="280" height="240" rx="6" fill="#ffffff" stroke="#14213d" stroke-width="8" />
-  <rect x="76" y="46" width="248" height="208" fill="#cfe3f5" />
-  {kind === 'casement' && <line x1="200" y1="46" x2="200" y2="254" stroke="#14213d" stroke-width="8" />}
-  {kind === 'casement' && <path d="M90 150 L180 70 M90 150 L180 230" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
-  {kind === 'slider' && <line x1="200" y1="46" x2="200" y2="254" stroke="#14213d" stroke-width="8" />}
-  {kind === 'slider' && <path d="M240 150 L300 150 M290 140 L300 150 L290 160" stroke="#14213d" stroke-width="3" fill="none" />}
-  {kind === 'awning' && <path d="M90 240 L200 70 L310 240" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
-  {kind === 'hung' && <line x1="76" y1="150" x2="324" y2="150" stroke="#14213d" stroke-width="8" />}
-  {kind === 'hung' && <path d="M200 240 L200 180 M190 190 L200 180 L210 190" stroke="#14213d" stroke-width="3" fill="none" />}
-  {kind === 'tilt' && <path d="M90 240 L200 70 L310 240" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
-  {kind === 'tilt' && <path d="M90 150 L310 70 M90 150 L310 230" stroke="#14213d" stroke-width="3" fill="none" stroke-dasharray="8 6" />}
-  <rect x="40" y="270" width="320" height="12" rx="3" fill="#14213d" />
+<svg viewBox={`0 0 ${w} ${h}`} xmlns="http://www.w3.org/2000/svg" role="img" aria-label="placeholder" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id={`bg-${kind}`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a2a2a" />
+      <stop offset="1" stop-color="#0d0d0d" />
+    </linearGradient>
+    <linearGradient id={`glass-${kind}`} x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a3f45" />
+      <stop offset="0.5" stop-color="#1f2327" />
+      <stop offset="1" stop-color="#2c3136" />
+    </linearGradient>
+  </defs>
+  <rect width={w} height={h} fill={`url(#bg-${kind})`} />
+  {kind === 'hero' && (
+    <g transform="translate(900 120)">
+      <rect x="0" y="0" width="560" height="660" fill="#f2f2f2" />
+      <rect x="22" y="22" width="516" height="616" fill="#e4e4e4" />
+      <rect x="40" y="40" width="480" height="580" fill="url(#glass-hero)" />
+      <rect x="276" y="40" width="10" height="580" fill="#f2f2f2" />
+      <rect x="258" y="300" width="14" height="70" rx="4" fill="#c9c9c9" />
+      <path d="M0 0 L560 0 L560 660 L0 660Z" fill="none" stroke="#cfcfcf" stroke-width="2" />
+    </g>
+  )}
+  {kind === 'corner' && (
+    <g transform="translate(120 80)">
+      <path d="M0 440 L0 0 L560 0 L560 60 L60 60 L60 440Z" fill="#f0f0f0" />
+      <path d="M12 428 L12 12 L548 12 L548 48 L48 48 L48 428Z" fill="none" stroke="#bdbdbd" stroke-width="2" />
+      <path d="M0 0 L60 60" stroke="#9a9a9a" stroke-width="2" />
+      <rect x="60" y="60" width="500" height="380" fill="url(#glass-corner)" />
+    </g>
+  )}
+  {kind === 'handle' && (
+    <g transform="translate(200 120)">
+      <rect x="0" y="0" width="400" height="360" fill="#ececec" />
+      <rect x="150" y="120" width="40" height="40" rx="6" fill="#bfbfbf" />
+      <rect x="160" y="130" width="20" height="20" rx="4" fill="#9e9e9e" />
+      <rect x="170" y="134" width="220" height="14" rx="7" fill="#b5b5b5" />
+    </g>
+  )}
+  {!['hero', 'corner', 'handle'].includes(kind) && (
+    <g transform="translate(160 60)">
+      <rect x="0" y="0" width="480" height="480" fill="#f0f0f0" />
+      <rect x="18" y="18" width="444" height="444" fill="#e2e2e2" />
+      <rect x="34" y="34" width="412" height="412" fill={`url(#glass-${kind})`} />
+      {(kind === 'casement' || kind === 'slider') && <rect x="236" y="34" width="8" height="412" fill="#f0f0f0" />}
+      {kind === 'hung' && <rect x="34" y="236" width="412" height="8" fill="#f0f0f0" />}
+      {kind === 'casement' && <path d="M60 240 L220 60 M60 240 L220 420" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="8 6" />}
+      {kind === 'awning' && <path d="M60 420 L240 60 L420 420" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="8 6" fill="none" />}
+      {kind === 'slider' && <path d="M300 240 L400 240 M385 228 L400 240 L385 252" stroke="#8a8a8a" stroke-width="1.5" fill="none" />}
+      {kind === 'hung' && <path d="M240 400 L240 300 M228 315 L240 300 L252 315" stroke="#8a8a8a" stroke-width="1.5" fill="none" />}
+      {kind === 'tilt' && <path d="M60 420 L240 60 L420 420 M60 240 L420 60 M60 240 L420 420" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="8 6" fill="none" />}
+      {(kind === 'casement' || kind === 'tilt') && <rect x="222" y="210" width="10" height="60" rx="4" fill="#c4c4c4" />}
+    </g>
+  )}
 </svg>

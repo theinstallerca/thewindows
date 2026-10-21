@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 ---
 <Base title="Contact & Quote Request">
   <section class="section">
-    <div class="container grid grid-2" style="align-items: start;">
+    <div class="container split" style="align-items: start; grid-template-columns: 1.4fr 1fr;">
       <div>
         <h1>Request a quote</h1>
         <p class="lead">Tell us about your project and we'll reply within one business day. Measurement visits in Winnipeg are free.</p>
@@ -32,27 +32,19 @@ import Base from '../layouts/Base.astro';
           </div>
           <div><label for="message">Details</label><textarea id="message" name="message" rows="5" placeholder="Sizes if you have them, which rooms, anything else we should know."></textarea></div>
           <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
-          <button type="submit" class="btn btn-primary">Send request</button>
+          <div><button type="submit" class="btn btn-solid">Send request</button></div>
           <p class="form-note">We only use your details to reply to this request.</p>
         </form>
       </div>
 
-      <div>
-        <div class="card">
-          <h3>Contact</h3>
-          <p>
-            <strong>Email</strong><br /><a href="mailto:info@thewindows.ca">info@thewindows.ca</a>
-          </p>
-          <p>
-            <strong>Phone</strong><br /><a href="tel:+12040000000">(204) 000-0000</a>
-          </p>
-          <p>
-            <strong>Shop</strong><br />Winnipeg, Manitoba<br /><span class="form-note">Visits by appointment</span>
-          </p>
-          <p>
-            <strong>Hours</strong><br />Mon–Fri 8:00–17:00<br />Sat by appointment
-          </p>
-        </div>
+      <div class="info-panel">
+        <h3>Contact</h3>
+        <dl>
+          <dt>Email</dt><dd><a href="mailto:info@thewindows.ca">info@thewindows.ca</a></dd>
+          <dt>Phone</dt><dd><a href="tel:+12040000000">(204) 000-0000</a></dd>
+          <dt>Shop</dt><dd>Winnipeg, Manitoba<br /><span class="form-note">Visits by appointment</span></dd>
+          <dt>Hours</dt><dd>Mon–Fri 8:00–17:00<br />Sat by appointment</dd>
+        </dl>
       </div>
     </div>
   </section>
