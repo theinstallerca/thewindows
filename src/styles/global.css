@@ -94,12 +94,12 @@ h3 { font-size: 1rem; letter-spacing: var(--track); text-transform: uppercase; f
 .brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--ink); }
 .brand-mark { font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; font-size: 1.1rem; }
 .brand-mark span { color: var(--gold); }
-.nav { display: flex; align-items: center; gap: 2rem; }
-.nav a { position: relative; display: inline-flex; align-items: center; height: 76px; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; color: var(--ink); }
-.nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: 22px; height: 1px; background: transparent; }
+.nav { display: flex; align-items: center; gap: 0.6rem; }
+.nav a { position: relative; display: inline-flex; align-items: center; height: 76px; padding: 0 0.7rem; text-decoration: none; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 400; color: var(--ink); }
+.nav a::after { content: ''; position: absolute; left: 0.7rem; right: 0.7rem; bottom: 22px; height: 1px; background: transparent; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--gold-dark); }
 .nav a:hover::after, .nav a[aria-current="page"]::after { background: var(--gold); }
-.nav .nav-cta { border: 1px solid var(--gold); color: var(--gold); padding: 0 1.2rem; height: 40px; }
+.nav .nav-cta { border: 1px solid var(--gold); color: var(--gold); padding: 0 1.2rem; height: 40px; margin-left: 0.8rem; }
 .nav .nav-cta::after { display: none; }
 .nav .nav-cta:hover { background: var(--gold); color: #fff; }
 .nav-toggle { display: none; background: none; border: 0; padding: 0.5rem; cursor: pointer; }
@@ -108,7 +108,7 @@ h3 { font-size: 1rem; letter-spacing: var(--track); text-transform: uppercase; f
   .nav-toggle { display: block; }
   .nav { display: none; position: absolute; left: 0; right: 0; top: 76px; background: #fff; border-bottom: 1px solid var(--line); flex-direction: column; align-items: stretch; padding: 1rem 1.25rem 1.5rem; gap: 0; }
   .nav.open { display: flex; }
-  .nav a { height: auto; padding: 0.9rem 0; border-bottom: 1px solid var(--line); display: flex; }
+  .nav a { height: auto; padding: 0.9rem 0.25rem; border-bottom: 1px solid var(--line); display: flex; }
   .nav a::after { display: none; }
   .nav .nav-cta { margin-top: 1rem; justify-content: center; border: 1px solid var(--gold); height: 44px; }
 }

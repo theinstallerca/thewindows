@@ -120,6 +120,14 @@ const ukUrl = link('uk', path);
         const open = nav!.classList.toggle('open');
         btn.setAttribute('aria-expanded', String(open));
       });
+      // Navigate on pointer release anywhere inside a menu item (more robust than relying on the browser's native link hit-test).
+      nav?.addEventListener('pointerup', (e) => {
+        const a = (e.target as HTMLElement).closest('a');
+        if (!a || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        if (a.target === '_blank') return;
+        e.preventDefault();
+        window.location.href = a.href;
+      });
     </script>
   </body>
 </html>
