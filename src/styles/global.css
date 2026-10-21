@@ -1,3 +1,11 @@
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/montserrat-cyrillic-300-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/montserrat-cyrillic-ext-300-normal.woff2') format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/montserrat-cyrillic-400-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/montserrat-cyrillic-ext-400-normal.woff2') format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/montserrat-cyrillic-500-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/montserrat-cyrillic-ext-500-normal.woff2') format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/montserrat-cyrillic-600-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;}
+@font-face{font-family:'Montserrat';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/montserrat-cyrillic-ext-600-normal.woff2') format('woff2');unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:200;font-display:swap;src:url('/fonts/poppins-latin-200-normal.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/poppins-latin-300-normal.woff2') format('woff2');}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/poppins-latin-400-normal.woff2') format('woff2');}
@@ -14,7 +22,7 @@
   --bg: #ffffff;
   --bg-soft: #f6f6f6;
   --dark: #121212;
-  --font: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font: 'Poppins', 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --track: 0.18em;
 }
 
@@ -206,3 +214,19 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--g
 
 .brand img { height: 34px; width: auto; }
 .site-footer .brand-mark { display: none; }
+
+/* Language switch */
+.langs { display: inline-flex; gap: 0.5rem; align-items: center; margin-left: 0.5rem; }
+.langs a { display: inline-flex; padding: 3px; border: 1px solid transparent; line-height: 0; }
+.langs a.active { border-color: var(--gold); }
+.langs svg { display: block; }
+.langs-mobile { display: none; }
+@media (max-width: 860px) {
+  .langs-mobile { display: flex; gap: 1rem; margin-top: 1rem; }
+  .nav .langs-mobile a { border: 1px solid var(--line); padding: 0.4rem 0.9rem; font-size: 0.8rem; letter-spacing: 0.1em; line-height: 1; }
+  .nav .langs-mobile a.active { border-color: var(--gold); color: var(--gold-dark); }
+}
+@media (max-width: 640px) { .topbar-links { display: flex; } .topbar-links > a { display: none; } .topbar-inner { justify-content: space-between; } }
+.split-contact { align-items: start; grid-template-columns: 1.4fr 1fr; }
+@media (max-width: 860px) { .split-contact { grid-template-columns: 1fr; } }
+.site-footer > .container > div > img { height: 30px; width: auto; }

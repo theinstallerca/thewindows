@@ -1,43 +1,61 @@
 ---
+import '../styles/global.css';
+import logo from '../assets/logo.svg';
+import { t, link, phone, email, type Lang } from '../i18n';
+
 interface Props {
   title: string;
   description?: string;
+  lang?: Lang;
+  path: string; // page path without language prefix, e.g. '/windows'
 }
-const { title, description = 'Custom PVC windows fabricated in Winnipeg, Manitoba. Measured, built and installed by The Windows.' } = Astro.props;
+const { title, lang = 'en', path } = Astro.props;
+const s = t(lang);
+const description = Astro.props.description ?? s.meta.description;
 const nav = [
-  { href: '/', label: 'Home' },
-  { href: '/windows', label: 'Windows' },
-  { href: '/gallery', label: 'Gallery' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: link(lang, '/'), label: s.nav.home },
+  { href: link(lang, '/windows'), label: s.nav.windows },
+  { href: link(lang, '/gallery'), label: s.nav.gallery },
+  { href: link(lang, '/about'), label: s.nav.about },
+  { href: link(lang, '/contact'), label: s.nav.contact },
 ];
 const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
-import '../styles/global.css';
-import logo from '../assets/logo.svg';
+const enUrl = link('en', path);
+const ukUrl = link('uk', path);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · The Windows</title>
     <meta name="description" content={description} />
+    <link rel="alternate" hreflang="en" href={`https://thewindows.ca${enUrl}`} />
+    <link rel="alternate" hreflang="uk" href={`https://thewindows.ca${ukUrl}`} />
     <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
   </head>
   <body>
     <div class="topbar">
       <div class="container topbar-inner">
-        <a href="tel:+12040000000">Tel (204) 000-0000</a>
+        <a href={`tel:${phone.tel}`}>{s.top.tel} {phone.display}</a>
         <div class="topbar-links">
-          <a href="/contact">Contact</a>
-          <a href="https://theinstaller.ca" rel="noopener">Commercial glazing</a>
+          <a href={link(lang, '/contact')}>{s.nav.contact}</a>
+          <a href="https://theinstaller.ca" rel="noopener">{s.top.commercial}</a>
+          <span class="langs">
+            <a href={enUrl} class={lang === 'en' ? 'active' : ''} aria-label="English" title="English" hreflang="en">
+              <svg viewBox="0 0 60 30" width="22" height="11" aria-hidden="true"><clipPath id="uk-clip"><path d="M0 0v30h60V0z"/></clipPath><path d="M0 0v30h60V0z" fill="#012169"/><path d="M0 0l60 30m0-30L0 30" stroke="#fff" stroke-width="6"/><path d="M0 0l60 30m0-30L0 30" clip-path="url(#uk-clip)" stroke="#C8102E" stroke-width="4"/><path d="M30 0v30M0 15h60" stroke="#fff" stroke-width="10"/><path d="M30 0v30M0 15h60" stroke="#C8102E" stroke-width="6"/></svg>
+            </a>
+            <a href={ukUrl} class={lang === 'uk' ? 'active' : ''} aria-label="Українська" title="Українська" hreflang="uk">
+              <svg viewBox="0 0 60 30" width="22" height="11" aria-hidden="true"><rect width="60" height="15" fill="#0057B7"/><rect y="15" width="60" height="15" fill="#FFD700"/></svg>
+            </a>
+          </span>
         </div>
       </div>
     </div>
     <header class="site-header">
       <div class="container header-inner">
-        <a href="/" class="brand" aria-label="The Windows home">
+        <a href={link(lang, '/')} class="brand" aria-label="The Windows home">
           <img src={logo.src} alt="thewindows" height="34" />
         </a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
@@ -47,7 +65,11 @@ import logo from '../assets/logo.svg';
           {nav.map((n) => (
             <a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
           ))}
-          <a href="/contact" class="nav-cta">Get a quote</a>
+          <a href={link(lang, '/contact')} class="nav-cta">{s.nav.quote}</a>
+          <span class="langs langs-mobile">
+            <a href={enUrl} class={lang === 'en' ? 'active' : ''}>EN</a>
+            <a href={ukUrl} class={lang === 'uk' ? 'active' : ''}>UA</a>
+          </span>
         </nav>
       </div>
     </header>
@@ -60,33 +82,33 @@ import logo from '../assets/logo.svg';
       <div class="container footer-grid">
         <div>
           <img src={logo.src} alt="thewindows" height="30" />
-          <p style="margin-top: 0.8rem;">Custom PVC windows fabricated and installed in Winnipeg, Manitoba.</p>
+          <p style="margin-top: 0.8rem;">{s.footer.blurb}</p>
         </div>
         <div>
-          <h4>Site</h4>
+          <h4>{s.footer.site}</h4>
           <ul>
             {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h4>{s.footer.contact}</h4>
           <ul>
-            <li><a href="mailto:info@thewindows.ca">info@thewindows.ca</a></li>
-            <li><a href="tel:+12040000000">(204) 000-0000</a></li>
-            <li>Mon–Fri 8:00–17:00</li>
+            <li><a href={`mailto:${email}`}>{email}</a></li>
+            <li><a href={`tel:${phone.tel}`}>{phone.display}</a></li>
+            <li>{s.footer.hours}</li>
           </ul>
         </div>
         <div>
-          <h4>Commercial</h4>
+          <h4>{s.footer.commercial}</h4>
           <ul>
-            <li>Storefront and curtain wall projects are handled by our partner company.</li>
+            <li>{s.footer.commercialText}</li>
             <li><a href="https://theinstaller.ca" rel="noopener">theinstaller.ca →</a></li>
           </ul>
         </div>
       </div>
       <div class="container footer-bottom">
         <span>© {new Date().getFullYear()} The Windows</span>
-        <span>Winnipeg, Manitoba</span>
+        <span>{s.footer.city}</span>
       </div>
     </footer>
 

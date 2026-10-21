@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import { t, phone, email, type Lang } from '../../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+---
+<Base title={s.contact.title} lang={lang} path="/contact">
+  <section class="section">
+    <div class="container split split-contact">
+      <div>
+        <h1>{s.contact.h1}</h1>
+        <p class="lead">{s.contact.lead}</p>
+
+        <div id="form-ok" class="alert alert-ok" hidden>{s.contact.ok}</div>
+        <div id="form-err" class="alert alert-err" hidden>{s.contact.err}</div>
+
+        <form class="form" id="contact-form" action="/api/contact.php" method="post">
+          <input type="hidden" name="lang" value={lang} />
+          <div class="form-row">
+            <div><label for="name">{s.contact.name}</label><input id="name" name="name" required autocomplete="name" /></div>
+            <div><label for="phone">{s.contact.phone}</label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+          </div>
+          <div><label for="email">{s.contact.email}</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
+          <div><label for="address">{s.contact.address}</label><input id="address" name="address" autocomplete="street-address" /></div>
+          <div class="form-row">
+            <div><label for="count">{s.contact.count}</label><input id="count" name="count" type="number" min="1" /></div>
+            <div>
+              <label for="project">{s.contact.project}</label>
+              <select id="project" name="project">
+                {s.contact.projects.map((p) => <option>{p}</option>)}
+              </select>
+            </div>
+          </div>
+          <div><label for="message">{s.contact.details}</label><textarea id="message" name="message" rows="5" placeholder={s.contact.placeholder}></textarea></div>
+          <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
+          <div><button type="submit" class="btn btn-solid">{s.contact.send}</button></div>
+          <p class="form-note">{s.contact.note}</p>
+        </form>
+      </div>
+
+      <div class="info-panel">
+        <h3>{s.contact.panelH}</h3>
+        <dl>
+          <dt>{s.contact.email}</dt><dd><a href={`mailto:${email}`}>{email}</a></dd>
+          <dt>{s.contact.phone}</dt><dd><a href={`tel:${phone.tel}`}>{phone.display}</a></dd>
+          <dt>{s.contact.shop}</dt><dd>{s.contact.shopText}<br /><span class="form-note">{s.contact.byAppt}</span></dd>
+          <dt>{s.contact.hours}</dt><dd>{s.contact.hoursText}</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const ok = document.getElementById('form-ok')!;
+    const err = document.getElementById('form-err')!;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('button')!;
+      btn.disabled = true;
+      ok.hidden = err.hidden = true;
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        const data = await res.json();
+        if (res.ok && data.ok) { ok.hidden = false; form.reset(); }
+        else err.hidden = false;
+      } catch { err.hidden = false; }
+      btn.disabled = false;
+      ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</Base>

@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import WindowArt from '../WindowArt.astro';
+import { t, link, type Lang } from '../../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+---
+<Base title={s.about.title} lang={lang} path="/about">
+  <section class="section">
+    <div class="container split">
+      <div>
+        <h1>{s.about.h1}</h1>
+        <p class="lead">{s.about.lead}</p>
+        <p>{s.about.p1}</p>
+        <p>{s.about.p2}</p>
+      </div>
+      <div class="media"><WindowArt kind="handle" /></div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container split" style="align-items: start;">
+      <div>
+        <h2>{s.about.standH}</h2>
+        <ul class="checklist">{s.about.stand.map((x) => <li>{x}</li>)}</ul>
+      </div>
+      <div>
+        <h2>{s.about.commH}</h2>
+        <p>{s.about.commP}</p>
+        <a href="https://theinstaller.ca" class="more" rel="noopener">+ theinstaller.ca</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark cta-band">
+    <div class="container">
+      <h2>{s.about.ctaH}</h2>
+      <p>{s.about.ctaP}</p>
+      <a href={link(lang, '/contact')} class="btn btn-light">{s.about.ctaBtn}</a>
+    </div>
+  </section>
+</Base>

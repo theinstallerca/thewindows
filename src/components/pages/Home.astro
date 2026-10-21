@@ -1,0 +1,99 @@
+---
+import Base from '../../layouts/Base.astro';
+import WindowArt from '../WindowArt.astro';
+import Icon from '../Icon.astro';
+import { t, link, type Lang } from '../../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+const stripIcons = ['sun', 'shield', 'quiet', 'snow', 'leaf'] as const;
+const valueIcons = ['ruler', 'snow', 'clock'] as const;
+const featured = ['casement', 'awning', 'picture'] as const;
+---
+<Base title={s.home.title} lang={lang} path="/">
+  <section class="hero">
+    <div class="hero-bg"><WindowArt kind="hero" /></div>
+    <div class="container hero-inner">
+      <h1><small>{s.home.kicker}</small>{s.home.h1}</h1>
+      <p>{s.home.lead}</p>
+      <div class="hero-actions">
+        <a href={link(lang, '/contact')} class="btn btn-light">{s.home.quote}</a>
+        <a href={link(lang, '/windows')} class="more" style="padding: 0.7rem 0; color: #fff;">{s.home.types}</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip">
+    <ul>
+      {s.home.strip.map((label, i) => <li><Icon name={stripIcons[i]} /> {label}</li>)}
+    </ul>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>{s.home.valuesH}</h2>
+        <p>{s.home.valuesP}</p>
+      </div>
+      <div class="values">
+        {s.home.values.map(([h, p], i) => (
+          <div class="value">
+            <Icon name={valueIcons[i]} /><span class="bar"></span>
+            <h3>{h}</h3>
+            <p>{p}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <h2>{s.home.typesH}</h2>
+        <p>{s.home.typesP}</p>
+      </div>
+      <div class="cards">
+        {featured.map((k) => (
+          <article class="card">
+            <div class="media"><WindowArt kind={k} /></div>
+            <div class="body"><h3>{s.types[k][0]}</h3><p>{s.types[k][1]}</p></div>
+            <div class="foot"><a href={link(lang, '/windows')} class="btn">{s.home.info}</a></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container split">
+      <div class="media"><WindowArt kind="corner" /></div>
+      <div>
+        <h2>{s.home.detailsH}</h2>
+        <p>{s.home.detailsP}</p>
+        <ul class="checklist">
+          {s.home.detailsList.map((x) => <li>{x}</li>)}
+        </ul>
+        <a href={link(lang, '/windows')} class="more">{s.home.detailsMore}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container">
+      <div class="section-head"><h2>{s.home.howH}</h2></div>
+      <ol class="steps">
+        {s.home.steps.map(([h, p], i) => (
+          <li><span class="num">0{i + 1}</span><h3>{h}</h3><p>{p}</p></li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-dark cta-band">
+    <div class="container">
+      <h2>{s.home.ctaH}</h2>
+      <p>{s.home.ctaP}</p>
+      <a href={link(lang, '/contact')} class="btn btn-light">{s.home.quote}</a>
+    </div>
+  </section>
+</Base>

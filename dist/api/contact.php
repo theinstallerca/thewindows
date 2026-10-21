@@ -39,6 +39,7 @@ $address = $clean('address', 200);
 $count   = $clean('count', 10);
 $project = $clean('project', 60);
 $message = mb_substr(trim((string)($_POST['message'] ?? '')), 0, 3000);
+$lang    = ($clean('lang', 5) === 'uk') ? 'UA' : 'EN';
 
 if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     fail(400, 'Name and a valid email are required');
@@ -58,7 +59,7 @@ $headers  = "From: The Windows website <$FROM>\r\n";
 $headers .= "Reply-To: $name <$email>\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-$sent = mail($TO, $SUBJECT, $body, $headers, "-f$FROM");
+$sent = mail($TO, "[$lang] $SUBJECT", $body, $headers, "-f$FROM");
 
 if (!$sent) {
     fail(500, 'Mail could not be sent');

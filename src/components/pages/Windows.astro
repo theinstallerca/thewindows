@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import WindowArt from '../WindowArt.astro';
+import { t, link, type Lang } from '../../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+const types = ['casement', 'awning', 'picture'] as const;
+---
+<Base title={s.windows.title} lang={lang} path="/windows">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1 class="center">{s.windows.h1}</h1>
+        <p>{s.windows.lead}</p>
+      </div>
+      <div class="cards">
+        {types.map((k) => (
+          <article class="card">
+            <div class="media"><WindowArt kind={k} /></div>
+            <div class="body"><h3>{s.types[k][0]}</h3><p>{s.types[k][1]}</p></div>
+            <div class="foot"><a href={link(lang, '/contact')} class="btn">{s.windows.quote}</a></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-soft">
+    <div class="container split" style="align-items: start;">
+      <div>
+        <h2>{s.windows.glassH}</h2>
+        <ul class="checklist">{s.windows.glass.map((x) => <li>{x}</li>)}</ul>
+      </div>
+      <div>
+        <h2>{s.windows.frameH}</h2>
+        <ul class="checklist">{s.windows.frame.map((x) => <li>{x}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark cta-band">
+    <div class="container">
+      <h2>{s.windows.ctaH}</h2>
+      <p>{s.windows.ctaP}</p>
+      <a href={link(lang, '/contact')} class="btn btn-light">{s.windows.ctaBtn}</a>
+    </div>
+  </section>
+</Base>

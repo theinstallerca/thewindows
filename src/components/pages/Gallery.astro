@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import WindowArt from '../WindowArt.astro';
+import { t, type Lang } from '../../i18n';
+const { lang } = Astro.props as { lang: Lang };
+const s = t(lang);
+// Drop photos into public/images/gallery/ and list them here.
+// { src: '/images/gallery/filename.jpg', caption: { en: '...', uk: '...' } }
+const photos: { src: string; caption: Record<Lang, string> }[] = [];
+const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
+---
+<Base title={s.gallery.title} lang={lang} path="/gallery">
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h1 class="center">{s.gallery.h1}</h1>
+        <p>{s.gallery.lead}</p>
+      </div>
+      <div class="gallery">
+        {photos.length > 0
+          ? photos.map((p) => (
+              <figure>
+                <img src={p.src} alt={p.caption[lang]} loading="lazy" />
+                <figcaption>{p.caption[lang]}</figcaption>
+              </figure>
+            ))
+          : placeholders.map((k) => (
+              <figure>
+                <WindowArt kind={k} />
+                <figcaption>{s.gallery.soon}</figcaption>
+              </figure>
+            ))}
+      </div>
+    </div>
+  </section>
+</Base>
