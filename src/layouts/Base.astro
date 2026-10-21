@@ -19,7 +19,8 @@ const nav = [
   { href: link(lang, '/about'), label: s.nav.about },
   { href: link(lang, '/contact'), label: s.nav.contact },
 ];
-const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const norm = (u: string) => u.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const current = norm(Astro.url.pathname);
 const enUrl = link('en', path);
 const ukUrl = link('uk', path);
 ---
@@ -63,7 +64,7 @@ const ukUrl = link('uk', path);
         </button>
         <nav id="nav" class="nav">
           {nav.map((n) => (
-            <a href={n.href} aria-current={current === n.href ? 'page' : undefined}>{n.label}</a>
+            <a href={n.href} aria-current={current === norm(n.href) ? 'page' : undefined}>{n.label}</a>
           ))}
           <a href={link(lang, '/contact')} class="nav-cta">{s.nav.quote}</a>
           <span class="langs langs-mobile">

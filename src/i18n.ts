@@ -174,4 +174,4 @@ const uk: typeof en = {
 export const dict = { en, uk };
 export const t = (lang: Lang) => dict[lang];
 export const prefix = (lang: Lang) => (lang === 'uk' ? '/ua' : '');
-export const link = (lang: Lang, path: string) => (prefix(lang) + path).replace(/^\/ua\/$/, '/ua') || '/';
+export const link = (lang: Lang, path: string) => prefix(lang) + path; // '/' -> '/', '/ua/' for Ukrainian home
