@@ -233,3 +233,5 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--g
 .split-contact { align-items: start; grid-template-columns: 1.4fr 1fr; }
 @media (max-width: 860px) { .split-contact { grid-template-columns: 1fr; } }
 .site-footer > .container > div > img { height: 30px; width: auto; }
+.nav a, .topbar a, .langs a { user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; }
+.site-header { isolation: isolate; }
