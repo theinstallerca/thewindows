@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && cp dist/ua.html dist/ua/index.html",
     "preview": "astro preview"
   },
   "dependencies": {
