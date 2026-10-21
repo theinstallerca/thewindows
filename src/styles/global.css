@@ -1,9 +1,14 @@
+@font-face{font-family:'Poppins';font-style:normal;font-weight:200;font-display:swap;src:url('/fonts/poppins-latin-200-normal.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url('/fonts/poppins-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/poppins-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:500;font-display:swap;src:url('/fonts/poppins-latin-500-normal.woff2') format('woff2');}
+@font-face{font-family:'Poppins';font-style:normal;font-weight:600;font-display:swap;src:url('/fonts/poppins-latin-600-normal.woff2') format('woff2');}
 :root {
   --ink: #1c1c1c;
   --text: #4a4a4a;
   --muted: #8a8a8a;
-  --gold: #b89a5a;
-  --gold-dark: #9c8048;
+  --gold: #ff7d00;
+  --gold-dark: #e06c00;
   --line: #e6e6e6;
   --bar: #bdbdbd;
   --bg: #ffffff;
@@ -198,3 +203,6 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--g
 .site-footer a { text-decoration: none; color: var(--text); }
 .site-footer a:hover { color: var(--gold-dark); }
 .footer-bottom { border-top: 1px solid var(--line); margin-top: 2.5rem; padding-top: 1.25rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; font-size: 0.8rem; color: var(--muted); }
+
+.brand img { height: 34px; width: auto; }
+.site-footer .brand-mark { display: none; }
