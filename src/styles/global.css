@@ -54,7 +54,7 @@ h3 { font-size: 1rem; letter-spacing: var(--track); text-transform: uppercase; f
 .section-soft { background: var(--bg-soft); }
 .section-dark { background: var(--dark); color: #cfcfcf; }
 .section-dark h2, .section-dark h3 { color: #fff; }
-.section-head { max-width: 680px; margin: 0 auto 3rem; text-align: center; }
+.section-head { max-width: 760px; margin: 0 auto 3rem; text-align: center; }
 .section-head p { color: var(--muted); }
 
 /* Buttons & links */

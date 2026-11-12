@@ -75,8 +75,8 @@ const en = {
     ctaH: 'Talk to us about your windows', ctaP: 'Measurement visits in Winnipeg are free.', ctaBtn: 'Get in touch',
   },
   estimate: {
-    title: 'Online Estimate', h1: 'Rough estimate online',
-    lead: 'Enter your window sizes and configuration. We will reply by email with a budgetary price. If it fits your budget, we come out to measure for free.',
+    title: 'Estimate Online', h1: 'Estimate online',
+    lead: 'Enter your window sizes and configuration. We will reply by email with a budgetary price.',
     unit: 'Units', inch: 'inches', cm: 'cm',
     window: 'Window', add: '+ Add another window', remove: 'Remove',
     label: 'Room / label', labelPh: 'e.g. Living room',
@@ -95,7 +95,7 @@ const en = {
   contact: {
     chooseH: 'How would you like to start?',
     optVisitH: 'Book a free measurement', optVisitP: 'We come out, measure every opening and give you a written quote.', optVisitBtn: 'Fill in the form below',
-    optEstH: 'Get a rough estimate online', optEstP: 'Enter sizes and configuration yourself and receive a budgetary price by email.', optEstBtn: 'Start online estimate',
+    optEstH: 'Get an estimate online', optEstP: 'Enter sizes and configuration yourself and receive a budgetary price by email.', optEstBtn: 'Start online estimate',
     title: 'Contact & Quote Request', h1: 'Request a quote',
     lead: "Tell us about your project and we'll reply within one business day. Measurement visits in Winnipeg are free.",
     ok: "Thanks — your message has been sent. We'll be in touch shortly.",
@@ -180,8 +180,8 @@ const uk: typeof en = {
     ctaH: 'Поговорімо про ваші вікна', ctaP: 'Виїзд на замір у Вінніпезі — безкоштовно.', ctaBtn: 'Зв’язатися',
   },
   estimate: {
-    title: 'Онлайн-розрахунок', h1: 'Орієнтовний розрахунок онлайн',
-    lead: 'Введіть розміри та конфігурацію вікон. Ми відповімо на email з орієнтовною ціною. Якщо вона вам підходить — приїдемо на безкоштовний замір.',
+    title: 'Онлайн-розрахунок', h1: 'Розрахунок онлайн',
+    lead: 'Введіть розміри та конфігурацію вікон. Ми відповімо на email з орієнтовною ціною.',
     unit: 'Одиниці', inch: 'дюйми', cm: 'см',
     window: 'Вікно', add: '+ Додати ще вікно', remove: 'Видалити',
     label: 'Кімната / позначка', labelPh: 'напр. Вітальня',
