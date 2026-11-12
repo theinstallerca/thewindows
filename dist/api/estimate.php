@@ -52,7 +52,7 @@ foreach ($wins as $i => $w) {
 }
 
 $table = "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px'>
-<tr style='background:#f2f2f2'><th>#</th><th>Qty</th><th>W × H</th><th>Sections</th><th>Types (L→R)</th><th>Glass</th><th>Wall</th></tr>$rows</table>";
+<tr style='background:#f2f2f2'><th>#</th><th>Qty</th><th>W × H</th><th>Units</th><th>Types (L→R)</th><th>Glass</th><th>Wall</th></tr>$rows</table>";
 
 $shopHtml = "<p><b>Online estimate request [$lang]</b> from thewindows.ca</p>
 <p><b>Name:</b> {$esc($name)}<br><b>Email:</b> {$esc($email)}<br><b>Units entered:</b> $unit</p>
