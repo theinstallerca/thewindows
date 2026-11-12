@@ -38,19 +38,6 @@ const e = s.estimate;
               <div><label for="name">{s.contact.name}</label><input id="name" name="name" required autocomplete="name" /></div>
               <div><label for="email">{s.contact.email}</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
             </div>
-            <div class="form-row">
-              <div>
-                <label for="wall">{e.wall}</label>
-                <select id="wall" name="wall">
-                  <option value="">{e.wallNone}</option>
-                  <option value="4-1/2">4-1/2"</option>
-                  <option value="5-1/4">5-1/4"</option>
-                  <option value="6-1/2">6-1/2"</option>
-                  <option value="custom">{e.wallCustom}</option>
-                </select>
-              </div>
-              <div id="wall-custom-wrap" hidden><label for="wall_custom">{e.wallCustomLabel}</label><input id="wall_custom" name="wall_custom" placeholder={e.wallCustomPh} /></div>
-            </div>
             <div><label for="notes">{e.notes}</label><textarea id="notes" name="notes" rows="4" placeholder={e.notesPh}></textarea></div>
             <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
             <div><button type="submit" class="btn btn-solid">{e.send}</button></div>
@@ -86,6 +73,19 @@ const e = s.estimate;
             <div><label>{e.section} 1</label><select class="f-t" data-i="0"></select></div>
             <div><label>{e.section} 2</label><select class="f-t" data-i="1"></select></div>
             <div><label>{e.section} 3</label><select class="f-t" data-i="2"></select></div>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>{e.wall}</label>
+              <select class="f-wall">
+                <option value="">{e.wallNone}</option>
+                <option value="4-1/2">4-1/2"</option>
+                <option value="5-1/4">5-1/4"</option>
+                <option value="6-1/2">6-1/2"</option>
+                <option value="custom">{e.wallCustom}</option>
+              </select>
+            </div>
+            <div class="wall-custom" hidden><label>{e.wallCustomLabel}</label><input class="f-wallc" placeholder={e.wallCustomPh} /></div>
           </div>
           <div>
             <label>{e.glass}</label>
@@ -136,6 +136,7 @@ const e = s.estimate;
         w: +el.querySelector('.f-w').value || 0,
         h: +el.querySelector('.f-h').value || 0,
         sections: secN, types,
+        wall: (() => { const v = el.querySelector('.f-wall').value; return v === 'custom' ? 'custom: ' + el.querySelector('.f-wallc').value.trim() : v; })(),
         glass: el.querySelector('.f-glass:checked').value,
         lowe: el.querySelector('.f-lowe').checked,
         argon: el.querySelector('.f-argon').checked,
@@ -205,6 +206,7 @@ const e = s.estimate;
       el.querySelector('.draw').innerHTML = svgFor(d);
       el.querySelectorAll('.sec-types > div').forEach((div, i) => (div.hidden = i >= d.sections));
       el.querySelectorAll('.u').forEach((u) => (u.textContent = unit() === 'in' ? '(in)' : '(cm)'));
+      el.querySelector('.wall-custom').hidden = el.querySelector('.f-wall').value !== 'custom';
     }
 
     function addWin() {
@@ -230,7 +232,6 @@ const e = s.estimate;
 
     document.getElementById('add').addEventListener('click', () => addWin().scrollIntoView({ behavior: 'smooth', block: 'center' }));
     form.querySelectorAll('input[name=unit]').forEach((r) => r.addEventListener('change', renderAll));
-    form.wall.addEventListener('change', () => { document.getElementById('wall-custom-wrap').hidden = form.wall.value !== 'custom'; });
     addWin();
 
     function svgToPng(svg, w, h) {
@@ -256,7 +257,7 @@ const e = s.estimate;
       if (!form.name.value.trim() || !form.email.checkValidity()) { form.reportValidity(); return; }
       const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
       const fd = new FormData();
-      ['lang', 'name', 'email', 'wall', 'wall_custom', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
+      ['lang', 'name', 'email', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
       fd.append('unit', unit());
       fd.append('windows', JSON.stringify(wins.map((d) => ({ ...d, w_text: fmt(d.w), h_text: fmt(d.h) }))));
       for (let i = 0; i < wins.length; i++) {
