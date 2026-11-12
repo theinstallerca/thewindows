@@ -266,3 +266,5 @@ h2.left { text-align: left; }
 .draw svg { width: 100%; height: auto; display: block; }
 .est-details { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); max-width: 760px; }
 #add { margin-bottom: 0.5rem; }
+.form-row-3 { grid-template-columns: 1fr 1fr 0.7fr; }
+@media (max-width: 600px) { .form-row-3 { grid-template-columns: 1fr 1fr; } }

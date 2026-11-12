@@ -36,13 +36,21 @@ const e = s.estimate;
           <div class="form">
             <div class="form-row">
               <div><label for="name">{s.contact.name}</label><input id="name" name="name" required autocomplete="name" /></div>
-              <div><label for="phone">{s.contact.phone}</label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+              <div><label for="email">{s.contact.email}</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
             </div>
             <div class="form-row">
-              <div><label for="email">{s.contact.email}</label><input id="email" name="email" type="email" required autocomplete="email" /></div>
-              <div><label for="address">{s.contact.address}</label><input id="address" name="address" autocomplete="street-address" /></div>
+              <div>
+                <label for="wall">{e.wall}</label>
+                <select id="wall" name="wall">
+                  <option value="">{e.wallNone}</option>
+                  <option value="4-1/2">4-1/2"</option>
+                  <option value="5-1/4">5-1/4"</option>
+                  <option value="6-1/2">6-1/2"</option>
+                  <option value="custom">{e.wallCustom}</option>
+                </select>
+              </div>
+              <div id="wall-custom-wrap" hidden><label for="wall_custom">{e.wallCustomLabel}</label><input id="wall_custom" name="wall_custom" placeholder={e.wallCustomPh} /></div>
             </div>
-            <div><label for="budget">{e.budget}</label><input id="budget" name="budget" placeholder={e.budgetPh} /></div>
             <div><label for="notes">{e.notes}</label><textarea id="notes" name="notes" rows="4" placeholder={e.notesPh}></textarea></div>
             <div class="hp" aria-hidden="true"><label>Leave this empty<input name="website" tabindex="-1" autocomplete="off" /></label></div>
             <div><button type="submit" class="btn btn-solid">{e.send}</button></div>
@@ -61,13 +69,10 @@ const e = s.estimate;
       </header>
       <div class="win-grid">
         <div class="win-fields">
-          <div class="form-row">
-            <div><label>{e.label}</label><input class="f-label" placeholder={e.labelPh} /></div>
-            <div><label>{e.qty}</label><input class="f-qty" type="number" min="1" value="1" /></div>
-          </div>
-          <div class="form-row">
+          <div class="form-row form-row-3">
             <div><label>{e.width} <span class="u"></span></label><input class="f-w" type="number" min="1" step="any" inputmode="decimal" /></div>
             <div><label>{e.height} <span class="u"></span></label><input class="f-h" type="number" min="1" step="any" inputmode="decimal" /></div>
+            <div><label>{e.qty}</label><input class="f-qty" type="number" min="1" value="1" /></div>
           </div>
           <div>
             <label>{e.sections}</label>
@@ -91,7 +96,6 @@ const e = s.estimate;
               </span>
               <label class="chk"><input type="checkbox" class="f-lowe" checked /> {e.lowe}</label>
               <label class="chk"><input type="checkbox" class="f-argon" checked /> {e.argon}</label>
-              <label class="chk"><input type="checkbox" class="f-grilles" /> {e.grilles}</label>
             </div>
           </div>
         </div>
@@ -128,7 +132,6 @@ const e = s.estimate;
       const secN = +el.querySelector('.f-sec:checked').value;
       const types = [...el.querySelectorAll('.f-t')].slice(0, secN).map((s) => s.value);
       return {
-        label: el.querySelector('.f-label').value.trim(),
         qty: +el.querySelector('.f-qty').value || 1,
         w: +el.querySelector('.f-w').value || 0,
         h: +el.querySelector('.f-h').value || 0,
@@ -136,7 +139,6 @@ const e = s.estimate;
         glass: el.querySelector('.f-glass:checked').value,
         lowe: el.querySelector('.f-lowe').checked,
         argon: el.querySelector('.f-argon').checked,
-        grilles: el.querySelector('.f-grilles').checked,
       };
     }
 
@@ -164,19 +166,14 @@ const e = s.estimate;
         const ix = sx + m, iy = sy + m, iw = sw - 2 * m, ih = sh - 2 * m;
         if (t === 'casementL' || t === 'casementR' || t === 'awning') {
           o += `<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" fill="none" stroke="${ink}" stroke-width="1.2"/>`;
-          // sash with handle; V points opposite the hinge, like the shop drawing
+          // V points toward the hinge side, like the shop drawing
           let pts;
-          if (t === 'casementL') pts = `${ix},${iy} ${ix + iw},${iy + ih / 2} ${ix},${iy + ih}`;
-          else if (t === 'casementR') pts = `${ix + iw},${iy} ${ix},${iy + ih / 2} ${ix + iw},${iy + ih}`;
-          else pts = `${ix},${iy} ${ix + iw / 2},${iy + ih} ${ix + iw},${iy}`;
+          if (t === 'casementL') pts = `${ix + iw},${iy} ${ix},${iy + ih / 2} ${ix + iw},${iy + ih}`;
+          else if (t === 'casementR') pts = `${ix},${iy} ${ix + iw},${iy + ih / 2} ${ix},${iy + ih}`;
+          else pts = `${ix},${iy + ih} ${ix + iw / 2},${iy} ${ix + iw},${iy + ih}`;
           o += `<polyline points="${pts}" fill="none" stroke="${ink}" stroke-width="1.2"/>`;
         }
         if (t === 'picture') o += `<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" fill="none" stroke="${ink}" stroke-width="1.2" stroke-dasharray="0"/>`;
-        if (d.grilles && t !== 'none') {
-          const cols = iw > ih ? 3 : 2, rows = ih > iw ? 3 : 2;
-          for (let c = 1; c < cols; c++) o += `<line x1="${ix + (iw * c) / cols}" y1="${iy}" x2="${ix + (iw * c) / cols}" y2="${iy + ih}" stroke="#9aa" stroke-width="1"/>`;
-          for (let r = 1; r < rows; r++) o += `<line x1="${ix}" y1="${iy + (ih * r) / rows}" x2="${ix + iw}" y2="${iy + (ih * r) / rows}" stroke="#9aa" stroke-width="1"/>`;
-        }
         if (labels[t]) o += `<text x="${sx + sw / 2}" y="${sy + sh / 2 + 5}" text-anchor="middle" fill="${ink}" font-size="14">${labels[t]}</text>`;
         // section width dimension (only when >1 section)
         if (d.sections > 1 && d.w) {
@@ -233,6 +230,7 @@ const e = s.estimate;
 
     document.getElementById('add').addEventListener('click', () => addWin().scrollIntoView({ behavior: 'smooth', block: 'center' }));
     form.querySelectorAll('input[name=unit]').forEach((r) => r.addEventListener('change', renderAll));
+    form.wall.addEventListener('change', () => { document.getElementById('wall-custom-wrap').hidden = form.wall.value !== 'custom'; });
     addWin();
 
     function svgToPng(svg, w, h) {
@@ -258,7 +256,7 @@ const e = s.estimate;
       if (!form.name.value.trim() || !form.email.checkValidity()) { form.reportValidity(); return; }
       const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
       const fd = new FormData();
-      ['lang', 'name', 'phone', 'email', 'address', 'budget', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
+      ['lang', 'name', 'email', 'wall', 'wall_custom', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
       fd.append('unit', unit());
       fd.append('windows', JSON.stringify(wins.map((d) => ({ ...d, w_text: fmt(d.w), h_text: fmt(d.h) }))));
       for (let i = 0; i < wins.length; i++) {

@@ -20,9 +20,8 @@ $clean = static function (string $key, int $max = 500): string {
 };
 $name    = $clean('name', 100);
 $email   = $clean('email', 150);
-$phone   = $clean('phone', 40);
-$address = $clean('address', 200);
-$budget  = $clean('budget', 100);
+$wall    = $clean('wall', 10);
+if ($wall === 'custom') $wall = 'custom: ' . $clean('wall_custom', 40);
 $unit    = $clean('unit', 2) === 'cm' ? 'cm' : 'in';
 $lang    = $clean('lang', 5) === 'uk' ? 'UA' : 'EN';
 $notes   = mb_substr(trim((string)($_POST['notes'] ?? '')), 0, 3000);
@@ -50,16 +49,15 @@ foreach ($wins as $i => $w) {
     $wt = $esc($w['w_text'] ?? $w['w'] ?? '');
     $ht = $esc($w['h_text'] ?? $w['h'] ?? '');
     $qty = (int)($w['qty'] ?? 1);
-    $label = $esc($w['label'] ?? '');
-    $rows .= "<tr><td>$n</td><td>$label</td><td>$qty</td><td>$wt × $ht</td><td>" . (int)($w['sections'] ?? 1) . "</td><td>{$esc($types)}</td><td>$glass " . $esc(implode(', ', $opts)) . "</td></tr>";
-    $textRows .= "#$n " . ($w['label'] ?? '') . " qty $qty — $wt x $ht — " . (int)($w['sections'] ?? 1) . " sec: $types — $glass " . implode(', ', $opts) . "\n";
+    $rows .= "<tr><td>$n</td><td>$qty</td><td>$wt × $ht</td><td>" . (int)($w['sections'] ?? 1) . "</td><td>{$esc($types)}</td><td>$glass " . $esc(implode(', ', $opts)) . "</td></tr>";
+    $textRows .= "#$n qty $qty — $wt x $ht — " . (int)($w['sections'] ?? 1) . " sec: $types — $glass " . implode(', ', $opts) . "\n";
 }
 
 $table = "<table border='1' cellpadding='6' cellspacing='0' style='border-collapse:collapse;font-family:Arial,sans-serif;font-size:13px'>
-<tr style='background:#f2f2f2'><th>#</th><th>Label</th><th>Qty</th><th>W × H</th><th>Sections</th><th>Types (L→R)</th><th>Glass</th></tr>$rows</table>";
+<tr style='background:#f2f2f2'><th>#</th><th>Qty</th><th>W × H</th><th>Sections</th><th>Types (L→R)</th><th>Glass</th></tr>$rows</table>";
 
 $shopHtml = "<p><b>Online estimate request [$lang]</b> from thewindows.ca</p>
-<p><b>Name:</b> {$esc($name)}<br><b>Email:</b> {$esc($email)}<br><b>Phone:</b> {$esc($phone)}<br><b>Address:</b> {$esc($address)}<br><b>Budget:</b> {$esc($budget)}<br><b>Units entered:</b> $unit</p>
+<p><b>Name:</b> {$esc($name)}<br><b>Email:</b> {$esc($email)}<br><b>Wall thickness:</b> {$esc($wall)}<br><b>Units entered:</b> $unit</p>
 $table
 <p><b>Notes:</b><br>" . nl2br($esc($notes)) . "</p>
 <p style='color:#888;font-size:11px'>IP: " . $esc($_SERVER['REMOTE_ADDR'] ?? '') . " · " . date('Y-m-d H:i') . "</p>";
