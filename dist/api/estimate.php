@@ -12,7 +12,8 @@ header('Content-Type: application/json; charset=utf-8');
 
 function fail(int $code, string $msg): void { http_response_code($code); echo json_encode(['ok' => false, 'error' => $msg]); exit; }
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') fail(405, 'Method not allowed');
-if (!empty($_POST['website'])) { echo json_encode(['ok' => true]); exit; } // honeypot
+require __DIR__ . '/_guard.php';
+guard(['notes']);
 
 $clean = static function (string $key, int $max = 500): string {
     $v = trim((string)($_POST[$key] ?? ''));

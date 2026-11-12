@@ -19,12 +19,8 @@ function fail(int $code, string $msg): void {
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     fail(405, 'Method not allowed');
 }
-
-// Honeypot: bots fill every field.
-if (!empty($_POST['website'])) {
-    echo json_encode(['ok' => true]); // pretend success, discard
-    exit;
-}
+require __DIR__ . '/_guard.php';
+guard(['message']);
 
 $clean = static function (string $key, int $max = 500): string {
     $v = trim((string)($_POST[$key] ?? ''));

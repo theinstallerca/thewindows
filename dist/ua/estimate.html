@@ -9,6 +9,7 @@ const unitLabels = {"in":"\"","cm":"cm"};
     const err = document.getElementById('form-err');
     const typeKeys = ['none', 'casementL', 'casementR', 'awning', 'picture'];
     let n = 0;
+    const loadedAt = Date.now();
 
     function unit() { return form.querySelector('input[name=unit]:checked').value; }
     function fmt(v) {
@@ -153,6 +154,7 @@ const unitLabels = {"in":"\"","cm":"cm"};
       const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
       const fd = new FormData();
       ['lang', 'name', 'email', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
+      fd.append('ts', String(loadedAt));
       fd.append('unit', unit());
       fd.append('windows', JSON.stringify(wins.map((d) => ({ ...d, w_text: fmt(d.w), h_text: fmt(d.h) }))));
       for (let i = 0; i < wins.length; i++) {
@@ -160,7 +162,7 @@ const unitLabels = {"in":"\"","cm":"cm"};
         if (png) fd.append('preview[]', png, `window-${i + 1}.png`);
       }
       try {
-        const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+        const res = await fetch(form.action, { method: 'POST', body: fd, headers: { Accept: 'application/json', 'X-Requested-With': 'thewindows' } });
         const data = await res.json();
         if (res.ok && data.ok) { ok.hidden = false; form.reset(); list.innerHTML = ''; n = 0; addWin(); }
         else err.hidden = false;
