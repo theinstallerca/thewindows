@@ -5,7 +5,7 @@ export const email = 'info@thewindows.ca';
 
 const en = {
   langName: 'English',
-  nav: { home: 'Home', windows: 'Windows', gallery: 'Gallery', about: 'About', contact: 'Contact', quote: 'Get a quote' },
+  nav: { home: 'Home', windows: 'Windows', gallery: 'Gallery', about: 'About', contact: 'Contact', quote: 'Get a quote', estimate: 'Online estimate' },
   top: { tel: 'Tel', commercial: 'Commercial glazing' },
   footer: {
     blurb: 'Custom PVC windows fabricated and installed in Winnipeg, Manitoba.',
@@ -74,7 +74,27 @@ const en = {
     commP: 'Storefront, curtain wall and commercial glazing are handled by our partner company, The Installer, with the same crew and the same standards.',
     ctaH: 'Talk to us about your windows', ctaP: 'Measurement visits in Winnipeg are free.', ctaBtn: 'Get in touch',
   },
+  estimate: {
+    title: 'Online Estimate', h1: 'Rough estimate online',
+    lead: 'Enter your window sizes and configuration. We will reply by email with a budgetary price. If it fits your budget, we come out to measure for free.',
+    unit: 'Units', inch: 'inches', cm: 'cm',
+    window: 'Window', add: '+ Add another window', remove: 'Remove',
+    label: 'Room / label', labelPh: 'e.g. Living room',
+    width: 'Width', height: 'Height', sections: 'Sections',
+    section: 'Section', types: { none: '—', casementL: 'Casement LH (hinge left)', casementR: 'Casement RH (hinge right)', awning: 'Awning', picture: 'Picture (fixed)' },
+    glass: 'Glass', dual: 'Dual pane', triple: 'Triple pane', lowe: 'Low-E', argon: 'Argon', grilles: 'Grilles',
+    qty: 'Qty', preview: 'Preview',
+    yourDetails: 'Your details', budget: 'Rough budget for the project (optional)', budgetPh: 'e.g. $5,000–8,000',
+    notes: 'Notes', notesPh: 'Replacement or new construction, exterior colour, anything else we should know.',
+    send: 'Send for estimate', note: 'This is a budgetary estimate, not a final quote. Final price is confirmed after on-site measurement.',
+    ok: 'Thanks — we received your request and will reply by email with a budgetary price, usually within one business day.',
+    err: 'Sorry, something went wrong. Please email us at info@thewindows.ca.',
+    needOne: 'Please enter width and height for at least one window.',
+  },
   contact: {
+    chooseH: 'How would you like to start?',
+    optVisitH: 'Book a free measurement', optVisitP: 'We come out, measure every opening and give you a written quote.', optVisitBtn: 'Fill in the form below',
+    optEstH: 'Get a rough estimate online', optEstP: 'Enter sizes and configuration yourself and receive a budgetary price by email.', optEstBtn: 'Start online estimate',
     title: 'Contact & Quote Request', h1: 'Request a quote',
     lead: "Tell us about your project and we'll reply within one business day. Measurement visits in Winnipeg are free.",
     ok: "Thanks — your message has been sent. We'll be in touch shortly.",
@@ -89,7 +109,7 @@ const en = {
 
 const uk: typeof en = {
   langName: 'Українська',
-  nav: { home: 'Головна', windows: 'Вікна', gallery: 'Галерея', about: 'Про нас', contact: 'Контакти', quote: 'Отримати ціну' },
+  nav: { home: 'Головна', windows: 'Вікна', gallery: 'Галерея', about: 'Про нас', contact: 'Контакти', quote: 'Отримати ціну', estimate: 'Онлайн-розрахунок' },
   top: { tel: 'Тел', commercial: 'Комерційне скління' },
   footer: {
     blurb: 'Пластикові вікна на замовлення — виготовлення та монтаж у Вінніпезі, Манітоба.',
@@ -158,7 +178,27 @@ const uk: typeof en = {
     commP: 'Вітрини, фасадне та комерційне скління виконує наша партнерська компанія The Installer — та ж бригада, ті ж стандарти.',
     ctaH: 'Поговорімо про ваші вікна', ctaP: 'Виїзд на замір у Вінніпезі — безкоштовно.', ctaBtn: 'Зв’язатися',
   },
+  estimate: {
+    title: 'Онлайн-розрахунок', h1: 'Орієнтовний розрахунок онлайн',
+    lead: 'Введіть розміри та конфігурацію вікон. Ми відповімо на email з орієнтовною ціною. Якщо вона вам підходить — приїдемо на безкоштовний замір.',
+    unit: 'Одиниці', inch: 'дюйми', cm: 'см',
+    window: 'Вікно', add: '+ Додати ще вікно', remove: 'Видалити',
+    label: 'Кімната / позначка', labelPh: 'напр. Вітальня',
+    width: 'Ширина', height: 'Висота', sections: 'Секції',
+    section: 'Секція', types: { none: '—', casementL: 'Поворотне, петлі зліва (LH)', casementR: 'Поворотне, петлі справа (RH)', awning: 'Фрамуга', picture: 'Глухе' },
+    glass: 'Скло', dual: 'Двокамерний', triple: 'Трикамерний', lowe: 'Low-E', argon: 'Аргон', grilles: 'Шпроси',
+    qty: 'К-сть', preview: 'Ескіз',
+    yourDetails: 'Ваші дані', budget: 'Орієнтовний бюджет проєкту (необов’язково)', budgetPh: 'напр. $5,000–8,000',
+    notes: 'Примітки', notesPh: 'Заміна чи нове будівництво, зовнішній колір, усе інше, що варто знати.',
+    send: 'Надіслати на розрахунок', note: 'Це орієнтовна ціна, а не остаточна. Остаточна ціна підтверджується після заміру на місці.',
+    ok: 'Дякуємо — ми отримали запит і відповімо на email з орієнтовною ціною, зазвичай протягом одного робочого дня.',
+    err: 'На жаль, сталася помилка. Напишіть нам на info@thewindows.ca.',
+    needOne: 'Вкажіть ширину та висоту хоча б для одного вікна.',
+  },
   contact: {
+    chooseH: 'З чого почати?',
+    optVisitH: 'Замовити безкоштовний замір', optVisitP: 'Приїдемо, заміряємо кожен отвір і дамо письмову ціну.', optVisitBtn: 'Заповнити форму нижче',
+    optEstH: 'Орієнтовний розрахунок онлайн', optEstP: 'Введіть розміри та конфігурацію самі й отримайте орієнтовну ціну на email.', optEstBtn: 'Почати онлайн-розрахунок',
     title: 'Контакти та запит ціни', h1: 'Запросити ціну',
     lead: 'Розкажіть про ваш проєкт — відповімо протягом одного робочого дня. Виїзд на замір у Вінніпезі безкоштовний.',
     ok: 'Дякуємо — ваше повідомлення надіслано. Незабаром зв’яжемося.',

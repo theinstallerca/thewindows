@@ -235,3 +235,34 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--g
 .site-footer > .container > div > img { height: 30px; width: auto; }
 .nav a, .topbar a, .langs a { user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: transparent; }
 .site-header { isolation: isolate; }
+
+/* Estimate page */
+h2.left { text-align: left; }
+.cards-2 { grid-template-columns: repeat(2, 1fr); max-width: 860px; margin: 0 auto; }
+@media (max-width: 700px) { .cards-2 { grid-template-columns: 1fr; } }
+.est-form { max-width: 1040px; margin: 0 auto; }
+.est-toolbar { display: flex; justify-content: flex-end; margin-bottom: 1rem; }
+.est-unit { display: inline-flex; align-items: center; gap: 0.75rem; }
+.est-unit label { margin: 0; }
+.seg { display: inline-flex; border: 1px solid var(--line); }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { margin: 0; padding: 0.5rem 0.9rem; cursor: pointer; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text); border-right: 1px solid var(--line); font-weight: 400; }
+.seg label:last-child { border-right: 0; }
+.seg input:checked + label { background: var(--gold); color: #fff; }
+.win { border: 1px solid var(--line); padding: 1.5rem; margin-bottom: 1.25rem; background: #fff; }
+.win-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.win-head h3 { margin: 0; }
+.win-remove { background: none; border: 0; font: inherit; cursor: pointer; }
+.win-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+@media (max-width: 860px) { .win-grid { grid-template-columns: 1fr; } }
+.win-fields { display: grid; gap: 1rem; }
+.sec-types { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.sec-types > div[hidden] { display: none; }
+@media (max-width: 600px) { .sec-types { grid-template-columns: 1fr; } }
+.checks { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; }
+.chk { display: inline-flex; align-items: center; gap: 0.4rem; margin: 0; text-transform: none; letter-spacing: 0; font-size: 0.95rem; font-weight: 300; }
+.chk input { width: auto; accent-color: var(--gold); }
+.draw { border: 1px solid var(--line); background: #fff; }
+.draw svg { width: 100%; height: auto; display: block; }
+.est-details { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--line); max-width: 760px; }
+#add { margin-bottom: 0.5rem; }

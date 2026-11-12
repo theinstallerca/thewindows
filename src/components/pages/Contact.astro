@@ -1,14 +1,29 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { t, phone, email, type Lang } from '../../i18n';
+import { t, link, phone, email, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 ---
 <Base title={s.contact.title} lang={lang} path="/contact">
-  <section class="section">
+  <section class="section" style="padding-bottom: 0;">
+    <div class="container">
+      <div class="section-head"><h1 class="center">{s.contact.chooseH}</h1></div>
+      <div class="cards cards-2">
+        <article class="card">
+          <div class="body"><h3>{s.contact.optVisitH}</h3><p>{s.contact.optVisitP}</p></div>
+          <div class="foot"><a href="#quote" class="btn">{s.contact.optVisitBtn}</a></div>
+        </article>
+        <article class="card">
+          <div class="body"><h3>{s.contact.optEstH}</h3><p>{s.contact.optEstP}</p></div>
+          <div class="foot"><a href={link(lang, '/estimate')} class="btn btn-solid">{s.contact.optEstBtn}</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="quote">
     <div class="container split split-contact">
       <div>
-        <h1>{s.contact.h1}</h1>
+        <h2 class="left">{s.contact.h1}</h2>
         <p class="lead">{s.contact.lead}</p>
 
         <div id="form-ok" class="alert alert-ok" hidden>{s.contact.ok}</div>

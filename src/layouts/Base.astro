@@ -19,6 +19,7 @@ const nav = [
   { href: link(lang, '/about'), label: s.nav.about },
   { href: link(lang, '/contact'), label: s.nav.contact },
 ];
+const footNav = [...nav, { href: link(lang, '/estimate'), label: s.nav.estimate }];
 const norm = (u: string) => u.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const current = norm(Astro.url.pathname);
 const enUrl = link('en', path);
@@ -88,7 +89,7 @@ const ukUrl = link('uk', path);
         <div>
           <h4>{s.footer.site}</h4>
           <ul>
-            {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+            {footNav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
           </ul>
         </div>
         <div>
