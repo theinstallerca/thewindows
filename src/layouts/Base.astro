@@ -24,6 +24,23 @@ const norm = (u: string) => u.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const current = norm(Astro.url.pathname);
 const enUrl = link('en', path);
 const ukUrl = link('uk', path);
+const site = 'https://thewindows.ca';
+const canonical = site + link(lang, path);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': site + '/#business',
+  name: 'The Windows',
+  description: s.meta.description,
+  url: site + '/',
+  telephone: phone.tel,
+  email,
+  image: site + '/apple-touch-icon.png',
+  address: { '@type': 'PostalAddress', addressLocality: 'Winnipeg', addressRegion: 'MB', addressCountry: 'CA' },
+  areaServed: [{ '@type': 'City', name: 'Winnipeg' }, { '@type': 'AdministrativeArea', name: 'Manitoba' }],
+  knowsLanguage: ['en', 'uk'],
+  makesOffer: ['casement', 'awning', 'picture'].map((k) => ({ '@type': 'Offer', itemOffered: { '@type': 'Product', name: (s.types as any)[k][0], description: (s.types as any)[k][1] } })),
+};
 ---
 <!doctype html>
 <html lang={lang}>
@@ -34,6 +51,15 @@ const ukUrl = link('uk', path);
     <meta name="description" content={description} />
     <link rel="alternate" hreflang="en" href={`https://thewindows.ca${enUrl}`} />
     <link rel="alternate" hreflang="uk" href={`https://thewindows.ca${ukUrl}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://thewindows.ca${enUrl}`} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="The Windows" />
+    <meta property="og:title" content={`${title} · The Windows`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'uk' ? 'uk_UA' : 'en_CA'} />
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
   </head>

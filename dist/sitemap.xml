@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://thewindows.ca/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/windows</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/windows"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/windows"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/windows</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/windows"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/windows"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/gallery</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/gallery"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/gallery"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/gallery</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/gallery"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/gallery"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/about</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/about"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/about"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/about</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/about"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/about"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/estimate</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/estimate"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/estimate"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/estimate</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/estimate"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/estimate"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/contact</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/contact"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/contact"/>
+  </url>
+  <url>
+    <loc>https://thewindows.ca/ua/contact</loc>
+    <lastmod>2026-11-14</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://thewindows.ca/contact"/>
+    <xhtml:link rel="alternate" hreflang="uk" href="https://thewindows.ca/ua/contact"/>
+  </url>
+</urlset>
