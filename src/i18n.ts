@@ -71,7 +71,7 @@ const en = {
     standH: 'What we stand behind',
     stand: ['Windows made to your opening, not a catalogue size', 'Profiles and glass rated for Manitoba winters', 'Honest pricing in writing before any work starts', "Local service — if something ever needs attention, we're a short drive away"],
     commH: 'Commercial projects',
-    commP: 'Storefront, curtain wall and commercial glazing are handled by our partner company, The Installer, with the same crew and the same standards.',
+    commP: 'Storefront, curtain wall and commercial glazing are handled by our partner company, Theinstaller, with the same crew and the same standards.',
     ctaH: 'Talk to us about your windows', ctaP: 'Measurement visits in Winnipeg are free.', ctaBtn: 'Get in touch',
   },
   estimate: {
@@ -176,7 +176,7 @@ const uk: typeof en = {
     standH: 'За що ми відповідаємо',
     stand: ['Вікна під ваш отвір, а не з каталогу', 'Профіль і скло, розраховані на зими Манітоби', 'Чесна письмова ціна до початку робіт', 'Місцевий сервіс — якщо щось потребує уваги, ми поруч'],
     commH: 'Комерційні проєкти',
-    commP: 'Вітрини, фасадне та комерційне скління виконує наша партнерська компанія The Installer — та ж бригада, ті ж стандарти.',
+    commP: 'Вітрини, фасадне та комерційне скління виконує наша партнерська компанія Theinstaller — та ж бригада, ті ж стандарти.',
     ctaH: 'Поговорімо про ваші вікна', ctaP: 'Виїзд на замір у Вінніпезі — безкоштовно.', ctaBtn: 'Зв’язатися',
   },
   estimate: {
