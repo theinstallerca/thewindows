@@ -39,7 +39,12 @@ $rows = '';
 $textRows = '';
 foreach ($wins as $i => $w) {
     $n = $i + 1;
-    $types = implode(' | ', array_map(fn($t) => $typeNames[$t] ?? '-', (array)($w['types'] ?? [])));
+    $tt = array_values((array)($w['types'] ?? []));
+    $uw = array_values((array)($w['unit_w_text'] ?? []));
+    $types = implode(' | ', array_map(
+        fn($t, $i) => trim(($typeNames[$t] ?? '-') . ' ' . (isset($uw[$i]) && is_scalar($uw[$i]) ? mb_substr((string)$uw[$i], 0, 20) : '')),
+        $tt, array_keys($tt)
+    ));
     $glass = ($w['glass'] ?? '') === 'triple' ? 'Triple' : 'Dual';
     $opts  = [];
     if (!empty($w['lowe']))   $opts[] = 'Low-E';

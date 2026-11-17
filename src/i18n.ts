@@ -85,6 +85,8 @@ const en = {
     glass: 'Glass', dual: 'Dual pane', triple: 'Triple pane', lowe: 'Low-E', argon: 'Argon', grilles: 'Grilles',
     qty: 'Qty', preview: 'Preview (from outside)',
     tab2d: 'Preview', tab3d: '3D Preview', outside: 'From outside',
+    unitWidthHint: 'Unit widths are optional. Units left blank share the remaining width equally.',
+    unitWidthWarn: 'The unit widths do not add up to the overall width. Please check them.',
     zoomTip: 'Click the picture to enlarge', zoomHint: 'Scroll or pinch to zoom · drag to move',
     zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoomReset: 'Reset', close: 'Close',
     v3: {
@@ -201,6 +203,8 @@ const uk: typeof en = {
     glass: 'Скло', dual: 'Двокамерний', triple: 'Трикамерний', lowe: 'Low-E', argon: 'Аргон', grilles: 'Шпроси',
     qty: 'К-сть', preview: 'Ескіз (вигляд ззовні)',
     tab2d: 'Ескіз', tab3d: '3D-вигляд', outside: 'Вигляд ззовні',
+    unitWidthHint: 'Ширина блоків необов’язкова. Блоки без ширини порівну ділять решту.',
+    unitWidthWarn: 'Сума ширин блоків не збігається із загальною шириною. Перевірте, будь ласка.',
     zoomTip: 'Натисніть на зображення, щоб збільшити', zoomHint: 'Коліщатко або щипок — масштаб · перетягніть, щоб зсунути',
     zoomIn: 'Збільшити', zoomOut: 'Зменшити', zoomReset: 'Скинути', close: 'Закрити',
     v3: {

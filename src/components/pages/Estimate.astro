@@ -93,9 +93,14 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
             </span>
           </div>
           <div class="sec-types">
-            <div><label>{e.section} 1</label><select class="f-t" data-i="0"></select></div>
-            <div><label>{e.section} 2</label><select class="f-t" data-i="1"></select></div>
-            <div><label>{e.section} 3</label><select class="f-t" data-i="2"></select></div>
+            {[0, 1, 2].map((i) => (
+              <div class="sec-row">
+                <div><label>{e.section} {i + 1}</label><select class="f-t" data-i={i}></select></div>
+                <div class="sec-w"><label>{e.width} <span class="u"></span></label><input class="f-uw" data-i={i} type="number" min="0" step="any" inputmode="decimal" aria-label={`${e.section} ${i + 1}: ${e.width}`} /></div>
+              </div>
+            ))}
+            <p class="sec-hint">{e.unitWidthHint}</p>
+            <p class="sec-warn" hidden>{e.unitWidthWarn}</p>
           </div>
           <div class="form-row">
             <div>
@@ -170,7 +175,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
   </template>
 
   <script is:inline src="/preview3d.js"></script>
-  <script define:vars={{ types: e.types, needOne: e.needOne, building: v.building, unitLabels: { in: '"', cm: 'cm' } }}>
+  <script define:vars={{ types: e.types, needOne: e.needOne, unitWidthWarn: e.unitWidthWarn, building: v.building, unitLabels: { in: '"', cm: 'cm' } }}>
     const form = document.getElementById('est-form');
     const list = document.getElementById('windows');
     const tpl = document.getElementById('win-tpl');
@@ -195,9 +200,20 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
     function readWin(el) {
       const secN = +el.querySelector('.f-sec:checked').value;
       const types = [...el.querySelectorAll('.f-t')].slice(0, secN).map((s) => s.value);
+      // Unit widths: the ones typed in are kept, the blank ones share what is left of the overall width.
+      const typed = [...el.querySelectorAll('.f-uw')].slice(0, secN).map((i) => Math.max(0, +i.value || 0));
+      const sum = typed.reduce((a, b) => a + b, 0), blanks = typed.filter((v) => !v).length;
+      let w = +el.querySelector('.f-w').value || 0;
+      if (!w && secN > 1 && !blanks) w = sum;                 // no overall width yet: the units add up to it
+      const total = w || 36;                                   // 36 is what the drawing uses until a width is entered
+      let widths, uwBad = false;
+      if (secN === 1 || !sum) widths = typed.map(() => total / secN);
+      else if (blanks && sum < total) widths = typed.map((v) => v || (total - sum) / blanks);
+      else if (!blanks && Math.abs(sum - total) < 0.02) widths = typed;
+      else { uwBad = !!w; widths = blanks ? typed.map(() => total / secN) : typed.map((v) => v * total / sum); }
       return {
         qty: +el.querySelector('.f-qty').value || 1,
-        w: +el.querySelector('.f-w').value || 0,
+        w, widths, uwBad, uwTyped: typed,
         h: +el.querySelector('.f-h').value || 0,
         sections: secN, types,
         wall: (() => { const v = el.querySelector('.f-wall').value; return v === 'custom' ? 'custom: ' + el.querySelector('.f-wallc').value.trim() : v; })(),
@@ -221,10 +237,11 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       o += `<rect width="${W}" height="${H}" fill="#fff"/>`;
       o += `<rect x="${x0}" y="${y0}" width="${fw}" height="${fh}" fill="${glass}" stroke="${ink}" stroke-width="2"/>`;
       o += `<rect x="${x0 + fr}" y="${y0 + fr}" width="${fw - 2 * fr}" height="${fh - 2 * fr}" fill="none" stroke="${ink}" stroke-width="1"/>`;
-      const sw = (fw - 2 * fr) / d.sections;
+      const tw = d.widths.reduce((a, b) => a + b, 0);
+      const sws = d.widths.map((v) => (fw - 2 * fr) * v / tw);
       const labels = { casementL: 'LH', casementR: 'RH', awning: 'AWN', picture: 'PIC', none: '' };
       for (let i = 0; i < d.sections; i++) {
-        const sx = x0 + fr + i * sw, sy = y0 + fr, sh = fh - 2 * fr;
+        const sw = sws[i], sx = x0 + fr + sws.slice(0, i).reduce((a, b) => a + b, 0), sy = y0 + fr, sh = fh - 2 * fr;
         if (i > 0) o += `<line x1="${sx}" y1="${sy}" x2="${sx}" y2="${sy + sh}" stroke="${ink}" stroke-width="2"/>`;
         const t = d.types[i] || 'none';
         const m = Math.min(10, sw * 0.08);
@@ -244,7 +261,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
         if (d.sections > 1 && d.w) {
           const yd = y0 - 14;
           o += `<line x1="${sx}" y1="${yd}" x2="${sx + sw}" y2="${yd}" stroke="${dim}" stroke-width="1" marker-start="url(#a)" marker-end="url(#a)"/>`;
-          o += `<text x="${sx + sw / 2}" y="${yd - 4}" text-anchor="middle" fill="${dim}" font-size="11">${fmt(d.w / d.sections)}</text>`;
+          o += `<text x="${sx + sw / 2}" y="${yd - 4}" text-anchor="middle" fill="${dim}" font-size="11">${fmt(d.widths[i])}</text>`;
         }
       }
       o = o.replace('<rect width', `<defs><marker id="a" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,5 L10,2 L10,8 z" fill="${dim}"/></marker></defs><rect width`);
@@ -281,8 +298,9 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
     function win3d(el) {
       const d = readWin(el);
       const mm = unit() === 'cm' ? 10 : 25.4;
-      const W = (d.w || 36) * mm, H = (d.h || 36) * mm, uw = W / d.sections;
-      const units = d.types.map((t, i) => ({ x: i * uw, y: 0, w: uw, h: H, sash: t === 'casementL' || t === 'casementR' || t === 'awning' }));
+      const W = (d.w || 36) * mm, H = (d.h || 36) * mm;
+      let x = 0;
+      const units = d.types.map((t, i) => { const u = { x, y: 0, w: d.widths[i] * mm, h: H, sash: t === 'casementL' || t === 'casementR' || t === 'awning' }; x += u.w; return u; });
       return { W, H, units };
     }
     function draw3d(el) {
@@ -383,7 +401,11 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       const d = readWin(el);
       el.querySelector('.draw').innerHTML = svgFor(d);
       draw3d(el);
-      el.querySelectorAll('.sec-types > div').forEach((div, i) => (div.hidden = i >= d.sections));
+      el.querySelectorAll('.sec-row').forEach((div, i) => (div.hidden = i >= d.sections));
+      // a lone unit is the whole window, so its width is the overall width
+      el.querySelector('.sec-types').classList.toggle('one', d.sections === 1);
+      el.querySelectorAll('.f-uw').forEach((inp, i) => { inp.placeholder = i < d.sections && d.w ? String(Math.round(d.widths[i] * 100) / 100) : ''; });
+      el.querySelector('.sec-warn').hidden = !d.uwBad;
       el.querySelectorAll('.u').forEach((u) => (u.textContent = unit() === 'in' ? '(in)' : '(cm)'));
       el.querySelector('.wall-custom').hidden = el.querySelector('.f-wall').value !== 'custom';
     }
@@ -455,13 +477,16 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       ok.hidden = err.hidden = true;
       const wins = [...list.children].map(readWin).filter((d) => d.w > 0 && d.h > 0);
       if (!wins.length) { alert(needOne); return; }
+      // widths that do not add up would reach the office as numbers the customer never typed
+      const bad = [...list.children].find((el) => { const d = readWin(el); return d.w > 0 && d.h > 0 && d.uwBad; });
+      if (bad) { bad.querySelector('.sec-warn').scrollIntoView({ behavior: 'smooth', block: 'center' }); alert(unitWidthWarn); return; }
       if (!form.name.value.trim() || !form.email.checkValidity()) { form.reportValidity(); return; }
       const btn = form.querySelector('button[type=submit]'); btn.disabled = true;
       const fd = new FormData();
       ['lang', 'name', 'email', 'notes', 'website'].forEach((k) => fd.append(k, form.elements[k].value));
       fd.append('ts', String(loadedAt));
       fd.append('unit', unit());
-      fd.append('windows', JSON.stringify(wins.map((d) => ({ ...d, w_text: fmt(d.w), h_text: fmt(d.h) }))));
+      fd.append('windows', JSON.stringify(wins.map(({ uwBad, uwTyped, ...d }) => ({ ...d, w_text: fmt(d.w), h_text: fmt(d.h), unit_w_text: d.sections > 1 ? d.widths.map(fmt) : [] }))));
       for (let i = 0; i < wins.length; i++) {
         const png = await svgToPng(svgFor(wins[i]), 560, 420);
         if (png) fd.append('preview[]', png, `window-${i + 1}.png`);
