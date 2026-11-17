@@ -1,7 +1,8 @@
 ---
 import '../styles/global.css';
 import logo from '../assets/logo.svg';
-import { t, link, phone, email, type Lang } from '../i18n';
+import { t, link, phone, type Lang } from '../i18n';
+import Email from '../components/Email.astro';
 
 interface Props {
   title: string;
@@ -34,7 +35,6 @@ const schema = {
   description: s.meta.description,
   url: site + '/',
   telephone: phone.tel,
-  email,
   image: site + '/apple-touch-icon.png',
   address: { '@type': 'PostalAddress', addressLocality: 'Winnipeg', addressRegion: 'MB', addressCountry: 'CA' },
   areaServed: [{ '@type': 'City', name: 'Winnipeg' }, { '@type': 'AdministrativeArea', name: 'Manitoba' }],
@@ -120,7 +120,7 @@ const schema = {
         <div>
           <h4>{s.footer.contact}</h4>
           <ul>
-            <li><a href={`mailto:${email}`}>{email}</a></li>
+            <li><Email lang={lang} /></li>
             <li><a href={`tel:${phone.tel}`}>{phone.display}</a></li>
             <li>{s.footer.hours}</li>
           </ul>
@@ -140,6 +140,18 @@ const schema = {
     </footer>
 
     <script>
+      // Email links: the address is put together only after a real visitor does something (see Email.astro).
+      const wake = ['pointermove', 'pointerdown', 'touchstart', 'keydown', 'scroll'];
+      const reveal = () => {
+        wake.forEach((ev) => removeEventListener(ev, reveal));
+        document.querySelectorAll<HTMLAnchorElement>('a.eml').forEach((a) => {
+          const addr = a.dataset.u + String.fromCharCode(64) + a.dataset.d;
+          a.href = 'mai' + 'lto:' + addr;
+          a.textContent = addr;
+        });
+      };
+      wake.forEach((ev) => addEventListener(ev, reveal, { passive: true }));
+
       const btn = document.querySelector('.nav-toggle');
       const nav = document.getElementById('nav');
       btn?.addEventListener('click', () => {
