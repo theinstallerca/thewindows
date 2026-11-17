@@ -273,7 +273,7 @@ h2.left { text-align: left; }
 .pv-tab:focus-visible, .v3-s:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .pv-note { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 /* 3D preview: flat elements placed in perspective, see public/preview3d.js */
-.v3-host { border: 1px solid var(--line); background: var(--bg-soft); aspect-ratio: 4 / 3; overflow: hidden; }
+.v3-host { border: 1px solid var(--line); background: var(--bg-soft); aspect-ratio: 5 / 4; overflow: hidden; }
 .v3-stage { position: relative; width: 100%; overflow: hidden; background: #777; }
 .v3-world { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform-style: preserve-3d; }
 .v3-world i { position: absolute; left: 0; top: 0; display: block; transform-origin: 0 0; }

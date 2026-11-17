@@ -49,6 +49,8 @@
   var V3_EYE = '50% 92%';
   /* how much of the picture the window takes up */
   var V3_FILL = { w: 0.74, h: 0.57 };
+  var V3_ROOF_SHOW = 520;      // mm of height kept clear above the fascia, so the roof is in view
+  var V3_STAGE = 0.8;          // the picture's height as a share of its width
 
   function hex2rgb(h) {
     return [parseInt(h.substr(1, 2), 16), parseInt(h.substr(3, 2), 16), parseInt(h.substr(5, 2), 16)];
@@ -84,7 +86,11 @@
   }
 
   function scale(win, SW, SH) {
-    return Math.min(SW * V3_FILL.w / win.W, SH * V3_FILL.h / win.H);   // px per mm
+    /* also far enough back that the eave, and a strip of roof over it, stay in
+       the picture: the window's centre sits 58% of the way down, and everything
+       from there up to the roof has to fit above it */
+    var up = win.H / 2 + V3_EAVE_ABOVE + V3_FASCIA + V3_ROOF_SHOW;
+    return Math.min(SW * V3_FILL.w / win.W, SH * V3_FILL.h / win.H, SH * 0.58 / up);   // px per mm
   }
 
   function build(win, opt, SW, SH) {
@@ -239,7 +245,7 @@
   function render(host, win, opt, waitText) {
     var SW = host.clientWidth;
     if (!SW || !(win.W > 0) || !(win.H > 0)) return;
-    var SH = Math.round(SW * 0.75);
+    var SH = Math.round(SW * V3_STAGE);
     var token = host._v3 = (host._v3 || 0) + 1;
     var o = { wall: opt.wall, stucco: opt.stucco, color: opt.color, roof: opt.roof };
     var T = V3_TEX[o.wall] || V3_TEX.brick1, R = V3_TEX[o.roof] || V3_TEX.rooftan, k = scale(win, SW, SH);
