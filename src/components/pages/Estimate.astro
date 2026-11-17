@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { t, phone, email, type Lang } from '../../i18n';
+import { t, type Lang } from '../../i18n';
+import Email from '../Email.astro';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const e = s.estimate;
@@ -23,7 +24,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       </div>
 
       <div id="form-ok" class="alert alert-ok" hidden>{e.ok}</div>
-      <div id="form-err" class="alert alert-err" hidden>{e.err}</div>
+      <div id="form-err" class="alert alert-err" hidden><Email lang={lang} text={e.err} /></div>
 
       <form id="est-form" class="est-form" action="/api/estimate.php" method="post" novalidate>
         <input type="hidden" name="lang" value={lang} />

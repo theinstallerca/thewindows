@@ -357,3 +357,7 @@ h2.left { text-align: left; }
 .opt-row label { white-space: nowrap; }
 .opt-wall .wall-custom { margin-top: 0.75rem; }
 .opt-wall .wall-custom[hidden] { display: none; }
+
+/* Email address kept out of the HTML: the @ is drawn here (see Email.astro) */
+.eml-at::before { content: "\40"; }
+.eml-at { font-style: normal; }

@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { t, link, phone, email, type Lang } from '../../i18n';
+import { t, link, phone, type Lang } from '../../i18n';
+import Email from '../Email.astro';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 ---
@@ -27,7 +28,7 @@ const s = t(lang);
         <p class="lead">{s.contact.lead}</p>
 
         <div id="form-ok" class="alert alert-ok" hidden>{s.contact.ok}</div>
-        <div id="form-err" class="alert alert-err" hidden>{s.contact.err}</div>
+        <div id="form-err" class="alert alert-err" hidden><Email lang={lang} text={s.contact.err} /></div>
 
         <form class="form" id="contact-form" action="/api/contact.php" method="post">
           <input type="hidden" name="lang" value={lang} />
@@ -57,7 +58,7 @@ const s = t(lang);
       <div class="info-panel">
         <h3>{s.contact.panelH}</h3>
         <dl>
-          <dt>{s.contact.email}</dt><dd><a href={`mailto:${email}`}>{email}</a></dd>
+          <dt>{s.contact.email}</dt><dd><Email lang={lang} /></dd>
           <dt>{s.contact.phone}</dt><dd><a href={`tel:${phone.tel}`}>{phone.display}</a></dd>
           <dt>{s.contact.shop}</dt><dd>{s.contact.shopText}<br /><span class="form-note">{s.contact.byAppt}</span></dd>
           <dt>{s.contact.hours}</dt><dd>{s.contact.hoursText}</dd>

@@ -1,0 +1,12 @@
+---
+// The contact address, kept out of the page source so address-harvesting bots do not find it.
+// The HTML never holds the address in one piece: the "@" is drawn by CSS, and the real mailto
+// link is only put together (in Base.astro) once a visitor moves, taps, scrolls or types.
+// Pass `text` to print a sentence that contains the address.
+import { email, link, type Lang } from '../i18n';
+interface Props { lang: Lang; text?: string; }
+const { lang, text } = Astro.props;
+const [user, domain] = email.split('@');
+const [before, after] = text ? text.split(email) : ['', ''];
+---
+{before}<a class="eml" href={link(lang, '/contact')} data-u={user} data-d={domain}>{user}<i class="eml-at"></i>{domain}</a>{after}
