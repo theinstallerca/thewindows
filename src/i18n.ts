@@ -201,7 +201,7 @@ const uk: typeof en = {
     label: 'Кімната / позначка', labelPh: 'напр. Вітальня',
     width: 'Ширина', height: 'Висота', sections: 'Секції',
     section: 'Секція', types: { none: '—', casementL: 'Поворотне, петлі зліва (LH)', casementR: 'Поворотне, петлі справа (RH)', awning: 'Фрамуга', picture: 'Глухе' },
-    glass: 'Скло', dual: 'Двокамерний', triple: 'Трикамерний', lowe: 'Low-E', argon: 'Аргон', grilles: 'Шпроси',
+    glass: 'Скло', dual: 'Подвійне', triple: 'Потрійне', lowe: 'Low-E', argon: 'Аргон', grilles: 'Шпроси',
     qty: 'К-сть', preview: 'Ескіз (вигляд ззовні)',
     tab2d: 'Ескіз', tab3d: '3D-вигляд', outside: 'Вигляд ззовні',
     grpSize: 'Розмір', grpUnits: 'Секції', grpUnitsQ: 'Скільки секцій поруч?', grpOptions: 'Стіна та скло',
