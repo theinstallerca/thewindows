@@ -4,6 +4,15 @@ import { t, phone, email, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const e = s.estimate;
+const v = e.v3;
+// What the 3D preview offers — the same roofs, walls and frame colours as the Measure App.
+const roofs = ['rooftan', 'roofbrown', 'roofgrey', 'roofcharcoal'];
+const walls = [
+  { label: v.brick, items: ['brick1', 'brick2', 'brick3'] },
+  { label: v.siding, items: ['siding1', 'siding2', 'siding3', 'siding4', 'siding5', 'siding7', 'siding8'] },
+];
+const stuccos = ['#ecebe6', '#e3d9c3', '#d4c4a8', '#c9b28f', '#b9b8b2', '#a89f93', '#8e8377', '#5d5f61'];
+const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
 ---
 <Base title={e.title} lang={lang} path="/estimate">
   <section class="section est">
@@ -100,14 +109,53 @@ const e = s.estimate;
           </div>
         </div>
         <div class="win-preview">
-          <label>{e.preview}</label>
-          <div class="draw"></div>
+          <div class="pv-head">
+            <div class="pv-tabs" role="tablist">
+              <button type="button" class="pv-tab on" role="tab" aria-selected="true" data-view="2d">{e.tab2d}</button>
+              <button type="button" class="pv-tab" role="tab" aria-selected="false" data-view="3d">{e.tab3d}</button>
+            </div>
+            <span class="pv-note">{e.outside}</span>
+          </div>
+          <div class="draw" role="tabpanel"></div>
+          <div class="draw3d" role="tabpanel" hidden>
+            <div class="v3-host"></div>
+            <div class="v3-opts">
+              <div class="v3-opt">
+                <span class="v3-h">{v.roof}</span>
+                <div class="v3-sw">
+                  {roofs.map((r, i) => <button type="button" class="v3-s" data-roof={r} title={v.roofs[i]} aria-label={`${v.roof}: ${v.roofs[i]}`} style={`background-image:url(/tex/${r}.webp)`}></button>)}
+                </div>
+              </div>
+              {walls.map((g) => (
+                <div class="v3-opt">
+                  <span class="v3-h">{g.label}</span>
+                  <div class="v3-sw">
+                    {g.items.map((w, i) => <button type="button" class="v3-s" data-wall={w} aria-label={`${g.label} ${i + 1}`} style={`background-image:url(/tex/${w}.webp)`}></button>)}
+                  </div>
+                </div>
+              ))}
+              <div class="v3-opt">
+                <span class="v3-h">{v.stucco}</span>
+                <div class="v3-sw">
+                  {stuccos.map((c, i) => <button type="button" class="v3-s" data-wall="stucco" data-stucco={c} title={v.stuccos[i]} aria-label={`${v.stucco}: ${v.stuccos[i]}`} style={`background:url(/tex/stucco.webp) center/120px,${c};background-blend-mode:hard-light`}></button>)}
+                </div>
+              </div>
+              <div class="v3-opt">
+                <span class="v3-h">{v.color}</span>
+                <div class="v3-sw">
+                  {colors.map((c, i) => <button type="button" class="v3-s" data-color={c} title={v.colors[i]} aria-label={`${v.color}: ${v.colors[i]}`} style={`background:${c}`}></button>)}
+                </div>
+              </div>
+              <p class="v3-note">{v.note}</p>
+            </div>
+          </div>
         </div>
       </div>
     </article>
   </template>
 
-  <script define:vars={{ types: e.types, needOne: e.needOne, unitLabels: { in: '"', cm: 'cm' } }}>
+  <script is:inline src="/preview3d.js"></script>
+  <script define:vars={{ types: e.types, needOne: e.needOne, building: v.building, unitLabels: { in: '"', cm: 'cm' } }}>
     const form = document.getElementById('est-form');
     const list = document.getElementById('windows');
     const tpl = document.getElementById('win-tpl');
@@ -202,9 +250,39 @@ const e = s.estimate;
       return o + '</svg>';
     }
 
+    // 3D preview: the roof, wall and frame colour are one choice for the whole page — every window is going into the same house.
+    const v3 = { roof: 'rooftan', wall: 'brick1', stucco: '#ecebe6', color: '#f4f5f3' };
+    try { Object.assign(v3, JSON.parse(localStorage.getItem('est3d') || '{}')); } catch {}
+    function syncOpts(root) {
+      root.querySelectorAll('.v3-s').forEach((b) => {
+        const ds = b.dataset;
+        const on = ds.roof ? ds.roof === v3.roof
+          : ds.color ? ds.color === v3.color
+          : ds.wall === v3.wall && (ds.wall !== 'stucco' || ds.stucco === v3.stucco);
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+    }
+    function draw3d(el) {
+      if (el.dataset.view !== '3d' || !window.Preview3D) return;
+      const d = readWin(el);
+      const mm = unit() === 'cm' ? 10 : 25.4;
+      const W = (d.w || 36) * mm, H = (d.h || 36) * mm, uw = W / d.sections;
+      const units = d.types.map((t, i) => ({ x: i * uw, y: 0, w: uw, h: H, sash: t === 'casementL' || t === 'casementR' || t === 'awning' }));
+      window.Preview3D.render(el.querySelector('.v3-host'), { W, H, units }, v3, building);
+    }
+    function setView(el, view) {
+      el.dataset.view = view;
+      el.querySelectorAll('.pv-tab').forEach((b) => { const on = b.dataset.view === view; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
+      el.querySelector('.draw').hidden = view !== '2d';
+      el.querySelector('.draw3d').hidden = view !== '3d';
+      draw3d(el);
+    }
+
     function render(el) {
       const d = readWin(el);
       el.querySelector('.draw').innerHTML = svgFor(d);
+      draw3d(el);
       el.querySelectorAll('.sec-types > div').forEach((div, i) => (div.hidden = i >= d.sections));
       el.querySelectorAll('.u').forEach((u) => (u.textContent = unit() === 'in' ? '(in)' : '(cm)'));
       el.querySelector('.wall-custom').hidden = el.querySelector('.f-wall').value !== 'custom';
@@ -222,6 +300,19 @@ const e = s.estimate;
         sel.value = 'none';
       });
       el.querySelector('.win-remove').addEventListener('click', () => { el.remove(); renumber(); });
+      el.dataset.view = '2d';
+      el.querySelectorAll('.pv-tab').forEach((b) => b.addEventListener('click', () => setView(el, b.dataset.view)));
+      el.querySelector('.v3-opts').addEventListener('click', (ev) => {
+        const b = ev.target.closest('.v3-s'); if (!b) return;
+        const ds = b.dataset;
+        if (ds.roof) v3.roof = ds.roof;
+        else if (ds.color) v3.color = ds.color;
+        else { v3.wall = ds.wall; if (ds.stucco) v3.stucco = ds.stucco; }
+        try { localStorage.setItem('est3d', JSON.stringify(v3)); } catch {}
+        syncOpts(list);
+        [...list.children].forEach(draw3d);
+      });
+      syncOpts(el);
       el.addEventListener('input', () => render(el));
       el.addEventListener('change', () => render(el));
       list.appendChild(el);
@@ -234,6 +325,9 @@ const e = s.estimate;
 
     document.getElementById('add').addEventListener('click', () => addWin().scrollIntoView({ behavior: 'smooth', block: 'center' }));
     form.querySelectorAll('input[name=unit]').forEach((r) => r.addEventListener('change', renderAll));
+    // the 3D scene is laid out in pixels for the width it has, so it is rebuilt when that changes
+    let lastW = window.innerWidth;
+    window.addEventListener('resize', () => { if (window.innerWidth === lastW) return; lastW = window.innerWidth; [...list.children].forEach(draw3d); });
     addWin();
 
     function svgToPng(svg, w, h) {
