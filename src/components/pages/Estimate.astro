@@ -110,8 +110,8 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
           </div>
           <div class="grp">
           <h4 class="grp-h"><span>3</span>{e.grpOptions}</h4>
-          <div class="form-row">
-            <div>
+          <div class="opt-row">
+            <div class="opt-wall">
               <label>{e.wall}</label>
               <select class="f-wall">
                 <option value="">{e.wallNone}</option>
@@ -120,10 +120,9 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
                 <option value="6-1/2">6-1/2"</option>
                 <option value="custom">{e.wallCustom}</option>
               </select>
+              <div class="wall-custom" hidden><label>{e.wallCustomLabel}</label><input class="f-wallc" placeholder={e.wallCustomPh} /></div>
             </div>
-            <div class="wall-custom" hidden><label>{e.wallCustomLabel}</label><input class="f-wallc" placeholder={e.wallCustomPh} /></div>
-          </div>
-          <div>
+            <div>
             <label>{e.glass}</label>
             <div class="checks">
               <span class="seg">
@@ -132,6 +131,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
               </span>
               <label class="chk"><input type="checkbox" class="f-lowe" checked /> {e.lowe}</label>
               <label class="chk"><input type="checkbox" class="f-argon" checked /> {e.argon}</label>
+            </div>
             </div>
           </div>
           </div>
