@@ -85,6 +85,8 @@ const en = {
     glass: 'Glass', dual: 'Dual pane', triple: 'Triple pane', lowe: 'Low-E', argon: 'Argon', grilles: 'Grilles',
     qty: 'Qty', preview: 'Preview (from outside)',
     tab2d: 'Preview', tab3d: '3D Preview', outside: 'From outside',
+    zoomTip: 'Click the picture to enlarge', zoomHint: 'Scroll or pinch to zoom · drag to move',
+    zoomIn: 'Zoom in', zoomOut: 'Zoom out', zoomReset: 'Reset', close: 'Close',
     v3: {
       roof: 'Roof', brick: 'Brick', siding: 'Siding', stucco: 'Stucco', color: 'Window colour',
       roofs: ['Tan', 'Brown', 'Grey', 'Charcoal'],
@@ -199,6 +201,8 @@ const uk: typeof en = {
     glass: 'Скло', dual: 'Двокамерний', triple: 'Трикамерний', lowe: 'Low-E', argon: 'Аргон', grilles: 'Шпроси',
     qty: 'К-сть', preview: 'Ескіз (вигляд ззовні)',
     tab2d: 'Ескіз', tab3d: '3D-вигляд', outside: 'Вигляд ззовні',
+    zoomTip: 'Натисніть на зображення, щоб збільшити', zoomHint: 'Коліщатко або щипок — масштаб · перетягніть, щоб зсунути',
+    zoomIn: 'Збільшити', zoomOut: 'Зменшити', zoomReset: 'Скинути', close: 'Закрити',
     v3: {
       roof: 'Дах', brick: 'Цегла', siding: 'Сайдинг', stucco: 'Штукатурка', color: 'Колір вікна',
       roofs: ['Пісочний', 'Коричневий', 'Сірий', 'Графітовий'],
