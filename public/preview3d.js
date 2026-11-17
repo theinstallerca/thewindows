@@ -30,9 +30,12 @@
   /* each roof photo's average colour — what the roof fades to in the distance */
   var V3_ROOF_RGB = { rooftan: '124,101,78', roofbrown: '75,66,58', roofgrey: '120,124,121', roofcharcoal: '43,46,49' };
 
-  /* How the window sits in the wall, mm: the frame face is this far behind the
-     face of the cladding. */
-  var V3_FRAME_BACK = { stucco: 6.35, other: 25.4 };
+  /* Every window is drawn with a 2" brickmould round it, outside the size
+     entered. It is 1-1/4" deep with the frame behind it. In siding and brick
+     1" of that is in the wall; on stucco 1" of it stands out. */
+  var V3_BM = 50.8;
+  var V3_BM_DEPTH = 31.75;
+  var V3_BM_PROUD = { stucco: 25.4, other: 6.35 };
   var V3_GLASS_BACK = 20;      // glass behind the face of whatever holds it
   var V3_SASH_BACK = 7;        // sash face behind the frame face, on a unit that opens
   var V3_FRAME_PART = 0.44;    // share of an opening unit's face that is frame; the rest is sash
@@ -49,7 +52,7 @@
   var V3_EYE = '50% 92%';
   /* how much of the picture the window takes up */
   var V3_FILL = { w: 0.74, h: 0.57 };
-  var V3_ROOF_SHOW = 520;      // mm of height kept clear above the fascia, so the roof is in view
+  var V3_ROOF_SHOW = 150;      // mm of height kept clear above the fascia, so the roof is in view
   var V3_STAGE = 0.8;          // the picture's height as a share of its width
 
   function hex2rgb(h) {
@@ -89,16 +92,17 @@
     /* also far enough back that the eave, and a strip of roof over it, stay in
        the picture: the window's centre sits 58% of the way down, and everything
        from there up to the roof has to fit above it */
-    var up = win.H / 2 + V3_EAVE_ABOVE + V3_FASCIA + V3_ROOF_SHOW;
-    return Math.min(SW * V3_FILL.w / win.W, SH * V3_FILL.h / win.H, SH * 0.58 / up);   // px per mm
+    var up = win.H / 2 + V3_BM + V3_EAVE_ABOVE + V3_FASCIA + V3_ROOF_SHOW;
+    return Math.min(SW * V3_FILL.w / (win.W + 2 * V3_BM), SH * V3_FILL.h / (win.H + 2 * V3_BM), SH * 0.58 / up);   // px per mm
   }
 
   function build(win, opt, SW, SH) {
-    var W = win.W, H = win.H;
+    var B = V3_BM, W = win.W + 2 * B, H = win.H + 2 * B;   // overall, brickmould included
     var stucco = (opt.wall === 'stucco');
     var k = scale(win, SW, SH);
     var P = SW * 2.3;                                                   // viewing distance
-    var zF = -(stucco ? V3_FRAME_BACK.stucco : V3_FRAME_BACK.other);    // frame face, behind the wall face
+    var zB = stucco ? V3_BM_PROUD.stucco : V3_BM_PROUD.other;           // brickmould face, in front of the wall
+    var zF = zB - V3_BM_DEPTH;                                          // frame face
     var col = opt.color || '#f4f5f3';
     /* light from the upper left, viewer to the right: faces turned toward the
        viewer's side are in shade, which is what makes the depth read */
@@ -154,22 +158,23 @@
     function pt(x, y) { return n(x + Mx) + 'px ' + n(y + MyT) + 'px'; }
     face(-Mx, -MyT, 0, ww, wh, '', wallCss,
       (stucco ? 'background-blend-mode:hard-light;' : '') + 'clip-path:polygon(evenodd,0 0,' + n(ww) + 'px 0,' + n(ww) + 'px ' + n(wh) + 'px,0 ' + n(wh) + 'px,0 0,' +
-      pt(0, 0) + ',' + pt(0, H) + ',' + pt(W, H) + ',' + pt(W, 0) + ',' + pt(0, 0) + ')');
+      pt(B / 2, B / 2) + ',' + pt(B / 2, H - B / 2) + ',' + pt(W - B / 2, H - B / 2) + ',' + pt(W - B / 2, B / 2) + ',' + pt(B / 2, B / 2) + ')');
     /* the shade the eave throws down the wall, laid just proud of it */
     face(-Mx, -V3_EAVE_ABOVE, 0.4 / k, ww, 430, '', 'linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.20) 45%,rgba(0,0,0,0))');
     eave(face, roofFace, n, -Mx, ww, V3_OVERHANG, opt);
 
-    /* --- the cladding's cut edge, on show round the frame --- */
-    var dd = -zF, rc = stucco ? (opt.stucco || '#d4c4a8') : '#6f6a64';
-    face(0, 0, zF, dd, H, RY, shade(rc, 0.62)); face(W, 0, zF, dd, H, RY, shade(rc, 0.80));
-    face(0, 0, zF, W, dd, RX, shade(rc, 0.50)); face(0, H, zF, W, dd, RX, shade(rc, 0.95));
+    /* --- what the brickmould throws on the wall --- */
+    var sh = Math.max(1.5, zB * k);
+    face(0, 0, 0.05 / k, W, H, '', 'transparent',
+      'box-shadow:' + (sh * 0.9).toFixed(1) + 'px ' + (sh * 1.2).toFixed(1) + 'px ' + (sh * 1.4 + 3).toFixed(1) + 'px rgba(0,0,0,.42),0 0 ' +
+      (sh * 0.8 + 4).toFixed(1) + 'px rgba(0,0,0,.28)');
 
     /* --- backing: the dark you see through the joints between coupled units --- */
-    face(0, 0, zF - 60, W, H, '', '#15181b');
+    face(B, B, zF - 60, W - 2 * B, H - 2 * B, '', '#15181b');
 
     /* --- units --- */
     win.units.forEach(function (u) {
-      var x = u.x, y = u.y, uw = u.w, uh = u.h;
+      var x = u.x + B, y = u.y + B, uw = u.w, uh = u.h;
       var fc = u.sash ? FACE_SASH : FACE_FIXED;
       var fcx = Math.min(fc, uw * 0.4), fcy = Math.min(fc, uh * 0.4);
       var zG;
@@ -190,6 +195,12 @@
         'linear-gradient(172deg, #a7bfd1 0%, #7391a7 34%, #3d5266 78%, #2c3c4c 100%)',
         'box-shadow:inset ' + n(9) + 'px ' + n(13) + 'px ' + n(16) + 'px rgba(0,0,0,.42), inset 0 0 0 ' + Math.max(0.6, n(1.5)) + 'px rgba(20,24,28,.75)');
     });
+
+    /* --- shadow of the brickmould on the frame, then the brickmould itself --- */
+    face(B, B, zF + 0.3, W - 2 * B, H - 2 * B, '', 'transparent',
+      'box-shadow:inset ' + Math.max(1.2, n(10)).toFixed(1) + 'px ' + Math.max(1.6, n(14)).toFixed(1) + 'px ' + Math.max(2, n(16)).toFixed(1) +
+      'px rgba(0,0,0,.34), inset 0 0 0 ' + Math.max(0.6, n(1.2)).toFixed(1) + 'px rgba(0,0,0,.30)');
+    ring(0, 0, W, H, B, B, B, zF, zB, col);
 
     var world = '<div class="v3-world" style="top:58%;transform:rotateY(-24deg) translate3d(' + n(-W / 2) + 'px,' + n(-H / 2) + 'px,0)">';
     return '<div class="v3-stage" style="height:' + SH + 'px;perspective:' + Math.round(P) + 'px;perspective-origin:' + V3_EYE + '">' +
