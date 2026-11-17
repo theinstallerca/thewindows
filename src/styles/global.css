@@ -352,9 +352,8 @@ h2.left { text-align: left; }
 .est .est-details { max-width: none; margin-top: 2rem; padding: 1.75rem 1.5rem; background: #fff; border: 1px solid #e0e0e0; border-top: 3px solid var(--ink); box-shadow: 0 1px 2px rgba(0,0,0,.04), 0 8px 24px rgba(0,0,0,.05); }
 .est .est-details .form { max-width: 760px; }
 @media (max-width: 600px) { .est .win-head { padding: 0.8rem 1rem; } .est .win-grid { padding: 1rem; } .est .est-details { padding: 1.25rem 1rem; } }
-/* side by side while both fit; the glass options stack under their Dual / Triple switch */
-.opt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr)); gap: 1.1rem; align-items: start; }
+/* two matching menus, side by side while both fit */
+.opt-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 1.1rem; align-items: start; }
 .opt-row label { white-space: nowrap; }
-.opt-wall { display: grid; gap: 0.75rem; }
+.opt-wall .wall-custom { margin-top: 0.75rem; }
 .opt-wall .wall-custom[hidden] { display: none; }
-.opt-row .checks { gap: 0.6rem 1.1rem; }

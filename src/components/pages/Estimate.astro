@@ -124,14 +124,10 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
             </div>
             <div>
             <label>{e.glass}</label>
-            <div class="checks">
-              <span class="seg">
-                <input type="radio" class="f-glass" value="dual" /><label>{e.dual}</label>
-                <input type="radio" class="f-glass" value="triple" checked /><label>{e.triple}</label>
-              </span>
-              <label class="chk"><input type="checkbox" class="f-lowe" checked /> {e.lowe}</label>
-              <label class="chk"><input type="checkbox" class="f-argon" checked /> {e.argon}</label>
-            </div>
+            <select class="f-glass">
+              <option value="dual">{e.dual}</option>
+              <option value="triple" selected>{e.triple}</option>
+            </select>
             </div>
           </div>
           </div>
@@ -226,9 +222,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
         h: +el.querySelector('.f-h').value || 0,
         sections: secN, types,
         wall: (() => { const v = el.querySelector('.f-wall').value; return v === 'custom' ? 'custom: ' + el.querySelector('.f-wallc').value.trim() : v; })(),
-        glass: el.querySelector('.f-glass:checked').value,
-        lowe: el.querySelector('.f-lowe').checked,
-        argon: el.querySelector('.f-argon').checked,
+        glass: el.querySelector('.f-glass').value,
       };
     }
 
@@ -423,9 +417,8 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       const el = tpl.content.firstElementChild.cloneNode(true);
       n++;
       el.querySelector('.win-n').textContent = n;
-      const grp = 'sec' + n, grpG = 'glass' + n;
+      const grp = 'sec' + n;
       el.querySelectorAll('.f-sec').forEach((r, i) => { r.name = grp; r.id = grp + i; r.nextElementSibling.htmlFor = r.id; });
-      el.querySelectorAll('.f-glass').forEach((r, i) => { r.name = grpG; r.id = grpG + i; r.nextElementSibling.htmlFor = r.id; });
       el.querySelectorAll('.f-t').forEach((sel, i) => {
         typeKeys.forEach((k) => { const o = document.createElement('option'); o.value = k; o.textContent = types[k]; sel.appendChild(o); });
         sel.value = 'none';
