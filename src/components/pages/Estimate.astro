@@ -74,18 +74,23 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
   <template id="win-tpl">
     <article class="win">
       <header class="win-head">
-        <h3><span class="win-title">{e.window}</span> <span class="win-n"></span></h3>
+        <h3><span class="win-badge" aria-hidden="true"></span><span class="win-title">{e.window}</span> <span class="win-n"></span></h3>
         <button type="button" class="win-remove more">{e.remove}</button>
       </header>
       <div class="win-grid">
         <div class="win-fields">
+          <div class="grp">
+          <h4 class="grp-h"><span>1</span>{e.grpSize}</h4>
           <div class="form-row form-row-3">
             <div><label>{e.width} <span class="u"></span></label><input class="f-w" type="number" min="1" step="any" inputmode="decimal" /></div>
             <div><label>{e.height} <span class="u"></span></label><input class="f-h" type="number" min="1" step="any" inputmode="decimal" /></div>
             <div><label>{e.qty}</label><input class="f-qty" type="number" min="1" value="1" /></div>
           </div>
-          <div>
-            <label>{e.sections}</label>
+          </div>
+          <div class="grp">
+          <h4 class="grp-h"><span>2</span>{e.grpUnits}</h4>
+          <div class="grp-line">
+            <label>{e.grpUnitsQ}</label>
             <span class="seg seg-sec">
               <input type="radio" class="f-sec" value="1" checked /><label>1</label>
               <input type="radio" class="f-sec" value="2" /><label>2</label>
@@ -102,8 +107,11 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
             <p class="sec-hint">{e.unitWidthHint}</p>
             <p class="sec-warn" hidden>{e.unitWidthWarn}</p>
           </div>
-          <div class="form-row">
-            <div>
+          </div>
+          <div class="grp">
+          <h4 class="grp-h"><span>3</span>{e.grpOptions}</h4>
+          <div class="opt-row">
+            <div class="opt-wall">
               <label>{e.wall}</label>
               <select class="f-wall">
                 <option value="">{e.wallNone}</option>
@@ -112,10 +120,9 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
                 <option value="6-1/2">6-1/2"</option>
                 <option value="custom">{e.wallCustom}</option>
               </select>
+              <div class="wall-custom" hidden><label>{e.wallCustomLabel}</label><input class="f-wallc" placeholder={e.wallCustomPh} /></div>
             </div>
-            <div class="wall-custom" hidden><label>{e.wallCustomLabel}</label><input class="f-wallc" placeholder={e.wallCustomPh} /></div>
-          </div>
-          <div>
+            <div>
             <label>{e.glass}</label>
             <div class="checks">
               <span class="seg">
@@ -125,6 +132,8 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
               <label class="chk"><input type="checkbox" class="f-lowe" checked /> {e.lowe}</label>
               <label class="chk"><input type="checkbox" class="f-argon" checked /> {e.argon}</label>
             </div>
+            </div>
+          </div>
           </div>
         </div>
         <div class="win-preview">
@@ -447,7 +456,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       renumber();
       return el;
     }
-    function renumber() { [...list.children].forEach((el, i) => { el.querySelector('.win-n').textContent = i + 1; el.querySelector('.win-remove').hidden = i === 0; }); n = list.children.length; }
+    function renumber() { [...list.children].forEach((el, i) => { el.querySelector('.win-n').textContent = i + 1; el.querySelector('.win-badge').textContent = i + 1; el.querySelector('.win-remove').hidden = i === 0; }); n = list.children.length; }
     function renderAll() { [...list.children].forEach(render); }
 
     document.getElementById('add').addEventListener('click', () => addWin().scrollIntoView({ behavior: 'smooth', block: 'center' }));
