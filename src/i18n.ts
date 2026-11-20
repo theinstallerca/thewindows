@@ -74,6 +74,7 @@ const en = {
     commP: 'Storefront, curtain wall and commercial glazing are handled by our partner company, Theinstaller, with the same crew and the same standards.',
     ctaH: 'Talk to us about your windows', ctaP: 'Measurement visits in Winnipeg are free.', ctaBtn: 'Get in touch',
   },
+  photo: { outside: 'seen from outside', inside: 'seen from inside' },
   estimate: {
     title: 'Online PVC Window Estimate, Winnipeg', h1: 'Estimate online',
     lead: 'Enter your window sizes and configuration. We will reply by email with a budgetary price.',
@@ -193,6 +194,7 @@ const uk: typeof en = {
     commP: 'Вітрини, фасадне та комерційне скління виконує наша партнерська компанія Theinstaller — та ж бригада, ті ж стандарти.',
     ctaH: 'Поговорімо про ваші вікна', ctaP: 'Виїзд на замір у Вінніпезі — безкоштовно.', ctaBtn: 'Зв’язатися',
   },
+  photo: { outside: 'вигляд ззовні', inside: 'вигляд зсередини' },
   estimate: {
     title: 'Онлайн-розрахунок пластикових вікон', h1: 'Розрахунок онлайн',
     lead: 'Введіть розміри та конфігурацію вікон. Ми відповімо на email з орієнтовною ціною.',

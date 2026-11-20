@@ -1,0 +1,23 @@
+---
+// The picture for a window type: product photos where we have them, the drawn placeholder otherwise.
+// Photos are cut-outs on a transparent background in public/images/windows/, shown side by side.
+import WindowArt from './WindowArt.astro';
+import { t, type Lang } from '../i18n';
+interface Props { kind: string; lang: Lang; }
+const { kind, lang } = Astro.props;
+const s = t(lang);
+const photos: Record<string, { src: string; w: number; h: number; alt: string }[]> = {
+  casement: [
+    { src: '/images/windows/casement-outside.webp', w: 565, h: 900, alt: `${s.types.casement[0]}: ${s.photo.outside}` },
+    { src: '/images/windows/casement-inside.webp', w: 589, h: 900, alt: `${s.types.casement[0]}: ${s.photo.inside}` },
+  ],
+};
+const shots = photos[kind];
+---
+{shots ? (
+  <div class="media shots">
+    {shots.map((p) => <img src={p.src} width={p.w} height={p.h} alt={p.alt} loading="lazy" decoding="async" />)}
+  </div>
+) : (
+  <div class="media"><WindowArt kind={kind as any} /></div>
+)}
