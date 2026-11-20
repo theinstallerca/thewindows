@@ -361,3 +361,7 @@ h2.left { text-align: left; }
 /* Email address kept out of the HTML: the @ is drawn here (see Email.astro) */
 .eml-at::before { content: "\40"; }
 .eml-at { font-style: normal; }
+
+/* Product photos in a type card: cut-outs side by side on the dark ground */
+.card .media.shots { display: flex; align-items: center; justify-content: center; gap: 5%; padding: 5% 6%; }
+.card .media.shots img { width: auto; height: 100%; min-width: 0; flex: 0 1 auto; object-fit: contain; }

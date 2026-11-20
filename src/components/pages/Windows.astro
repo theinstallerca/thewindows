@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import WindowArt from '../WindowArt.astro';
+import TypeMedia from '../TypeMedia.astro';
 import { t, link, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
@@ -16,7 +16,7 @@ const types = ['casement', 'awning', 'picture'] as const;
       <div class="cards">
         {types.map((k) => (
           <article class="card">
-            <div class="media"><WindowArt kind={k} /></div>
+            <TypeMedia kind={k} lang={lang} />
             <div class="body"><h3>{s.types[k][0]}</h3><p>{s.types[k][1]}</p></div>
             <div class="foot"><a href={link(lang, '/contact')} class="btn">{s.windows.quote}</a></div>
           </article>
