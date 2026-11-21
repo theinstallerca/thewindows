@@ -31,7 +31,7 @@ $wins = json_decode((string)($_POST['windows'] ?? '[]'), true);
 if (!is_array($wins) || count($wins) === 0) fail(400, 'No windows');
 $wins = array_slice($wins, 0, $MAX_WIN);
 
-$typeNames = ['casementL' => 'Casement LH', 'casementR' => 'Casement RH', 'awning' => 'Awning', 'picture' => 'Picture', 'none' => '-'];
+$typeNames = ['casementL' => 'Casement LH', 'casementR' => 'Casement RH', 'awning' => 'Awning', 'picture' => 'Picture', 'fixed' => 'Fixed', 'none' => '-'];
 $esc = static fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
 
 // ---- Build HTML summary -------------------------------------------------

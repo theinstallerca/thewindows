@@ -10,7 +10,7 @@
    board is 4" next to it.
 
    Exposes window.Preview3D.render(host, win, opt, waitText)
-     win: { W, H, units:[{ x, w, sash:true|false }], joints:[x, ...] }   — millimetres over the frames;
+     win: { W, H, units:[{ x, w, kind:'sash' | 'picture' | 'fixed' }], joints:[x, ...] }   — millimetres over the frames;
           a unit is its own frame, x from the left frame edge; joints are the centres between frames
      opt: { wall:'brick1' | ... | 'stucco', stucco:'#rrggbb', color:'#rrggbb', roof:'rooftan' | ... } */
 (function () {
@@ -178,12 +178,20 @@
       var f = Math.min(1, Math.min(uw, uh) / 200);
       function a(v) { return v * f; }
       var groove = 'box-shadow:inset 0 0 0 ' + Math.max(0.7, n(0.8)) + 'px rgba(0,0,0,.13)';
-      if (u.sash) {
+      if (u.kind === 'sash') {
         ring(x, y, uw, uh, a(14), a(14), a(14), Z(45.2), Z(32.9), col);                                   // R8543: only a sliver shows
         ring(x + a(14), y + a(14), uw - a(28), uh - a(28), a(7), a(7), a(7), Z(45.4), Z(44.9), SEAL);     // black seal round the sash
         ring(x + a(19.4), y + a(19.4), uw - a(38.8), uh - a(38.8), a(57.5), a(57.5), a(57.5), Z(53.3), Z(37.5), col);   // GP333 sash
         face(x + a(55.2), y + a(55.2), Z(37.45), uw - a(110.4), uh - a(110.4), '', 'transparent', groove);              // the V-groove on its face
         g = a(78.9); zG = Z(54.8);
+      } else if (u.kind === 'fixed') {
+        /* R8545: the fixed frame. Its wide face is flush with the frame face and matches a casement's
+           sightline; a narrow sealed channel runs where a casement has the gap round its sash. */
+        ring(x, y, uw, uh, a(14.1), a(14.1), a(14.1), Z(41.9), Z(32.9), col);
+        ring(x + a(14.1), y + a(14.1), uw - a(28.2), uh - a(28.2), a(6.1), a(6.1), a(6.1), Z(42.1), Z(41.7), SEAL);
+        ring(x + a(20.2), y + a(20.2), uw - a(40.4), uh - a(40.4), a(56.5), a(56.5), a(56.5), Z(48.7), Z(32.9), col);
+        face(x + a(55), y + a(55), Z(32.85), uw - a(110), uh - a(110), '', 'transparent', groove);
+        g = a(78.7); zG = Z(51.4);
       } else {
         ring(x, y, uw, uh, a(17.2), a(17.2), a(17.2), Z(37.4), Z(32.9), col);                             // R8544, outer face
         ring(x + a(17.2), y + a(17.2), uw - a(34.4), uh - a(34.4), a(23.4), a(23.4), a(23.4), Z(53.2), Z(37.4), col);   // its glazing leg
