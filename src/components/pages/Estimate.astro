@@ -1,10 +1,16 @@
 ---
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import Base from '../../layouts/Base.astro';
 import { t, type Lang } from '../../i18n';
 import Email from '../Email.astro';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const e = s.estimate;
+// The server tells browsers to keep .js files for a year, so the 3D script's address carries a stamp
+// of its contents: when the script changes, the address changes, and nobody is left running an old copy
+// against a newer page.
+const v3Stamp = createHash('sha1').update(readFileSync('public/preview3d.js')).digest('hex').slice(0, 10);
 const v = e.v3;
 // What the 3D preview offers — the same roofs, walls and frame colours as the Measure App.
 const roofs = ['rooftan', 'roofbrown', 'roofgrey', 'roofcharcoal'];
@@ -180,7 +186,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
     </article>
   </template>
 
-  <script is:inline src="/preview3d.js"></script>
+  <script is:inline src={`/preview3d.js?v=${v3Stamp}`}></script>
   <script define:vars={{ types: e.types, needOne: e.needOne, unitWidthWarn: e.unitWidthWarn, building: v.building, unitLabels: { in: '"', cm: 'cm' } }}>
     const form = document.getElementById('est-form');
     const list = document.getElementById('windows');
