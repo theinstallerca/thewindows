@@ -237,7 +237,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       const x0 = pad.l + (aw - fw) / 2, y0 = pad.t + (ah - fh) / 2;
       const fr = Math.max(6, Math.min(14, fw * 0.035)); // frame thickness px
       const ink = '#1c1c1c', dim = '#1f5fbf', glass = '#e9f0f7';
-      let o = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="Poppins, Montserrat, Arial, sans-serif" font-size="13">`;
+      let o = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" font-family="Arial, Helvetica, sans-serif" font-size="13">`;
       o += `<rect width="${W}" height="${H}" fill="#fff"/>`;
       o += `<rect x="${x0}" y="${y0}" width="${fw}" height="${fh}" fill="${glass}" stroke="${ink}" stroke-width="2"/>`;
       o += `<rect x="${x0 + fr}" y="${y0 + fr}" width="${fw - 2 * fr}" height="${fh - 2 * fr}" fill="none" stroke="${ink}" stroke-width="1"/>`;
