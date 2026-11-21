@@ -10,7 +10,8 @@
    board is 4" next to it.
 
    Exposes window.Preview3D.render(host, win, opt, waitText)
-     win: { W, H, units:[{ x, y, w, h, sash:true|false }] }   — millimetres
+     win: { W, H, units:[{ x, w, sash:true|false }], joints:[x, ...] }   — millimetres over the frames;
+          a unit is its own frame, x from the left frame edge; joints are the centres between frames
      opt: { wall:'brick1' | ... | 'stucco', stucco:'#rrggbb', color:'#rrggbb', roof:'rooftan' | ... } */
 (function () {
   'use strict';
@@ -30,16 +31,10 @@
   /* each roof photo's average colour — what the roof fades to in the distance */
   var V3_ROOF_RGB = { rooftan: '124,101,78', roofbrown: '75,66,58', roofgrey: '120,124,121', roofcharcoal: '43,46,49' };
 
-  /* Every window is drawn with a 2" brickmould round it, outside the size
-     entered. It is 1-1/4" deep with the frame behind it. In siding and brick
-     1" of that is in the wall; on stucco 1" of it stands out. */
-  var V3_BM = 50.8;
-  var V3_BM_DEPTH = 31.75;
-  var V3_BM_PROUD = { stucco: 25.4, other: 6.35 };
-  var V3_GLASS_BACK = 20;      // glass behind the face of whatever holds it
-  var V3_SASH_BACK = 7;        // sash face behind the frame face, on a unit that opens
-  var V3_FRAME_PART = 0.44;    // share of an opening unit's face that is frame; the rest is sash
-  var FACE_FIXED = 42, FACE_SASH = 77;   // visible face of a fixed / an opening unit, mm
+  /* The GP363 reno brickmould stands 41.7 mm past the frame edge, outside the size entered.
+     The face of its cap is the front-most surface, this far proud of the wall. */
+  var V3_BM = 41.7;
+  var V3_PROUD = 30;
 
   /* The eave over the window, mm: soffit 15" above the window, 12" overhang,
      4" fascia with an eavestrough, roof at a 6/12 pitch. */
@@ -101,8 +96,7 @@
     var stucco = (opt.wall === 'stucco');
     var k = scale(win, SW, SH);
     var P = SW * 2.3;                                                   // viewing distance
-    var zB = stucco ? V3_BM_PROUD.stucco : V3_BM_PROUD.other;           // brickmould face, in front of the wall
-    var zF = zB - V3_BM_DEPTH;                                          // frame face
+    var zB = V3_PROUD;                                                  // cap face, in front of the wall
     var col = opt.color || '#f4f5f3';
     /* light from the upper left, viewer to the right: faces turned toward the
        viewer's side are in shade, which is what makes the depth read */
@@ -163,44 +157,63 @@
     face(-Mx, -V3_EAVE_ABOVE, 0.4 / k, ww, 430, '', 'linear-gradient(180deg,rgba(0,0,0,.46),rgba(0,0,0,.20) 45%,rgba(0,0,0,0))');
     eave(face, roofFace, n, -Mx, ww, V3_OVERHANG, opt);
 
-    /* --- what the brickmould throws on the wall --- */
+    /* ===== The window itself, from the real Praxis profiles =====
+       R8543 casement frame with the GP333 sash, R8544 picture frame, a TSL08 cover over each
+       joint between frames, and the GP363 reno brickmould with its GP364 cap all round.
+       Numbers are millimetres off the profile drawings: "across" is measured from the outer edge
+       of a unit's frame toward its glass, "back" from the front-most surface (the cap face). */
+    var SEAL = '#17191b';
+    function Z(back) { return zB - back; }
+    var FX = B, FY = B, FW = W - 2 * B, FH = H - 2 * B;      // the coupled frames: the size entered
+    /* what the brickmould throws on the wall */
     var sh = Math.max(1.5, zB * k);
     face(0, 0, 0.05 / k, W, H, '', 'transparent',
       'box-shadow:' + (sh * 0.9).toFixed(1) + 'px ' + (sh * 1.2).toFixed(1) + 'px ' + (sh * 1.4 + 3).toFixed(1) + 'px rgba(0,0,0,.42),0 0 ' +
       (sh * 0.8 + 4).toFixed(1) + 'px rgba(0,0,0,.28)');
+    face(FX, FY, Z(70), FW, FH, '', '#15181b');             // the dark behind everything
 
-    /* --- backing: the dark you see through the joints between coupled units --- */
-    face(B, B, zF - 60, W - 2 * B, H - 2 * B, '', '#15181b');
-
-    /* --- units --- */
     win.units.forEach(function (u) {
-      var x = u.x + B, y = u.y + B, uw = u.w, uh = u.h;
-      var fc = u.sash ? FACE_SASH : FACE_FIXED;
-      var fcx = Math.min(fc, uw * 0.4), fcy = Math.min(fc, uh * 0.4);
-      var zG;
-      if (!u.sash) {
-        zG = zF - V3_GLASS_BACK;
-        ring(x, y, uw, uh, fcy, fcx, fcy, zG, zF, col);
+      var x = FX + u.x, y = FY, uw = u.w, uh = FH, g, zG;
+      /* a very small unit cannot hold full-size members: shrink them together rather than overlap */
+      var f = Math.min(1, Math.min(uw, uh) / 200);
+      function a(v) { return v * f; }
+      var groove = 'box-shadow:inset 0 0 0 ' + Math.max(0.7, n(0.8)) + 'px rgba(0,0,0,.13)';
+      if (u.sash) {
+        ring(x, y, uw, uh, a(14), a(14), a(14), Z(45.2), Z(32.9), col);                                   // R8543: only a sliver shows
+        ring(x + a(14), y + a(14), uw - a(28), uh - a(28), a(7), a(7), a(7), Z(45.4), Z(44.9), SEAL);     // black seal round the sash
+        ring(x + a(19.4), y + a(19.4), uw - a(38.8), uh - a(38.8), a(57.5), a(57.5), a(57.5), Z(53.3), Z(37.5), col);   // GP333 sash
+        face(x + a(55.2), y + a(55.2), Z(37.45), uw - a(110.4), uh - a(110.4), '', 'transparent', groove);              // the V-groove on its face
+        g = a(78.9); zG = Z(54.8);
       } else {
-        var px = fcx * V3_FRAME_PART, py = fcy * V3_FRAME_PART, zS = zF - V3_SASH_BACK;
-        ring(x, y, uw, uh, py, px, py, zS, zF, col);
-        zG = zS - V3_GLASS_BACK * 0.7;
-        var m = 1.6;      // the gap between sash and frame — the backing shows through it as a dark line
-        ring(x + px + m, y + py + m, uw - 2 * px - 2 * m, uh - 2 * py - 2 * m, fcy - py - m, fcx - px - m, fcy - py - m, zG, zS, col);
+        ring(x, y, uw, uh, a(17.2), a(17.2), a(17.2), Z(37.4), Z(32.9), col);                             // R8544, outer face
+        ring(x + a(17.2), y + a(17.2), uw - a(34.4), uh - a(34.4), a(23.4), a(23.4), a(23.4), Z(53.2), Z(37.4), col);   // its glazing leg
+        face(x + a(20.6), y + a(20.6), Z(37.35), uw - a(41.2), uh - a(41.2), '', 'transparent', groove);
+        g = a(42.7); zG = Z(54.7);
       }
+      face(x + g - 1.1, y + g - 1.1, zG + 0.6, uw - 2 * g + 2.2, uh - 2 * g + 2.2, '', SEAL);              // seal lip against the glass
       /* glass: sky up top, the dark of the room below, one streak of reflection,
          and the shadow the head and jamb drop onto it */
-      face(x + fcx, y + fcy, zG, uw - 2 * fcx, uh - 2 * fcy, '',
+      face(x + g, y + g, zG + 0.8, uw - 2 * g, uh - 2 * g, '',
         'linear-gradient(118deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.20) 41%, rgba(255,255,255,.05) 52%, rgba(255,255,255,0) 60%),' +
         'linear-gradient(172deg, #a7bfd1 0%, #7391a7 34%, #3d5266 78%, #2c3c4c 100%)',
-        'box-shadow:inset ' + n(9) + 'px ' + n(13) + 'px ' + n(16) + 'px rgba(0,0,0,.42), inset 0 0 0 ' + Math.max(0.6, n(1.5)) + 'px rgba(20,24,28,.75)');
+        'box-shadow:inset ' + n(7) + 'px ' + n(11) + 'px ' + n(14) + 'px rgba(0,0,0,.40)');
     });
 
-    /* --- shadow of the brickmould on the frame, then the brickmould itself --- */
-    face(B, B, zF + 0.3, W - 2 * B, H - 2 * B, '', 'transparent',
+    /* TSL08 joint covers: there is no mullion, each unit is its own frame */
+    (win.joints || []).forEach(function (jc) {
+      var x = FX + jc - 8.4;
+      face(x, FY, Z(32.9), 2.4, FH, RY, shade(col, L.left));
+      face(x + 16.8, FY, Z(32.9), 2.4, FH, RY, shade(col, L.right));
+      face(x, FY, Z(30.5), 16.8, FH, '', 'linear-gradient(90deg,' + shade(col, 0.97) + ',' + shade(col, 1.02) + ' 30%,' + shade(col, 0.95) + ')');
+    });
+
+    /* shadow of the brickmould on the frames, then the brickmould and its cap */
+    face(FX + 8.8, FY + 8.8, Z(32.9) + 0.3, FW - 17.6, FH - 17.6, '', 'transparent',
       'box-shadow:inset ' + Math.max(1.2, n(10)).toFixed(1) + 'px ' + Math.max(1.6, n(14)).toFixed(1) + 'px ' + Math.max(2, n(16)).toFixed(1) +
-      'px rgba(0,0,0,.34), inset 0 0 0 ' + Math.max(0.6, n(1.2)).toFixed(1) + 'px rgba(0,0,0,.30)');
-    ring(0, 0, W, H, B, B, B, zF, zB, col);
+      'px rgba(0,0,0,.30)');
+    ring(0, 0, W, H, 50.5, 50.5, 50.5, Z(32.9), Z(4.6), col);     // GP363
+    ring(0, 0, W, H, 25, 25, 25, Z(4.6), Z(0), col);              // GP364 cap
+    face(25, 25, Z(4.6) + 0.2, W - 50, H - 50, '', 'transparent', 'box-shadow:inset ' + n(2) + 'px ' + n(3) + 'px ' + n(4) + 'px rgba(0,0,0,.22)');
 
     var world = '<div class="v3-world" style="top:58%;transform:rotateY(-24deg) translate3d(' + n(-W / 2) + 'px,' + n(-H / 2) + 'px,0)">';
     return '<div class="v3-stage" style="height:' + SH + 'px;perspective:' + Math.round(P) + 'px;perspective-origin:' + V3_EYE + '">' +

@@ -303,9 +303,19 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
       const d = readWin(el);
       const mm = unit() === 'cm' ? 10 : 25.4;
       const W = (d.w || 36) * mm, H = (d.h || 36) * mm;
+      // Each unit is its own frame, with a 1/16" taped joint between neighbours: the frames share
+      // the overall width less the joints, in proportion to the unit widths.
+      const JOINT = 1.6, n = d.types.length, sum = d.widths.reduce((a, b) => a + b, 0);
+      const usable = W - JOINT * (n - 1);
       let x = 0;
-      const units = d.types.map((t, i) => { const u = { x, y: 0, w: d.widths[i] * mm, h: H, sash: t === 'casementL' || t === 'casementR' || t === 'awning' }; x += u.w; return u; });
-      return { W, H, units };
+      const joints = [];
+      const units = d.types.map((t, i) => {
+        const u = { x, w: usable * d.widths[i] / sum, sash: t === 'casementL' || t === 'casementR' || t === 'awning' };
+        x += u.w;
+        if (i < n - 1) { joints.push(x + JOINT / 2); x += JOINT; }
+        return u;
+      });
+      return { W, H, units, joints };
     }
     function draw3d(el) {
       if (el.dataset.view !== '3d' || !window.Preview3D) return;
@@ -339,7 +349,7 @@ const colors = ['#f4f5f3', '#e9dfc8', '#c9b79a', '#4a3b32', '#26282b'];
     }
     function openZoom(el, view, from) {
       Z.el = el; Z.view = view; Z.from = from;
-      zoom.querySelector('.zoom-title').textContent = el.querySelector('.win-head h3').textContent.trim().replace(/\s+/g, ' ') + ' · ' + el.querySelector('.pv-tab.on').textContent;
+      zoom.querySelector('.zoom-title').textContent = el.querySelector('.win-title').textContent.trim() + ' ' + el.querySelector('.win-n').textContent.trim() + ' · ' + el.querySelector('.pv-tab.on').textContent;
       zoom.hidden = false;
       document.documentElement.style.overflow = 'hidden';
       zLayout();
