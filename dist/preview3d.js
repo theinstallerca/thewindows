@@ -199,12 +199,12 @@
         g = a(42.7); zG = Z(54.7);
       }
       face(x + g - 1.1, y + g - 1.1, zG + 0.6, uw - 2 * g + 2.2, uh - 2 * g + 2.2, '', SEAL);              // seal lip against the glass
-      /* glass: sky up top, the dark of the room below, one streak of reflection,
+      /* glass: a light neutral grey, paler at the top, with one streak of reflection
          and the shadow the head and jamb drop onto it */
       face(x + g, y + g, zG + 0.8, uw - 2 * g, uh - 2 * g, '',
         'linear-gradient(118deg, rgba(255,255,255,0) 30%, rgba(255,255,255,.20) 41%, rgba(255,255,255,.05) 52%, rgba(255,255,255,0) 60%),' +
-        'linear-gradient(172deg, #a7bfd1 0%, #7391a7 34%, #3d5266 78%, #2c3c4c 100%)',
-        'box-shadow:inset ' + n(7) + 'px ' + n(11) + 'px ' + n(14) + 'px rgba(0,0,0,.40)');
+        'linear-gradient(172deg, #d6d9dc 0%, #b3b7bb 34%, #8a8e93 78%, #74787d 100%)',
+        'box-shadow:inset ' + n(7) + 'px ' + n(11) + 'px ' + n(14) + 'px rgba(0,0,0,.30)');
     });
 
     /* TSL08 joint covers: there is no mullion, each unit is its own frame */
