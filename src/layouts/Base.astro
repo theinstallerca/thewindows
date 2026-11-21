@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo-light.svg';
 import { t, link, phone, type Lang } from '../i18n';
 import Email from '../components/Email.astro';
 
@@ -83,7 +83,7 @@ const schema = {
     <header class="site-header">
       <div class="container header-inner">
         <a href={link(lang, '/')} class="brand" aria-label="The Windows home">
-          <img src={logo.src} alt="thewindows" height="34" />
+          <img src={logo.src} alt="thewindows" width="381" height="52" />
         </a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
           <span></span><span></span><span></span>
@@ -108,7 +108,7 @@ const schema = {
     <footer class="site-footer">
       <div class="container footer-grid">
         <div>
-          <img src={logo.src} alt="thewindows" height="30" />
+          <img src={logo.src} alt="thewindows" width="249" height="34" />
           <p style="margin-top: 0.8rem;">{s.footer.blurb}</p>
         </div>
         <div>
