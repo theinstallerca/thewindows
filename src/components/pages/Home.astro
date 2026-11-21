@@ -4,7 +4,7 @@ import { t, link, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const h = s.home;
-const featured = ['casement', 'awning', 'picture'] as const;
+const featured = ['casement', 'awning', 'picture', 'fixed'] as const;
 
 // Notes round the hero photo: which side the label sits on, where the dot is on the photo (% of its
 // width and height), and how long the leader line is (% of the photo's width).
@@ -88,12 +88,13 @@ const hLine = (x1: number, x2: number, y: number) => `M${x1} ${y}H${x2}M${x1} ${
         <h2>{h.typesH}</h2>
         <span class="mono">{h.typesNote}</span>
       </div>
-      <div class="cards">
+      <div class="cards cards-4">
         {featured.map((k, i) => (
           <article class="card type-card">
             <div class="top">
               <svg viewBox="0 0 102 100" fill="none" stroke="#c9cdd2" aria-hidden="true">
-                <rect x="2" y="2" width="98" height="96" stroke-width="2.5" /><rect x="10" y="10" width="82" height="80" stroke-width="1.2" />
+                <rect x="2" y="2" width="98" height="96" stroke-width="2.5" />
+                {k === 'fixed' ? <rect x="20" y="20" width="62" height="60" stroke-width="1.2" /> : <rect x="10" y="10" width="82" height="80" stroke-width="1.2" />}
                 {k === 'casement' && <polyline points="88,14 14,50 88,86" stroke-width="1.5" />}
                 {k === 'awning' && <polyline points="14,86 51,14 88,86" stroke-width="1.5" />}
               </svg>
