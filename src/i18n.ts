@@ -22,7 +22,7 @@ const en = {
     estimate: 'Estimate online', types: 'Window types', quote: 'Request a quote',
     points: ['Free on-site measurement', 'Manufactured in Winnipeg', 'Professional installation'],
     photoAlt: 'Casement window, open, seen from outside',
-    notes: ['Triple glazing', 'Steel-reinforced', 'Welded corners', 'Integrated screen', 'Multi-point lock', 'Crank operated'],
+    notes: ['Triple glazing', 'Multi-chamber PVC', 'Welded corners', 'Integrated screen', 'Multi-point lock', 'Crank operated'],
     howH: 'How it works',
     steps: [
       ['Measure', 'Free visit. We measure every opening.'],
@@ -41,7 +41,7 @@ const en = {
       fixed: 'Fixed glass in a frame that matches a casement beside it.',
     },
     detailsH: 'The details that matter',
-    detailsP: 'Fusion-welded corners, steel-reinforced frames, multi-point locks and sealed glass units with warm-edge spacers. We choose profiles and glass for this climate, not for a catalogue.',
+    detailsP: 'Fusion-welded corners, multi-chamber PVC frames, multi-point locks and sealed glass units with warm-edge spacers. We choose profiles and glass for this climate, not for a catalogue.',
     detailsList: ['Double or triple pane, Low-E, argon fill', 'White or laminated exterior colours and woodgrains', 'Integrated screens and internal grilles', 'Brickmould, jamb extensions and nailing fin to suit your wall'],
     detailsMore: 'Options and glass', detailsAlt: 'Casement window seen from inside, with screen and crank handle',
     ctaH: 'Ready to replace your windows?',
@@ -56,7 +56,7 @@ const en = {
   windows: {
     title: 'Casement, Awning & Picture PVC Windows',
     h1: 'Window types',
-    lead: 'All windows are made from multi-chamber PVC profile with steel reinforcement, fusion-welded corners and sealed insulated glass units. Any type can be combined into a larger assembly.',
+    lead: 'All windows are made from multi-chamber PVC profile with fusion-welded corners and sealed insulated glass units. Any type can be combined into a larger assembly.',
     more: 'Learn more',
     glassH: 'Glass',
     glass: ['Double or triple pane sealed units', 'Low-E coatings, argon fill', 'Warm-edge spacer bars', 'Tempered glass where code requires it', 'Obscure / frosted glass for bathrooms', 'Internal grilles in several patterns'],
@@ -146,7 +146,7 @@ const uk: typeof en = {
     estimate: 'Розрахунок онлайн', types: 'Типи вікон', quote: 'Запросити ціну',
     points: ['Безкоштовний замір на місці', 'Виготовлено у Вінніпезі', 'Професійний монтаж'],
     photoAlt: 'Поворотне вікно, відчинене, вигляд ззовні',
-    notes: ['Потрійне скління', 'Армування сталлю', 'Зварні кути', 'Вбудована сітка', 'Багатоточковий замок', 'Ручка-кривошип'],
+    notes: ['Потрійне скління', 'Багатокамерний ПВХ', 'Зварні кути', 'Вбудована сітка', 'Багатоточковий замок', 'Ручка-кривошип'],
     howH: 'Як це працює',
     steps: [
       ['Замір', 'Безкоштовний виїзд. Заміряємо кожен отвір.'],
@@ -165,7 +165,7 @@ const uk: typeof en = {
       fixed: 'Глухе скло в рамі, що збігається з поворотним вікном поруч.',
     },
     detailsH: 'Деталі, які мають значення',
-    detailsP: 'Зварні кути, армовані сталлю рами, багатоточкові замки та герметичні склопакети з теплою дистанційною рамкою. Ми обираємо профіль і скло під цей клімат, а не з каталогу.',
+    detailsP: 'Зварні кути, рами з багатокамерного ПВХ, багатоточкові замки та герметичні склопакети з теплою дистанційною рамкою. Ми обираємо профіль і скло під цей клімат, а не з каталогу.',
     detailsList: ['Дво- або трикамерні склопакети, Low-E, аргон', 'Білий або ламінований зовнішній колір, текстура дерева', 'Вбудовані москітні сітки та внутрішні шпроси', 'Наличники, добори та монтажна планка під вашу стіну'],
     detailsMore: 'Опції та скло', detailsAlt: 'Поворотне вікно зсередини, із сіткою та ручкою',
     ctaH: 'Готові замінити вікна?',
@@ -180,7 +180,7 @@ const uk: typeof en = {
   windows: {
     title: 'Типи пластикових вікон',
     h1: 'Типи вікон',
-    lead: 'Усі вікна виготовляються з багатокамерного ПВХ-профілю зі сталевим армуванням, зварними кутами та герметичними склопакетами. Будь-які типи можна поєднати в одну конструкцію.',
+    lead: 'Усі вікна виготовляються з багатокамерного ПВХ-профілю зі зварними кутами та герметичними склопакетами. Будь-які типи можна поєднати в одну конструкцію.',
     more: 'Детальніше',
     glassH: 'Скло',
     glass: ['Дво- або трикамерні склопакети', 'Low-E покриття, заповнення аргоном', 'Тепла дистанційна рамка', 'Загартоване скло там, де вимагають норми', 'Матове скло для ванних кімнат', 'Внутрішні шпроси різних візерунків'],
