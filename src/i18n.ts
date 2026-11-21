@@ -37,7 +37,8 @@ const en = {
     typeShort: {
       casement: 'Side-hinged, cranks open outward. The tightest seal of any opening window.',
       awning: 'Top-hinged, opens outward from the bottom. Can stay open in the rain.',
-      picture: 'Fixed glass. The most light and the best insulation value.',
+      picture: 'Fixed glass in the narrowest frame. The most light and the best insulation value.',
+      fixed: 'Fixed glass in a frame that matches a casement beside it.',
     },
     detailsH: 'The details that matter',
     detailsP: 'Fusion-welded corners, steel-reinforced frames, multi-point locks and sealed glass units with warm-edge spacers. We choose profiles and glass for this climate, not for a catalogue.',
@@ -49,13 +50,14 @@ const en = {
   types: {
     casement: ['Casement', 'Hinged on the side and cranks open outward. The best seal of any opening window — ideal for bedrooms and living rooms.'],
     awning: ['Awning', 'Hinged at the top, opens outward from the bottom. Can stay open in the rain; common above picture windows and in basements.'],
-    picture: ['Picture (fixed)', 'Does not open. Maximum glass, maximum insulation value — often combined with casements or awnings on the sides.'],
+    picture: ['Picture', 'Does not open. The narrowest frame and the most glass, for maximum light and insulation value.'],
+    fixed: ['Fixed', 'Does not open. Its frame is as wide as a casement, so it lines up with opening units beside it.'],
   },
   windows: {
     title: 'Casement, Awning & Picture PVC Windows',
     h1: 'Window types',
     lead: 'All windows are made from multi-chamber PVC profile with steel reinforcement, fusion-welded corners and sealed insulated glass units. Any type can be combined into a larger assembly.',
-    quote: '+ Quote',
+    more: 'Learn more',
     glassH: 'Glass',
     glass: ['Double or triple pane sealed units', 'Low-E coatings, argon fill', 'Warm-edge spacer bars', 'Tempered glass where code requires it', 'Obscure / frosted glass for bathrooms', 'Internal grilles in several patterns'],
     frameH: 'Frame & hardware',
@@ -159,7 +161,8 @@ const uk: typeof en = {
     typeShort: {
       casement: 'Петлі збоку, відкривається назовні ручкою. Найщільніше прилягання серед відкривних вікон.',
       awning: 'Петлі зверху, відкривається назовні знизу. Можна залишати відкритим у дощ.',
-      picture: 'Глухе скло. Найбільше світла та найкраща теплоізоляція.',
+      picture: 'Глухе скло у найвужчій рамі. Найбільше світла та найкраща теплоізоляція.',
+      fixed: 'Глухе скло в рамі, що збігається з поворотним вікном поруч.',
     },
     detailsH: 'Деталі, які мають значення',
     detailsP: 'Зварні кути, армовані сталлю рами, багатоточкові замки та герметичні склопакети з теплою дистанційною рамкою. Ми обираємо профіль і скло під цей клімат, а не з каталогу.',
@@ -171,13 +174,14 @@ const uk: typeof en = {
   types: {
     casement: ['Поворотне (casement)', 'Петлі збоку, відкривається назовні ручкою-кривошипом. Найщільніше прилягання серед відкривних вікон — ідеально для спалень і віталень.'],
     awning: ['Фрамуга (awning)', 'Петлі зверху, відкривається назовні знизу. Можна залишати відкритим у дощ; часто ставлять над глухими вікнами та в підвалах.'],
-    picture: ['Глухе (picture)', 'Не відкривається. Максимум скла і максимальна теплоізоляція — зазвичай поєднується з поворотними або фрамугами з боків.'],
+    picture: ['Глухе (picture)', 'Не відкривається. Найвужча рама і найбільше скла: максимум світла та теплоізоляції.'],
+    fixed: ['Глухе (fixed)', 'Не відкривається. Рама такої ж ширини, як у поворотного, тож збігається з відкривними секціями поруч.'],
   },
   windows: {
     title: 'Типи пластикових вікон',
     h1: 'Типи вікон',
     lead: 'Усі вікна виготовляються з багатокамерного ПВХ-профілю зі сталевим армуванням, зварними кутами та герметичними склопакетами. Будь-які типи можна поєднати в одну конструкцію.',
-    quote: '+ Ціна',
+    more: 'Детальніше',
     glassH: 'Скло',
     glass: ['Дво- або трикамерні склопакети', 'Low-E покриття, заповнення аргоном', 'Тепла дистанційна рамка', 'Загартоване скло там, де вимагають норми', 'Матове скло для ванних кімнат', 'Внутрішні шпроси різних візерунків'],
     frameH: 'Профіль і фурнітура',

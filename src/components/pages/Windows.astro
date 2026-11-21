@@ -4,7 +4,7 @@ import TypeMedia from '../TypeMedia.astro';
 import { t, link, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
-const types = ['casement', 'awning', 'picture'] as const;
+const types = ['casement', 'awning', 'picture', 'fixed'] as const;
 ---
 <Base title={s.windows.title} lang={lang} path="/windows">
   <section class="section">
@@ -13,19 +13,19 @@ const types = ['casement', 'awning', 'picture'] as const;
         <h1 class="center">{s.windows.h1}</h1>
         <p>{s.windows.lead}</p>
       </div>
-      <div class="cards">
+      <div class="cards cards-4">
         {types.map((k) => (
           <article class="card">
             <TypeMedia kind={k} lang={lang} />
             <div class="body"><h3>{s.types[k][0]}</h3><p>{s.types[k][1]}</p></div>
-            <div class="foot"><a href={link(lang, '/contact')} class="btn">{s.windows.quote}</a></div>
+            <div class="foot"><a href="#options" class="btn">{s.windows.more}</a></div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="section section-soft">
+  <section class="section section-soft" id="options">
     <div class="container split" style="align-items: start;">
       <div>
         <h2>{s.windows.glassH}</h2>

@@ -1,6 +1,6 @@
 ---
 // Dark placeholder "product shot" of a window profile; replaced by photos later.
-interface Props { kind?: 'casement' | 'slider' | 'awning' | 'picture' | 'hung' | 'tilt' | 'hero' | 'corner' | 'handle'; }
+interface Props { kind?: 'casement' | 'slider' | 'awning' | 'picture' | 'fixed' | 'hung' | 'tilt' | 'hero' | 'corner' | 'handle'; }
 const { kind = 'casement' } = Astro.props;
 const w = kind === 'hero' ? 1600 : 800;
 const h = kind === 'hero' ? 900 : 600;
@@ -48,7 +48,9 @@ const h = kind === 'hero' ? 900 : 600;
     <g transform="translate(160 60)">
       <rect x="0" y="0" width="480" height="480" fill="#f0f0f0" />
       <rect x="18" y="18" width="444" height="444" fill="#e2e2e2" />
-      <rect x="34" y="34" width="412" height="412" fill={`url(#glass-${kind})`} />
+      {kind === 'fixed'
+        ? <><rect x="28" y="28" width="424" height="424" fill="#f0f0f0" /><rect x="70" y="70" width="340" height="340" fill={`url(#glass-${kind})`} /></>
+        : <rect x="34" y="34" width="412" height="412" fill={`url(#glass-${kind})`} />}
       {(kind === 'casement' || kind === 'slider') && <rect x="236" y="34" width="8" height="412" fill="#f0f0f0" />}
       {kind === 'hung' && <rect x="34" y="236" width="412" height="8" fill="#f0f0f0" />}
       {kind === 'casement' && <path d="M60 240 L220 60 M60 240 L220 420" stroke="#8a8a8a" stroke-width="1.5" stroke-dasharray="8 6" />}
