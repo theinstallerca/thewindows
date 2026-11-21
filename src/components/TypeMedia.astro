@@ -7,12 +7,13 @@ interface Props { kind: string; lang: Lang; }
 const { kind, lang } = Astro.props;
 const s = t(lang);
 const shot = (file: string, w: number, h: number, name: string) => ({ src: `/images/windows/${file}.webp`, w, h, alt: `${name}: ${s.photo.outside}` });
-// Casement is a photo; the others are rendered from the same Praxis profiles the 3D preview uses.
+// Casement is a photo; the others are rendered from the same Praxis profiles the 3D preview uses,
+// at the casement's size (28" x 44") and on the same canvas, so all four show at the same scale.
 const photos: Record<string, { src: string; w: number; h: number; alt: string }[]> = {
   casement: [shot('casement-outside', 552, 900, s.types.casement[0])],
-  awning: [shot('awning-outside', 900, 651, s.types.awning[0])],
-  picture: [shot('picture-outside', 900, 760, s.types.picture[0])],
-  fixed: [shot('fixed-outside', 655, 900, s.types.fixed[0])],
+  awning: [shot('awning-outside', 552, 900, s.types.awning[0])],
+  picture: [shot('picture-outside', 552, 900, s.types.picture[0])],
+  fixed: [shot('fixed-outside', 552, 900, s.types.fixed[0])],
 };
 const shots = photos[kind];
 ---
