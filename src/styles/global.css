@@ -440,3 +440,5 @@ h2.left { text-align: left; }
 .gallery.photos { display: block; columns: 3 300px; column-gap: 1.1rem; }
 .gallery.photos figure { break-inside: avoid; margin-bottom: 1.1rem; }
 .gallery.photos img { aspect-ratio: auto; height: auto; }
+.zoom-content.zoom-photo { background: #0a0b0c; }
+.zoom-photo img { width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }

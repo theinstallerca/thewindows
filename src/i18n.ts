@@ -96,7 +96,7 @@ const en = {
     ctaP: "We'll recommend the right combination during the measurement visit.",
     ctaBtn: 'Book a free measurement',
   },
-  gallery: { title: 'PVC Window Gallery, Winnipeg', h1: 'Our work', lead: 'Windows fabricated and installed around Winnipeg and southern Manitoba.', soon: 'Photo coming soon' },
+  gallery: { title: 'PVC Window Gallery, Winnipeg', h1: 'Our work', lead: 'Windows fabricated and installed around Winnipeg and southern Manitoba.', soon: 'Photo coming soon', prev: 'Previous photo', next: 'Next photo' },
   about: {
     title: 'About Us: Winnipeg PVC Window Fabricator', h1: 'About The Windows',
     lead: 'A Winnipeg manufacturer of custom PVC windows, from the first measurement to installation.',
@@ -250,7 +250,7 @@ const uk: typeof en = {
     ctaP: 'Порадимо правильну комбінацію під час заміру.',
     ctaBtn: 'Замовити безкоштовний замір',
   },
-  gallery: { title: 'Галерея пластикових вікон — Вінніпег', h1: 'Наші роботи', lead: 'Вікна, виготовлені та встановлені у Вінніпезі та на півдні Манітоби.', soon: 'Фото незабаром' },
+  gallery: { title: 'Галерея пластикових вікон — Вінніпег', h1: 'Наші роботи', lead: 'Вікна, виготовлені та встановлені у Вінніпезі та на півдні Манітоби.', soon: 'Фото незабаром', prev: 'Попереднє фото', next: 'Наступне фото' },
   about: {
     title: 'Про нас — виробник пластикових вікон у Вінніпезі', h1: 'Про The Windows',
     lead: 'Виробник пластикових вікон на замовлення у Вінніпезі: від першого заміру до монтажу.',
