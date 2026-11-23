@@ -6,7 +6,9 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 // Drop photos into public/images/gallery/ and list them here.
 // { src: '/images/gallery/filename.jpg', caption: { en: '...', uk: '...' } }
-const photos: { src: string; caption: Record<Lang, string> }[] = [];
+const photos: { src: string; caption: Record<Lang, string> }[] = [
+  { src: '/images/gallery/casement-picture-grey-siding.webp', caption: { en: 'Casement and picture window', uk: 'Поворотне та глухе вікно' } },
+];
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
 <Base title={s.gallery.title} lang={lang} path="/gallery">
@@ -20,7 +22,7 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
         {photos.length > 0
           ? photos.map((p) => (
               <figure>
-                <img src={p.src} alt={p.caption[lang]} loading="lazy" />
+                <img src={p.src} alt={p.caption[lang]} loading="lazy" width="1476" height="1066" />
                 <figcaption>{p.caption[lang]}</figcaption>
               </figure>
             ))
