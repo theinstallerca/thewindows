@@ -104,6 +104,7 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
       <img alt="" width={sec.w * 2} height={sec.h * 2} draggable="false" />
       {sec.marks.map(([x, y], i) => <b style={`left:${x}%;top:${y}%`} aria-hidden="true">{i + 1}</b>)}
     </div></div></div>
+    <ol class="zoom-legend">{parts.map((x) => <li>{x}</li>)}</ol>
   </div>
 
   <script>
@@ -125,7 +126,8 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
       apply();
     }
     function layout() {
-      const ratio = big.height / big.width;
+      // from the attributes: the rendered size is not known until the picture has loaded
+      const ratio = Number(big.getAttribute('height')) / Number(big.getAttribute('width'));
       const w = Math.floor(Math.min(view.clientWidth - 24, (view.clientHeight - 24) / ratio));
       content.style.width = w + 'px'; content.style.height = Math.round(w * ratio) + 'px';
       Z.s = 1; Z.x = Z.y = 0; apply();
