@@ -1,7 +1,7 @@
 ---
 // One page per window type: /casement-windows, /awning-windows, /picture-windows, /fixed-windows.
 import Base from '../../layouts/Base.astro';
-import ProfileSection from '../ProfileSection.astro';
+import sections from '../../data/sections.json';
 import { t, link, typeSlug, type Lang } from '../../i18n';
 type Kind = 'casement' | 'awning' | 'picture' | 'fixed';
 const { lang, kind } = Astro.props as { lang: Lang; kind: Kind };
@@ -13,6 +13,9 @@ const img = { casement: [552, 900], awning: [547, 900], picture: [552, 900], fix
 const sashed = kind === 'casement' || kind === 'awning';
 const sight = { casement: '77.8 mm · 3 1/16"', awning: '77.8 mm · 3 1/16"', picture: '41.6 mm · 1 5/8"', fixed: '77.6 mm · 3 1/16"' }[kind];
 const specs = [[tp.specOpens, p.opens], [tp.specDepth, '82.6 mm · 3 1/4"'], [tp.specSight, sight], [tp.specGlass, tp.glassValue]];
+// The cut sections are renders of the real profiles, all at one scale; the marker positions (% of the
+// picture) come from the render notes: frame, sash where there is one, glass unit, glazing bead.
+const sec = (sections as Record<string, { w: number; h: number; marks: number[][] }>)[kind];
 const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead] : [tp.partFrame, tp.partGlass, tp.partBead];
 ---
 <Base title={p.title} lang={lang} path={typeSlug(kind)}>
@@ -42,7 +45,14 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead] : 
         <h2>{tp.buildH}</h2>
         {p.build.map((x) => <p>{x}</p>)}
       </div>
-      <ProfileSection kind={kind} labels={{ ext: tp.ext, int: tp.int, depth: `${tp.specDepth} 82.6 mm`, sight: `${tp.specSight} ${sight}`, parts }} />
+      <figure class="psec">
+        <div class="psec-shot">
+          <img src={`/images/windows/${kind}-section.webp`} width={sec.w} height={sec.h} alt={`${p.h1}: ${tp.buildKicker.toLowerCase()}`} loading="lazy" />
+          {sec.marks.map(([x, y], i) => <b style={`left:${x}%;top:${y}%`} aria-hidden="true">{i + 1}</b>)}
+        </div>
+        <div class="psec-sides mono"><span>← {tp.ext}</span><span>{tp.int} →</span></div>
+        <figcaption><ol>{parts.map((x) => <li>{x}</li>)}</ol></figcaption>
+      </figure>
     </section>
 
     <section class="type-cols">
