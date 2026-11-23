@@ -6,7 +6,10 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 // Drop photos into public/images/gallery/ and list them here.
 // { src: '/images/gallery/filename.jpg', caption: { en: '...', uk: '...' } }
-const photos: { src: string; caption: Record<Lang, string> }[] = [];
+const photos: { src: string; w: number; h: number; caption: Record<Lang, string> }[] = [
+  { src: '/images/gallery/casement-picture-grey-siding.webp', w: 1476, h: 1066, caption: { en: 'Casement and picture window', uk: 'Поворотне та глухе вікно' } },
+  { src: '/images/gallery/picture-over-awning-stucco.webp', w: 1002, h: 1569, caption: { en: 'Picture window over an awning', uk: 'Глухе вікно над фрамугою' } },
+];
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
 <Base title={s.gallery.title} lang={lang} path="/gallery">
@@ -16,11 +19,11 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
         <h1 class="center">{s.gallery.h1}</h1>
         <p>{s.gallery.lead}</p>
       </div>
-      <div class="gallery">
+      <div class={photos.length > 0 ? "gallery photos" : "gallery"}>
         {photos.length > 0
           ? photos.map((p) => (
               <figure>
-                <img src={p.src} alt={p.caption[lang]} loading="lazy" />
+                <img src={p.src} alt={p.caption[lang]} loading="lazy" width={p.w} height={p.h} />
                 <figcaption>{p.caption[lang]}</figcaption>
               </figure>
             ))
