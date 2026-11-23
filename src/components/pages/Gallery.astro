@@ -18,11 +18,26 @@ const photos: { src: string; w: number; h: number; caption: Record<Lang, string>
   { src: '/images/gallery/open-awning-side-entry.webp', w: 784, h: 1344, caption: { en: 'Tall awning window, open', uk: 'Висока фрамуга, відчинена' } },
 ];
 const z = s.estimate;
-// Three balanced columns: each photo, in order, goes to whichever column is currently shortest
-// (heights in column widths, plus a little for the caption), so no column is left with a gap.
+// Three balanced columns. Heights are in column widths, plus a little for the caption. Every way of
+// sharing the photos between the columns is tried and the one whose columns end closest to level is
+// kept (each column keeps the gallery's order); past 12 photos that gets slow, so each photo simply
+// goes to whichever column is shortest.
+const tall = photos.map((p) => p.h / p.w + 0.12);
+let pick: number[] = [];
+if (photos.length <= 12) {
+  let best = Infinity;
+  const at: number[] = [];
+  const walk = (i: number, h: number[]) => {
+    if (i === photos.length) { const spread = Math.max(...h) - Math.min(...h); if (spread < best) { best = spread; pick = [...at]; } return; }
+    for (let c = 0; c < 3; c++) { if (c > 0 && i === 0) break; at[i] = c; h[c] += tall[i]; walk(i + 1, h); h[c] -= tall[i]; }
+  };
+  walk(0, [0, 0, 0]);
+} else {
+  const h = [0, 0, 0];
+  pick = tall.map((t) => { const c = h.indexOf(Math.min(...h)); h[c] += t; return c; });
+}
 const cols: { p: (typeof photos)[number]; i: number }[][] = [[], [], []];
-const heights = [0, 0, 0];
-photos.forEach((p, i) => { const c = heights.indexOf(Math.min(...heights)); cols[c].push({ p, i }); heights[c] += p.h / p.w + 0.12; });
+photos.forEach((p, i) => cols[pick[i]].push({ p, i }));
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
 <Base title={s.gallery.title} lang={lang} path="/gallery">
