@@ -15,6 +15,11 @@ const photos: { src: string; w: number; h: number; caption: Record<Lang, string>
   { src: '/images/gallery/raised-bungalow.webp', w: 1536, h: 1024, caption: { en: 'Picture windows with casements, upstairs and down', uk: 'Глухі вікна з поворотними, на обох поверхах' } },
 ];
 const z = s.estimate;
+// Three balanced columns: each photo, in order, goes to whichever column is currently shortest
+// (heights in column widths, plus a little for the caption), so no column is left with a gap.
+const cols: { p: (typeof photos)[number]; i: number }[][] = [[], [], []];
+const heights = [0, 0, 0];
+photos.forEach((p, i) => { const c = heights.indexOf(Math.min(...heights)); cols[c].push({ p, i }); heights[c] += p.h / p.w + 0.12; });
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
 <Base title={s.gallery.title} lang={lang} path="/gallery">
@@ -26,11 +31,15 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
       </div>
       <div class={photos.length > 0 ? "gallery photos" : "gallery"}>
         {photos.length > 0
-          ? photos.map((p) => (
-              <figure class="pv-zoomable" role="button" tabindex="0" title={z.zoomTip} data-src={p.src} data-w={p.w} data-h={p.h} data-cap={p.caption[lang]}>
-                <img src={p.src} alt={p.caption[lang]} loading="lazy" width={p.w} height={p.h} />
-                <figcaption>{p.caption[lang]}</figcaption>
-              </figure>
+          ? cols.map((col) => (
+              <div class="gcol">
+                {col.map(({ p, i }) => (
+                  <figure class="pv-zoomable" role="button" tabindex="0" title={z.zoomTip} data-i={i} data-src={p.src} data-w={p.w} data-h={p.h} data-cap={p.caption[lang]}>
+                    <img src={p.src} alt={p.caption[lang]} loading="lazy" width={p.w} height={p.h} />
+                    <figcaption>{p.caption[lang]}</figcaption>
+                  </figure>
+                ))}
+              </div>
             ))
           : placeholders.map((k) => (
               <figure>
@@ -65,7 +74,8 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
     import { createZoom } from '../../scripts/zoom';
     const zoomEl = document.getElementById('zoom');
     if (zoomEl) {
-      const figs = [...document.querySelectorAll<HTMLElement>('.gallery figure[data-src]')];
+      // stepping follows the gallery's own order, not the order of the columns
+      const figs = [...document.querySelectorAll<HTMLElement>('.gallery figure[data-src]')].sort((a, b) => +a.dataset.i! - +b.dataset.i!);
       const title = zoomEl.querySelector<HTMLElement>('.zoom-title')!;
       let at = 0;
       const d = (i: number) => figs[i].dataset;
