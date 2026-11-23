@@ -56,7 +56,7 @@ const en = {
   typePages: {
     specOpens: 'Operation', specDepth: 'Frame depth', specSight: 'Frame edge to glass', specGlass: 'Glass', glassValue: 'Dual or triple pane',
     buildKicker: 'Profile section', buildH: 'How it is built', ext: 'Outside', int: 'Inside',
-    partFrame: 'Welded PVC frame', partSash: 'Sash, sealed against the frame all round', partGlass: 'Sealed glass unit', partBead: 'Glazing bead, on the room side',
+    partFrame: 'Welded PVC frame', partSash: 'Sash, sealed against the frame all round', partGlass: 'Sealed glass unit', partBead: 'Glazing bead, on the room side', partBrickmould: 'Reno brickmould', partCap: 'Brickmould cap', partJamb: 'Jamb extension', partScreen: 'Insect screen, on the room side',
     fitsH: 'Where it fits', othersH: 'Other window types',
     casement: {
       title: 'Casement Windows, Custom PVC, Winnipeg', h1: 'Casement windows', opens: 'Side-hinged, opens outward',
@@ -210,7 +210,7 @@ const uk: typeof en = {
   typePages: {
     specOpens: 'Відкривання', specDepth: 'Глибина рами', specSight: 'Від краю рами до скла', specGlass: 'Скло', glassValue: 'Подвійне або потрійне',
     buildKicker: 'Переріз профілю', buildH: 'Як воно зроблене', ext: 'Зовні', int: 'Всередині',
-    partFrame: 'Зварна рама з ПВХ', partSash: 'Стулка, ущільнена по всьому периметру', partGlass: 'Герметичний склопакет', partBead: 'Штапик, з боку кімнати',
+    partFrame: 'Зварна рама з ПВХ', partSash: 'Стулка, ущільнена по всьому периметру', partGlass: 'Герметичний склопакет', partBead: 'Штапик, з боку кімнати', partBrickmould: 'Зовнішній наличник (brickmould)', partCap: 'Накладка наличника', partJamb: 'Добірна планка', partScreen: 'Москітна сітка, з боку кімнати',
     fitsH: 'Де воно доречне', othersH: 'Інші типи вікон',
     casement: {
       title: 'Поворотні вікна (casement) з ПВХ на замовлення, Вінніпег', h1: 'Поворотні вікна', opens: 'Петлі збоку, назовні',
