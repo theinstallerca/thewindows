@@ -15,9 +15,11 @@ const sight = { casement: '77.8 mm · 3 1/16"', awning: '77.8 mm · 3 1/16"', pi
 const specs = [[tp.specOpens, p.opens], [tp.specDepth, '82.6 mm · 3 1/4"'], [tp.specSight, sight], [tp.specGlass, tp.glassValue]];
 // An awning is the casement's frame and sash with the hinges at the top, so it shows the casement's section.
 // The cut sections are renders of the real profiles, all at one scale; the marker positions (% of the
-// picture) come from the render notes: frame, sash where there is one, glass unit, glazing bead.
+// picture) come from the render notes: frame, sash where there is one, glass unit, glazing bead,
+// brickmould, its cap, jamb extension, and the screen on opening units.
 const sec = (sections as Record<string, { w: number; h: number; marks: number[][] }>)[kind];
-const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead] : [tp.partFrame, tp.partGlass, tp.partBead];
+const trim = [tp.partBrickmould, tp.partCap, tp.partJamb];
+const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ...trim, tp.partScreen] : [tp.partFrame, tp.partGlass, tp.partBead, ...trim];
 ---
 <Base title={p.title} lang={lang} path={typeSlug(kind)}>
   <section class="hero type-hero">
