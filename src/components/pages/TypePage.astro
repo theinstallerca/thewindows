@@ -18,6 +18,8 @@ const specs = [[tp.specOpens, p.opens], [tp.specDepth, '82.6 mm · 3 1/4"'], [tp
 // picture) come from the render notes: frame, sash where there is one, glass unit, glazing bead,
 // brickmould, its cap, jamb extension, and the screen on opening units.
 const sec = (sections as Record<string, { w: number; h: number; marks: number[][] }>)[kind];
+// the legend reads down the left column, then down the right
+const rows = Math.ceil((sashed ? 8 : 6) / 2);
 const secKind = kind === 'awning' ? 'casement' : kind;
 const z = s.estimate;
 const trim = [tp.partBrickmould, tp.partCap, tp.partJamb];
@@ -57,7 +59,7 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
         </div>
         <p class="pv-tip" style="text-align:center">{z.zoomTip}</p>
         <div class="psec-sides mono"><span>← {tp.ext}</span><span>{tp.int} →</span></div>
-        <figcaption><ol>{parts.map((x) => <li>{x}</li>)}</ol></figcaption>
+        <figcaption><ol style={`--rows:${rows}`}>{parts.map((x) => <li>{x}</li>)}</ol></figcaption>
       </figure>
     </section>
 
@@ -104,7 +106,7 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
       <img alt="" width={sec.w * 2} height={sec.h * 2} draggable="false" />
       {sec.marks.map(([x, y], i) => <b style={`left:${x}%;top:${y}%`} aria-hidden="true">{i + 1}</b>)}
     </div></div></div>
-    <ol class="zoom-legend">{parts.map((x) => <li>{x}</li>)}</ol>
+    <ol class="zoom-legend" style={`--rows:${rows}`}>{parts.map((x) => <li>{x}</li>)}</ol>
   </div>
 
   <script>
