@@ -393,3 +393,32 @@ h2.left { text-align: left; }
 
 /* anchors land below the sticky header */
 [id] { scroll-margin-top: 112px; }
+
+/* Window type pages */
+.type-hero .hero-grid { grid-template-columns: 1fr 1fr; }
+.type-hero .mono a { color: var(--muted); text-decoration: none; } .type-hero .mono a:hover { color: var(--ink); }
+.type-hero .shot { width: min(300px, 56vw); }
+.type-hero .hero-stage::after { display: block; }
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); margin: 0 0 2.5rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.specs > div { padding: 1.3rem 1.5rem; border-left: 1px solid var(--line); }
+.specs > div:first-child { padding-left: 0; border-left: 0; }
+.specs dd { margin: 0.4rem 0 0; color: var(--ink); font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+@media (max-width: 860px) { .type-hero .hero-grid { grid-template-columns: 1fr; } .specs { grid-template-columns: 1fr 1fr; } .specs > div:nth-child(odd) { padding-left: 0; border-left: 0; } .specs > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+.build { display: grid; grid-template-columns: 1fr minmax(0, 420px); gap: 3.5rem; align-items: center; padding: 2.5rem; }
+.build h2 { text-align: left; margin: 0.75rem 0 1rem; }
+.build p { max-width: 520px; }
+.psec { margin: 0; }
+.psec svg { width: 100%; height: auto; display: block; }
+.psec ol { margin: 1rem 0 0.75rem; padding: 0; list-style: none; counter-reset: p; display: grid; gap: 0.35rem; font-size: 0.9rem; color: var(--ink); }
+.psec li { counter-increment: p; display: flex; gap: 0.6rem; align-items: baseline; }
+.psec li::before { content: counter(p); flex: none; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-family: var(--mono); font-size: 0.72rem; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; }
+.psec .mono { margin: 0; }
+@media (max-width: 860px) { .build { grid-template-columns: 1fr; gap: 2rem; padding: 1.75rem 1.5rem; } }
+.type-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; margin-top: 3.5rem; }
+.type-cols h2 { text-align: left; font-size: 1.4rem; }
+@media (max-width: 860px) { .type-cols { grid-template-columns: 1fr; gap: 1.5rem; } }
+.card.other { flex-direction: row; align-items: center; gap: 1.25rem; padding: 1.25rem 1.5rem; text-decoration: none; }
+.card.other img { height: 110px; width: auto; flex: none; }
+.card.other h3 { margin: 0.3rem 0 0.3rem; }
+.card.other p { font-size: 0.88rem; margin: 0; color: var(--text); }
+.card.other:hover { border-color: rgba(255,255,255,.3); }

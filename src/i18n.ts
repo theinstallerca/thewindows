@@ -53,6 +53,36 @@ const en = {
     picture: ['Picture', 'Does not open. The narrowest frame and the most glass, for maximum light and insulation value.'],
     fixed: ['Fixed', 'Does not open. Its frame is as wide as a casement, so it lines up with opening units beside it.'],
   },
+  typePages: {
+    specOpens: 'Operation', specDepth: 'Frame depth', specSight: 'Frame edge to glass', specGlass: 'Glass', glassValue: 'Dual or triple pane',
+    buildKicker: 'Profile section', buildH: 'How it is built', ext: 'Outside', int: 'Inside',
+    partFrame: 'Welded PVC frame', partSash: 'Sash, sealed against the frame all round', partGlass: 'Sealed glass unit', partBead: 'Glazing bead, on the room side',
+    fitsH: 'Where it fits', othersH: 'Other window types',
+    casement: {
+      title: 'Casement Windows, Custom PVC, Winnipeg', h1: 'Casement windows', opens: 'Side-hinged, opens outward',
+      lead: 'Hinged on the side and cranked open outward. When it closes, the sash presses against the frame all the way round, which gives the tightest seal of any opening window.',
+      build: ['A casement is two welded PVC parts: the frame fixed in the wall and the sash that carries the glass. From outside you see mostly sash, about 3 1/16" from the edge of the frame to the glass.', 'The glass is set from the room side and held by a glazing bead, so nothing that holds it can be reached from outside. The screen sits on the inside.'],
+      fits: ['Bedrooms and living rooms', 'Above counters and sinks, where a crank is easier to reach than a sash', 'Beside a picture or fixed unit, to bring air into a large opening'],
+    },
+    awning: {
+      title: 'Awning Windows, Custom PVC, Winnipeg', h1: 'Awning windows', opens: 'Top-hinged, opens outward',
+      lead: 'Hinged at the top and opened outward from the bottom. The open sash sheds water like a small roof, so it can stay open in light rain.',
+      build: ['An awning uses the same frame and sash as our casement, turned so the hinges are at the top. Side by side, the two have the same sightlines.', 'The glass is set from the room side and held by a glazing bead. The screen sits on the inside.'],
+      fits: ['Above or below a picture window', 'Basements and bathrooms, set high in the wall for privacy', 'Anywhere you want air on a rainy day'],
+    },
+    picture: {
+      title: 'Picture Windows, Custom PVC, Winnipeg', h1: 'Picture windows', opens: 'Does not open',
+      lead: 'Glass set straight into the narrowest frame we make. With no sash in the way, it gives the most glass for the opening, and the best insulation value.',
+      build: ['A picture window has no sash: the glass unit sits directly in a slim welded frame, about 1 5/8" from the edge of the frame to the glass.', 'The glass is set from the room side and held by a glazing bead, so it can be replaced without taking the frame out.'],
+      fits: ['Living rooms and anywhere the view matters', 'Large openings and stair landings', 'Between casements or above an awning, where one unit should stay shut'],
+    },
+    fixed: {
+      title: 'Fixed Windows, Custom PVC, Winnipeg', h1: 'Fixed windows', opens: 'Does not open',
+      lead: 'Glass that does not open, in a frame as wide as a casement. Choose it over a picture window when it sits beside opening units and the glass lines should match.',
+      build: ['A fixed unit sets the glass directly in a wide welded frame: about 3 1/16" from the edge of the frame to the glass, the same as our casement and awning.', 'The glass is set from the room side and held by a glazing bead, so it can be replaced without taking the frame out.'],
+      fits: ['Beside or between casements, so every pane is the same size', 'Rows of matching units across a wide opening', 'Anywhere a picture window would look too slim next to its neighbours'],
+    },
+  },
   windows: {
     title: 'Casement, Awning & Picture PVC Windows',
     h1: 'Window types',
@@ -177,6 +207,36 @@ const uk: typeof en = {
     picture: ['Глухе (picture)', 'Не відкривається. Найвужча рама і найбільше скла: максимум світла та теплоізоляції.'],
     fixed: ['Глухе (fixed)', 'Не відкривається. Рама такої ж ширини, як у поворотного, тож збігається з відкривними секціями поруч.'],
   },
+  typePages: {
+    specOpens: 'Відкривання', specDepth: 'Глибина рами', specSight: 'Від краю рами до скла', specGlass: 'Скло', glassValue: 'Подвійне або потрійне',
+    buildKicker: 'Переріз профілю', buildH: 'Як воно зроблене', ext: 'Зовні', int: 'Всередині',
+    partFrame: 'Зварна рама з ПВХ', partSash: 'Стулка, ущільнена по всьому периметру', partGlass: 'Герметичний склопакет', partBead: 'Штапик, з боку кімнати',
+    fitsH: 'Де воно доречне', othersH: 'Інші типи вікон',
+    casement: {
+      title: 'Поворотні вікна (casement) з ПВХ на замовлення, Вінніпег', h1: 'Поворотні вікна', opens: 'Петлі збоку, назовні',
+      lead: 'Петлі збоку, відкривається назовні ручкою-кривошипом. У закритому стані стулка притискається до рами по всьому периметру, тому це найщільніше з відкривних вікон.',
+      build: ['Поворотне вікно складається з двох зварних частин: рами, закріпленої в стіні, та стулки зі склом. Ззовні видно переважно стулку: близько 78 мм від краю рами до скла.', 'Скло встановлюється з боку кімнати й тримається штапиком, тож ззовні до кріплення не дістатися. Сітка стоїть зсередини.'],
+      fits: ['Спальні та вітальні', 'Над стільницею чи мийкою, де до ручки дотягнутися легше, ніж до стулки', 'Поруч із глухою секцією, щоб провітрювати великий отвір'],
+    },
+    awning: {
+      title: 'Вікна-фрамуги (awning) з ПВХ на замовлення, Вінніпег', h1: 'Вікна-фрамуги', opens: 'Петлі зверху, назовні',
+      lead: 'Петлі зверху, відкривається назовні знизу. Відчинена стулка відводить воду, як маленький дашок, тож її можна залишати відкритою в невеликий дощ.',
+      build: ['Фрамуга має ту саму раму й стулку, що й наше поворотне вікно, тільки петлі розташовані зверху. Поруч вони виглядають однаково.', 'Скло встановлюється з боку кімнати й тримається штапиком. Сітка стоїть зсередини.'],
+      fits: ['Над або під глухим вікном', 'Підвали та ванні кімнати, високо в стіні', 'Усюди, де потрібне провітрювання в дощ'],
+    },
+    picture: {
+      title: 'Глухі вікна (picture) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (picture)', opens: 'Не відкривається',
+      lead: 'Скло, встановлене безпосередньо в найвужчу нашу раму. Без стулки воно дає найбільше скла на отвір і найкращу теплоізоляцію.',
+      build: ['У глухому вікні немає стулки: склопакет стоїть прямо у вузькій зварній рамі, близько 42 мм від краю рами до скла.', 'Скло встановлюється з боку кімнати й тримається штапиком, тож його можна замінити, не знімаючи раму.'],
+      fits: ['Вітальні та місця, де важливий краєвид', 'Великі отвори та сходові майданчики', 'Між поворотними секціями або над фрамугою'],
+    },
+    fixed: {
+      title: 'Глухі вікна (fixed) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (fixed)', opens: 'Не відкривається',
+      lead: 'Глухе скло в рамі такої ж ширини, як у поворотного вікна. Обирайте його замість picture, коли воно стоїть поруч із відкривними секціями і лінії скла мають збігатися.',
+      build: ['У вікні fixed скло стоїть прямо в широкій зварній рамі: близько 78 мм від краю рами до скла, як у наших поворотних вікон і фрамуг.', 'Скло встановлюється з боку кімнати й тримається штапиком, тож його можна замінити, не знімаючи раму.'],
+      fits: ['Поруч або між поворотними секціями, щоб усі шибки були однакові', 'Ряди однакових секцій у широкому отворі', 'Там, де picture виглядало б надто вузьким поруч із сусідами'],
+    },
+  },
   windows: {
     title: 'Типи пластикових вікон',
     h1: 'Типи вікон',
@@ -254,4 +314,6 @@ const uk: typeof en = {
 export const dict = { en, uk };
 export const t = (lang: Lang) => dict[lang];
 export const prefix = (lang: Lang) => (lang === 'uk' ? '/ua' : '');
+/** The address of a window type's own page, e.g. '/casement-windows'. */
+export const typeSlug = (kind: string) => `/${kind}-windows`;
 export const link = (lang: Lang, path: string) => prefix(lang) + path; // '/' -> '/', '/ua/' for Ukrainian home
