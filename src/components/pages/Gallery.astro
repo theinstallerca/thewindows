@@ -10,6 +10,7 @@ const photos: { src: string; w: number; h: number; caption: Record<Lang, string>
   { src: '/images/gallery/casement-picture-grey-siding.webp', w: 1476, h: 1066, caption: { en: 'Casement and picture window', uk: 'Поворотне та глухе вікно' } },
   { src: '/images/gallery/picture-over-awning-stucco.webp', w: 1002, h: 1569, caption: { en: 'Picture window over an awning', uk: 'Глухе вікно над фрамугою' } },
 ];
+const z = s.estimate;
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
 <Base title={s.gallery.title} lang={lang} path="/gallery">
@@ -22,7 +23,7 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
       <div class={photos.length > 0 ? "gallery photos" : "gallery"}>
         {photos.length > 0
           ? photos.map((p) => (
-              <figure>
+              <figure class="pv-zoomable" role="button" tabindex="0" title={z.zoomTip} data-src={p.src} data-w={p.w} data-h={p.h} data-cap={p.caption[lang]}>
                 <img src={p.src} alt={p.caption[lang]} loading="lazy" width={p.w} height={p.h} />
                 <figcaption>{p.caption[lang]}</figcaption>
               </figure>
@@ -36,4 +37,41 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
       </div>
     </div>
   </section>
+
+  {photos.length > 0 && (
+    <div id="zoom" class="zoom" role="dialog" aria-modal="true" aria-label={s.gallery.h1} hidden>
+      <div class="zoom-bar">
+        <span class="zoom-title"></span>
+        <span class="zoom-hint">{z.zoomHint}</span>
+        <span class="zoom-btns">
+          {photos.length > 1 && <button type="button" data-z="prev" aria-label={s.gallery.prev} title={s.gallery.prev}>←</button>}
+          {photos.length > 1 && <button type="button" data-z="next" aria-label={s.gallery.next} title={s.gallery.next}>→</button>}
+          <button type="button" data-z="out" aria-label={z.zoomOut} title={z.zoomOut}>&minus;</button>
+          <button type="button" data-z="in" aria-label={z.zoomIn} title={z.zoomIn}>+</button>
+          <button type="button" data-z="reset">{z.zoomReset}</button>
+          <button type="button" data-z="close" class="zoom-close">{z.close}</button>
+        </span>
+      </div>
+      <div class="zoom-view"><div class="zoom-pan"><div class="zoom-content zoom-photo"><img alt="" draggable="false" /></div></div></div>
+    </div>
+  )}
+
+  <script>
+    // Click a photo to open it large (see src/scripts/zoom.ts); arrows step through the gallery.
+    import { createZoom } from '../../scripts/zoom';
+    const zoomEl = document.getElementById('zoom');
+    if (zoomEl) {
+      const figs = [...document.querySelectorAll<HTMLElement>('.gallery figure[data-src]')];
+      const title = zoomEl.querySelector<HTMLElement>('.zoom-title')!;
+      let at = 0;
+      const d = (i: number) => figs[i].dataset;
+      const label = (i: number) => { title.textContent = d(i).cap + (figs.length > 1 ? ` · ${i + 1} / ${figs.length}` : ''); };
+      const z = createZoom(zoomEl, { onStep: (dir) => { at = (at + dir + figs.length) % figs.length; label(at); z.show(d(at).src!, +d(at).w!, +d(at).h!, d(at).cap); } });
+      figs.forEach((f, i) => {
+        const open = () => { at = i; label(i); z.open(d(i).src!, +d(i).w!, +d(i).h!, f, d(i).cap); };
+        f.addEventListener('click', open);
+        f.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
+      });
+    }
+  </script>
 </Base>

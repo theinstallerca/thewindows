@@ -1,0 +1,1 @@
+import{c}from"./zoom.OMAM_1X9.js";const e=document.getElementById("sec-shot"),n=document.getElementById("zoom"),o=n.querySelector("img"),m=c(n),r=()=>m.open(e.dataset.large,Number(o.getAttribute("width")),Number(o.getAttribute("height")),e);e.addEventListener("click",r);e.addEventListener("keydown",t=>{(t.key==="Enter"||t.key===" ")&&(t.preventDefault(),r())});
