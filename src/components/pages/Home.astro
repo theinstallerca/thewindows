@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { t, link, type Lang } from '../../i18n';
+import { t, link, typeSlug, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const h = s.home;
@@ -102,7 +102,7 @@ const hLine = (x1: number, x2: number, y: number) => `M${x1} ${y}H${x2}M${x1} ${
             </div>
             <h3>{s.types[k][0]}</h3>
             <p>{h.typeShort[k]}</p>
-            <a href={link(lang, '/windows')} class="more">{h.more} →</a>
+            <a href={link(lang, typeSlug(k))} class="more">{h.more} →</a>
           </article>
         ))}
       </div>

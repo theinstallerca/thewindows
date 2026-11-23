@@ -2,7 +2,7 @@ import type { APIRoute } from 'astro';
 import { link } from '../i18n';
 
 const site = 'https://thewindows.ca';
-const pages = ['/', '/windows', '/gallery', '/about', '/estimate', '/contact'];
+const pages = ['/', '/windows', '/casement-windows', '/awning-windows', '/picture-windows', '/fixed-windows', '/gallery', '/about', '/estimate', '/contact'];
 
 export const GET: APIRoute = () => {
   const today = new Date().toISOString().slice(0, 10);
