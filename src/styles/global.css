@@ -408,7 +408,11 @@ h2.left { text-align: left; }
 .build h2 { text-align: left; margin: 0.75rem 0 1rem; }
 .build p { max-width: 520px; }
 .psec { margin: 0; }
-.psec svg { width: 100%; height: auto; display: block; }
+.psec-shot { position: relative; width: min(100%, 360px); margin: 0 auto; }
+.psec-shot::before { content: ''; position: absolute; inset: 6% -8%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.1), transparent); }
+.psec-shot img { position: relative; width: 100%; height: auto; display: block; filter: drop-shadow(0 20px 26px rgba(0,0,0,.55)); }
+.psec-shot b { position: absolute; transform: translate(-50%, -50%); width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-family: var(--mono); font-size: 0.78rem; font-weight: 500; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 4px rgba(255,125,0,.25); }
+.psec-sides { display: flex; justify-content: space-between; margin-top: 0.75rem; }
 .psec ol { margin: 1rem 0 0.75rem; padding: 0; list-style: none; counter-reset: p; display: grid; gap: 0.35rem; font-size: 0.9rem; color: var(--ink); }
 .psec li { counter-increment: p; display: flex; gap: 0.6rem; align-items: baseline; }
 .psec li::before { content: counter(p); flex: none; width: 1.35rem; height: 1.35rem; border-radius: 50%; background: var(--gold); color: var(--on-gold); font-family: var(--mono); font-size: 0.72rem; font-weight: 500; display: inline-flex; align-items: center; justify-content: center; }
