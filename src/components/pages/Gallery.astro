@@ -38,9 +38,13 @@ if (photos.length <= 12) {
 }
 const cols: { p: (typeof photos)[number]; i: number }[][] = [[], [], []];
 photos.forEach((p, i) => cols[pick[i]].push({ p, i }));
+// The page shows a smaller copy of each photo (public/images/gallery/thumbs); the enlarged view loads
+// the full one. The top photo of each column loads straight away, the rest as they scroll into view.
+const thumb = (src: string) => src.replace('/gallery/', '/gallery/thumbs/');
+const first = new Set(cols.map((c) => c[0]?.i).filter((i) => i !== undefined));
 const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture'] as const;
 ---
-<Base title={s.gallery.title} lang={lang} path="/gallery">
+<Base title={s.gallery.title} description={s.desc.gallery} lang={lang} path="/gallery">
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -52,9 +56,12 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
           ? cols.map((col) => (
               <div class="gcol">
                 {col.map(({ p, i }) => (
-                  <figure class="pv-zoomable" role="button" tabindex="0" title={z.zoomTip} data-i={i} data-src={p.src} data-w={p.w} data-h={p.h} data-cap={p.caption[lang]}>
-                    <img src={p.src} alt={p.caption[lang]} loading="lazy" width={p.w} height={p.h} />
-                    <figcaption>{p.caption[lang]}</figcaption>
+                  <figure data-i={i} data-src={p.src} data-w={p.w} data-h={p.h} data-cap={p.caption[lang]}>
+                    <button type="button" class="gshot pv-zoomable" title={z.zoomTip} aria-label={`${z.zoomTip}: ${p.caption[lang]}`}>
+                      <img src={thumb(p.src)} alt={p.caption[lang]} width={p.w} height={p.h} style={`aspect-ratio:${p.w} / ${p.h}`}
+                        loading={first.has(i) ? 'eager' : 'lazy'} fetchpriority={i === 0 ? 'high' : undefined} decoding="async" />
+                    </button>
+                    <figcaption aria-hidden="true">{p.caption[lang]}</figcaption>
                   </figure>
                 ))}
               </div>
@@ -100,9 +107,8 @@ const placeholders = ['hero', 'corner', 'handle', 'casement', 'awning', 'picture
       const label = (i: number) => { title.textContent = d(i).cap + (figs.length > 1 ? ` · ${i + 1} / ${figs.length}` : ''); };
       const z = createZoom(zoomEl, { onStep: (dir) => { at = (at + dir + figs.length) % figs.length; label(at); z.show(d(at).src!, +d(at).w!, +d(at).h!, d(at).cap); } });
       figs.forEach((f, i) => {
-        const open = () => { at = i; label(i); z.open(d(i).src!, +d(i).w!, +d(i).h!, f, d(i).cap); };
-        f.addEventListener('click', open);
-        f.addEventListener('keydown', (ev) => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
+        const btn = f.querySelector<HTMLElement>('.gshot')!;
+        btn.addEventListener('click', () => { at = i; label(i); z.open(d(i).src!, +d(i).w!, +d(i).h!, btn, d(i).cap); });
       });
     }
   </script>

@@ -9,8 +9,14 @@ interface Props {
   description?: string;
   lang?: Lang;
   path: string; // page path without language prefix, e.g. '/windows'
+  /** breadcrumb trail after Home, as [label, path] pairs, for search results */
+  crumbs?: [string, string][];
+  /** picture shown when the page is shared (path under /public); defaults to the site card */
+  image?: string;
+  /** keep this page out of search results (e.g. the not-found page) */
+  noindex?: boolean;
 }
-const { title, lang = 'en', path } = Astro.props;
+const { title, lang = 'en', path, crumbs, noindex } = Astro.props;
 const s = t(lang);
 const description = Astro.props.description ?? s.meta.description;
 const nav = [
@@ -27,7 +33,8 @@ const enUrl = link('en', path);
 const ukUrl = link('uk', path);
 const site = 'https://thewindows.ca';
 const canonical = site + link(lang, path);
-const schema = {
+const shareImage = site + (Astro.props.image ?? '/images/share.jpg');
+const schema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
   '@id': site + '/#business',
@@ -35,11 +42,18 @@ const schema = {
   description: s.meta.description,
   url: site + '/',
   telephone: phone.tel,
-  image: site + '/apple-touch-icon.png',
+  image: site + '/images/share.jpg',
+  logo: site + '/apple-touch-icon.png',
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' }],
   address: { '@type': 'PostalAddress', addressLocality: 'Winnipeg', addressRegion: 'MB', addressCountry: 'CA' },
   areaServed: [{ '@type': 'City', name: 'Winnipeg' }, { '@type': 'AdministrativeArea', name: 'Manitoba' }],
   knowsLanguage: ['en', 'uk'],
-  makesOffer: ['casement', 'awning', 'picture'].map((k) => ({ '@type': 'Offer', itemOffered: { '@type': 'Product', name: (s.types as any)[k][0], description: (s.types as any)[k][1] } })),
+  makesOffer: (['casement', 'awning', 'picture', 'fixed'] as const).map((k) => ({ '@type': 'Offer', itemOffered: { '@type': 'Product', name: (s.types as any)[k][0], description: (s.types as any)[k][1] } })),
+};
+const breadcrumbs = crumbs && {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [[s.nav.home, '/'] as [string, string], ...crumbs].map(([name, p], i) => ({ '@type': 'ListItem', position: i + 1, name, item: site + link(lang, p) })),
 };
 ---
 <!doctype html>
@@ -49,17 +63,23 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} · The Windows</title>
     <meta name="description" content={description} />
-    <link rel="alternate" hreflang="en" href={`https://thewindows.ca${enUrl}`} />
-    <link rel="alternate" hreflang="uk" href={`https://thewindows.ca${ukUrl}`} />
-    <link rel="alternate" hreflang="x-default" href={`https://thewindows.ca${enUrl}`} />
-    <link rel="canonical" href={canonical} />
+    {!noindex && <>
+      <link rel="alternate" hreflang="en" href={`https://thewindows.ca${enUrl}`} />
+      <link rel="alternate" hreflang="uk" href={`https://thewindows.ca${ukUrl}`} />
+      <link rel="alternate" hreflang="x-default" href={`https://thewindows.ca${enUrl}`} />
+      <link rel="canonical" href={canonical} />
+    </>}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="The Windows" />
     <meta property="og:title" content={`${title} · The Windows`} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'uk' ? 'uk_UA' : 'en_CA'} />
+    <meta property="og:image" content={shareImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {noindex && <meta name="robots" content="noindex" />}
     <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    {breadcrumbs && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbs)} />}
     <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
   </head>
@@ -112,13 +132,13 @@ const schema = {
           <p style="margin-top: 0.8rem;">{s.footer.blurb}</p>
         </div>
         <div>
-          <h4>{s.footer.site}</h4>
+          <p class="foot-h">{s.footer.site}</p>
           <ul>
             {footNav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
           </ul>
         </div>
         <div>
-          <h4>{s.footer.contact}</h4>
+          <p class="foot-h">{s.footer.contact}</p>
           <ul>
             <li><Email lang={lang} /></li>
             <li><a href={`tel:${phone.tel}`}>{phone.display}</a></li>
@@ -126,7 +146,7 @@ const schema = {
           </ul>
         </div>
         <div>
-          <h4>{s.footer.commercial}</h4>
+          <p class="foot-h">{s.footer.commercial}</p>
           <ul>
             <li>{s.footer.commercialText}</li>
             <li><a href="https://theinstaller.ca" rel="noopener">theinstaller.ca →</a></li>

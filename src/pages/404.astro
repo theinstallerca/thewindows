@@ -1,0 +1,22 @@
+---
+// Shown by the server for any address that does not exist (ErrorDocument in public/.htaccess).
+import Base from '../layouts/Base.astro';
+import { t, link } from '../i18n';
+const s = t('en');
+const u = t('uk');
+---
+<Base title={s.notFound.title} description={s.desc.notFound} lang="en" path="/404" noindex>
+  <section class="section">
+    <div class="container" style="text-align:center; max-width: 640px;">
+      <span class="mono">404</span>
+      <h1 style="margin-top: 1rem;">{s.notFound.h1}</h1>
+      <p class="lead">{s.notFound.p}</p>
+      <p lang="uk" class="form-note">{u.notFound.p}</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <a href={link('en', '/')} class="btn btn-solid">{s.notFound.home}</a>
+        <a href={link('en', '/windows')} class="btn">{s.notFound.windows}</a>
+        <a href={link('uk', '/')} class="btn" lang="uk">{u.notFound.home}</a>
+      </div>
+    </div>
+  </section>
+</Base>

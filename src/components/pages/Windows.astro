@@ -6,7 +6,7 @@ const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 const types = ['casement', 'awning', 'picture', 'fixed'] as const;
 ---
-<Base title={s.windows.title} lang={lang} path="/windows">
+<Base title={s.windows.title} description={s.desc.windows} lang={lang} path="/windows">
   <section class="section">
     <div class="container">
       <div class="section-head">

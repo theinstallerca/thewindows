@@ -22,7 +22,7 @@ const notes = [
 const D = { l: 79.6, r: 552.4, t: 54, b: 243, j1: 197.8, j2: 434.2, yTop: 22.2, yBot: 272.7, xLeft: 45.9 };
 const hLine = (x1: number, x2: number, y: number) => `M${x1} ${y}H${x2}M${x1} ${y - 6}v12M${x2} ${y - 6}v12`;
 ---
-<Base title={h.title} lang={lang} path="/">
+<Base title={h.title} description={s.desc.home} lang={lang} path="/">
   <section class="hero">
     <div class="container hero-grid">
       <div>
@@ -53,7 +53,7 @@ const hLine = (x1: number, x2: number, y: number) => `M${x1} ${y}H${x2}M${x1} ${
 
   <div class="container">
     <section class="how" aria-label={h.howH}>
-      <span class="mono">{h.howH}</span>
+      <h2 class="mono how-h">{h.howH}</h2>
       <ol>
         {h.steps.map(([title, text], i) => (
           <li><b aria-hidden="true">0{i + 1}</b><div><h3>{title}</h3><p>{text}</p></div></li>

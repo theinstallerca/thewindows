@@ -5,7 +5,8 @@ const site = 'https://thewindows.ca';
 const pages = ['/', '/windows', '/casement-windows', '/awning-windows', '/picture-windows', '/fixed-windows', '/gallery', '/about', '/estimate', '/contact'];
 
 export const GET: APIRoute = () => {
-  const today = new Date().toISOString().slice(0, 10);
+  // placeholder date: scripts/lastmod.mjs replaces it after the build with when each page really changed
+const today = new Date().toISOString().slice(0, 10);
   const urls = pages.flatMap((p) => (['en', 'uk'] as const).map((lang) => `  <url>
     <loc>${site}${link(lang, p)}</loc>
     <lastmod>${today}</lastmod>

@@ -145,7 +145,7 @@ h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.02em; }
 
 /* Home: how it works strip */
 .how { padding: 1.6rem 0 1.75rem; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 2.5rem; }
-.how > .mono { display: block; margin-bottom: 1.1rem; }
+.how > .mono { display: block; margin: 0 0 1.1rem; text-align: left; letter-spacing: 0.1em; line-height: 1.4; }
 .how ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
 .how li { display: flex; gap: 0.9rem; align-items: flex-start; padding: 0 1.5rem; border-left: 1px solid var(--line); }
 .how li:first-child { padding-left: 0; border-left: 0; }
@@ -250,7 +250,7 @@ input:focus, textarea:focus, select:focus { outline: none; border-color: var(--g
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 2.5rem; }
 @media (max-width: 800px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 500px) { .footer-grid { grid-template-columns: 1fr; } }
-.site-footer h4 { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; color: var(--muted); margin: 0 0 0.9rem; }
+.site-footer .foot-h { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 400; color: var(--muted); margin: 0 0 0.9rem; }
 .site-footer ul { list-style: none; margin: 0; padding: 0; }
 .site-footer li { margin-bottom: 0.4rem; }
 .site-footer a { text-decoration: none; color: var(--text); }
@@ -439,7 +439,9 @@ h2.left { text-align: left; }
 /* Gallery photos keep their own shape (wide or tall), in three balanced columns; one column on phones */
 .gallery.photos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1rem; align-items: start; }
 .gallery.photos .gcol { display: grid; gap: 1.1rem; align-content: start; }
-.gallery.photos img { aspect-ratio: auto; height: auto; }
+.gallery.photos img { height: auto; }
+.gallery .gshot { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; cursor: zoom-in; overflow: hidden; }
+.gallery .gshot:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
 @media (max-width: 700px) { .gallery.photos { grid-template-columns: 1fr; } }
 .zoom-content.zoom-photo { background: #0a0b0c; }
 .zoom-photo img { width: 100%; height: 100%; display: block; user-select: none; -webkit-user-drag: none; }
