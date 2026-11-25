@@ -1,11 +1,20 @@
-# Serve /about as about.html, etc.
 RewriteEngine On
+
+# One address per page: /about.html -> /about, /index.html and /ua/index -> the folder (301, permanent).
+# THE_REQUEST is the address the visitor typed, so the internal rewrite below cannot loop back here.
+RewriteCond %{THE_REQUEST} \s/+(.*?/)?index(?:\.html)?[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+([^?\s]+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Serve /about as about.html, etc.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+)$ $1.html [L]
 
 AddDefaultCharset UTF-8
+ErrorDocument 404 /404.html
 
 # Cache static assets
 <IfModule mod_expires.c>

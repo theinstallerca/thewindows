@@ -25,7 +25,7 @@ const z = s.estimate;
 const trim = [tp.partBrickmould, tp.partCap, tp.partJamb];
 const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ...trim, tp.partScreen] : [tp.partFrame, tp.partGlass, tp.partBead, ...trim];
 ---
-<Base title={p.title} lang={lang} path={typeSlug(kind)}>
+<Base title={p.title} description={s.desc[kind]} lang={lang} crumbs={[[s.nav.windows, '/windows'], [p.h1, typeSlug(kind)]]} path={typeSlug(kind)}>
   <section class="hero type-hero">
     <div class="container hero-grid">
       <div>

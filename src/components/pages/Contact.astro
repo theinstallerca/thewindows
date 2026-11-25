@@ -5,7 +5,7 @@ import Email from '../Email.astro';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 ---
-<Base title={s.contact.title} lang={lang} path="/contact">
+<Base title={s.contact.title} description={s.desc.contact} lang={lang} path="/contact">
   <section class="section" style="padding-bottom: 0;">
     <div class="container">
       <div class="section-head"><h1 class="center">{s.contact.chooseH}</h1></div>

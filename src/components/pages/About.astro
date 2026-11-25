@@ -5,7 +5,7 @@ import { t, link, type Lang } from '../../i18n';
 const { lang } = Astro.props as { lang: Lang };
 const s = t(lang);
 ---
-<Base title={s.about.title} lang={lang} path="/about">
+<Base title={s.about.title} description={s.desc.about} lang={lang} path="/about">
   <section class="section">
     <div class="container split">
       <div>
