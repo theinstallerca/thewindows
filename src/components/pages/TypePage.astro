@@ -20,9 +20,11 @@ const specs = [[tp.specOpens, p.opens], [tp.specDepth, '82.6 mm · 3 1/4"'], [tp
 const sec = (sections as Record<string, { w: number; h: number; marks: number[][] }>)[kind];
 // the legend reads down the left column, then down the right
 const rows = Math.ceil((sashed ? 8 : 6) / 2);
-// A short looping clip under the text, where a type has one. Without the video file yet, its first frame is shown.
-const motions: Partial<Record<Kind, { poster: string; video?: string; w: number; h: number; alt: string }>> = {
-  casement: { poster: '/images/windows/casement-motion-poster.webp', w: 474, h: 720, alt: `${p.h1}: ${s.photo.outside}` },
+// A short looping animation under the text, where a type has one: an animated WebP with a transparent
+// background (plays and loops by itself, no video player). Visitors who ask for reduced motion get its
+// first frame instead.
+const motions: Partial<Record<Kind, { anim?: string; poster: string; w: number; h: number; alt: string }>> = {
+  casement: { anim: '/images/windows/casement-open-close.webp', poster: '/images/windows/casement-motion-poster.webp', w: 474, h: 720, alt: s.typePages.casementAnimAlt },
 };
 const motion = motions[kind];
 const secKind = kind === 'awning' ? 'casement' : kind;
@@ -60,9 +62,10 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
         </div>
         {motion && (
           <div class="build-motion">
-            {motion.video
-              ? <video src={motion.video} poster={motion.poster} width={motion.w} height={motion.h} autoplay muted loop playsinline preload="metadata" aria-label={motion.alt}></video>
-              : <img src={motion.poster} width={motion.w} height={motion.h} alt={motion.alt} loading="lazy" />}
+            <picture>
+              {motion.anim && <source srcset={motion.poster} media="(prefers-reduced-motion: reduce)" />}
+              <img src={motion.anim ?? motion.poster} width={motion.w} height={motion.h} alt={motion.alt} loading="lazy" decoding="async" />
+            </picture>
           </div>
         )}
       </div>

@@ -70,7 +70,7 @@ const en = {
     specOpens: 'Operation', specDepth: 'Frame depth', specSight: 'Frame edge to glass', specGlass: 'Glass', glassValue: 'Dual or triple glass sealed units',
     buildKicker: 'Profile section', buildH: 'How it is built', ext: 'Outside', int: 'Inside',
     partFrame: 'Welded PVC frame', partSash: 'Sash, sealed against the frame all round', partGlass: 'Sealed glass unit', partBead: 'Glazing bead', partBrickmould: 'Reno brickmould', partCap: 'Brickmould cap', partJamb: 'Jamb extension', partScreen: 'Insect screen',
-    fitsH: 'Where it fits', othersH: 'Other window types',
+    fitsH: 'Where it fits', othersH: 'Other window types', casementAnimAlt: 'A casement window cranking open and closing again',
     casement: {
       title: 'Casement Windows, Custom PVC, Winnipeg', h1: 'Casement windows', opens: 'Side-hinged, opens outward',
       lead: 'Hinged on the side and cranked open outward. When it closes, the sash presses against the frame all the way round, which gives the tightest seal of any opening window.',
@@ -237,7 +237,7 @@ const uk: typeof en = {
     specOpens: 'Відкривання', specDepth: 'Глибина рами', specSight: 'Від краю рами до скла', specGlass: 'Скло', glassValue: 'Склопакети з подвійним або потрійним склом',
     buildKicker: 'Переріз профілю', buildH: 'Як воно зроблене', ext: 'Зовні', int: 'Всередині',
     partFrame: 'Зварна рама з ПВХ', partSash: 'Стулка, ущільнена по всьому периметру', partGlass: 'Герметичний склопакет', partBead: 'Штапик', partBrickmould: 'Зовнішній наличник (brickmould)', partCap: 'Накладка наличника', partJamb: 'Добірна планка', partScreen: 'Москітна сітка',
-    fitsH: 'Де воно доречне', othersH: 'Інші типи вікон',
+    fitsH: 'Де воно доречне', othersH: 'Інші типи вікон', casementAnimAlt: 'Поворотне вікно відчиняється і знову зачиняється',
     casement: {
       title: 'Поворотні вікна (casement) з ПВХ на замовлення, Вінніпег', h1: 'Поворотні вікна', opens: 'Петлі збоку, назовні',
       lead: 'Петлі збоку, відкривається назовні ручкою-кривошипом. У закритому стані стулка притискається до рами по всьому периметру, тому це найщільніше з відкривних вікон.',
