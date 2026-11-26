@@ -86,13 +86,13 @@ const en = {
     picture: {
       title: 'Picture Windows, Custom PVC, Winnipeg', h1: 'Picture windows', opens: 'Does not open',
       lead: 'Glass set straight into the narrowest frame we make. With no sash in the way, it gives the most glass, and the most light, for the opening.',
-      build: ['A picture window has no sash: the glass unit sits directly in a slim welded frame, about 1 5/8" from the edge of the frame to the glass.', 'The glass is set from the room side and held by a glazing bead, so it can be replaced without taking the frame out.'],
+      build: ['A picture window has no sash: the glass unit sits directly in a slim welded frame, about 1 5/8" from the edge of the frame to the glass.', 'The glass is set from the room side and held by a glazing bead.'],
       fits: ['Living rooms and anywhere the view matters', 'Large openings and stair landings', 'Between casements or above an awning, where one unit should stay shut'],
     },
     fixed: {
       title: 'Fixed Windows, Custom PVC, Winnipeg', h1: 'Fixed windows', opens: 'Does not open',
       lead: 'Glass that does not open, in a frame that looks like a casement from outside. Choose it over a picture window when it sits beside opening units and the glass lines should match.',
-      build: ['A fixed unit sets the glass directly in a wide welded frame: about 3 1/16" from the edge of the frame to the glass, so from outside it reads the same as our casement and awning. The profile itself is different.', 'The glass is set from the room side and held by a glazing bead, so it can be replaced without taking the frame out.'],
+      build: ['A fixed unit sets the glass directly in a wide welded frame: about 3 1/16" from the edge of the frame to the glass, so from outside it reads the same as our casement and awning. The profile itself is different.', 'The glass is set from the room side and held by a glazing bead.'],
       fits: ['Beside or between casements, so every pane is the same size', 'Rows of matching units across a wide opening', 'Anywhere a picture window would look too slim next to its neighbours'],
     },
   },
@@ -253,13 +253,13 @@ const uk: typeof en = {
     picture: {
       title: 'Глухі вікна (picture) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (picture)', opens: 'Не відкривається',
       lead: 'Скло, встановлене безпосередньо в найвужчу нашу раму. Без стулки воно дає найбільше скла й світла на отвір.',
-      build: ['У глухому вікні немає стулки: склопакет стоїть прямо у вузькій зварній рамі, близько 42 мм від краю рами до скла.', 'Скло встановлюється з боку кімнати й тримається штапиком, тож його можна замінити, не знімаючи раму.'],
+      build: ['У глухому вікні немає стулки: склопакет стоїть прямо у вузькій зварній рамі, близько 42 мм від краю рами до скла.', 'Скло встановлюється з боку кімнати й тримається штапиком.'],
       fits: ['Вітальні та місця, де важливий краєвид', 'Великі отвори та сходові майданчики', 'Між поворотними секціями або над фрамугою'],
     },
     fixed: {
       title: 'Глухі вікна (fixed) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (fixed)', opens: 'Не відкривається',
       lead: 'Глухе скло в рамі, яка ззовні виглядає як поворотне вікно. Обирайте його замість picture, коли воно стоїть поруч із відкривними секціями і лінії скла мають збігатися.',
-      build: ['У вікні fixed скло стоїть прямо в широкій зварній рамі: близько 78 мм від краю рами до скла, тож ззовні воно виглядає як наші поворотні вікна та фрамуги. Сам профіль інший.', 'Скло встановлюється з боку кімнати й тримається штапиком, тож його можна замінити, не знімаючи раму.'],
+      build: ['У вікні fixed скло стоїть прямо в широкій зварній рамі: близько 78 мм від краю рами до скла, тож ззовні воно виглядає як наші поворотні вікна та фрамуги. Сам профіль інший.', 'Скло встановлюється з боку кімнати й тримається штапиком.'],
       fits: ['Поруч або між поворотними секціями, щоб усі шибки були однакові', 'Ряди однакових секцій у широкому отворі', 'Там, де picture виглядало б надто вузьким поруч із сусідами'],
     },
   },
