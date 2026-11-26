@@ -48,7 +48,8 @@ const schema: Record<string, unknown> = {
   address: { '@type': 'PostalAddress', addressLocality: 'Winnipeg', addressRegion: 'MB', addressCountry: 'CA' },
   areaServed: [{ '@type': 'City', name: 'Winnipeg' }, { '@type': 'AdministrativeArea', name: 'Manitoba' }],
   knowsLanguage: ['en', 'uk'],
-  makesOffer: (['casement', 'awning', 'picture', 'fixed'] as const).map((k) => ({ '@type': 'Offer', itemOffered: { '@type': 'Product', name: (s.types as any)[k][0], description: (s.types as any)[k][1] } })),
+  makesOffer: (['casement', 'awning', 'picture', 'fixed'] as const).map((k) => ({ '@type': 'Offer', // 'Service', not 'Product': Google treats a Product as for sale and then demands a price, reviews or a rating
+  itemOffered: { '@type': 'Service', serviceType: (s.types as any)[k][0], name: (s.types as any)[k][0], description: (s.types as any)[k][1], areaServed: 'Winnipeg, Manitoba' } })),
 };
 const breadcrumbs = crumbs && {
   '@context': 'https://schema.org',
