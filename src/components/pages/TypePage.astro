@@ -25,6 +25,7 @@ const rows = Math.ceil((sashed ? 8 : 6) / 2);
 // first frame instead.
 const motions: Partial<Record<Kind, { anim?: string; poster: string; w: number; h: number; alt: string }>> = {
   casement: { anim: '/images/windows/casement-open-close.webp', poster: '/images/windows/casement-motion-poster.webp', w: 474, h: 720, alt: s.typePages.casementAnimAlt },
+  awning: { anim: '/images/windows/awning-open-close.webp', poster: '/images/windows/awning-motion-poster.webp', w: 502, h: 720, alt: s.typePages.awningAnimAlt },
 };
 const motion = motions[kind];
 const secKind = kind === 'awning' ? 'casement' : kind;
