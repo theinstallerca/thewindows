@@ -4,6 +4,17 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.thewindows\.ca$ [NC]
 RewriteRule ^(.*)$ https://thewindows.ca/$1 [R=301,L]
 
+# Extra domains, once each is added in cPanel as an alias of thewindows.ca (they do nothing until then).
+# vikna.ca ("windows" in Ukrainian): the Ukrainian site, permanently.
+RewriteCond %{HTTP_HOST} ^(www\.)?vikna\.ca$ [NC]
+RewriteRule ^ https://thewindows.ca/ua/ [R=301,L]
+# dveri.ca ("doors") and winnipegdoors.ca: no doors pages yet, so the contact page in the matching language.
+# Temporary (302) on purpose: browsers do not remember it, so it can point at the doors pages later.
+RewriteCond %{HTTP_HOST} ^(www\.)?dveri\.ca$ [NC]
+RewriteRule ^ https://thewindows.ca/ua/contact [R=302,L]
+RewriteCond %{HTTP_HOST} ^(www\.)?winnipegdoors\.ca$ [NC]
+RewriteRule ^ https://thewindows.ca/contact [R=302,L]
+
 # One address per page: /about.html -> /about, /index.html and /ua/index -> the folder (301, permanent).
 # THE_REQUEST is the address the visitor typed, so the internal rewrite below cannot loop back here.
 RewriteCond %{THE_REQUEST} \s/+(.*?/)?index(?:\.html)?[\s?] [NC]
