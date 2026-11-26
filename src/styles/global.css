@@ -456,3 +456,7 @@ h2.left { text-align: left; }
 .ti-foot:hover span { color: var(--ink); }
 .ti-about { display: inline-block; margin: 0.25rem 0 1.1rem; }
 .ti-about img { height: 40px; width: auto; display: block; }
+/* type page: text at the top of its column, an optional clip centred below it */
+.build-text.has-motion { align-self: stretch; display: flex; flex-direction: column; gap: 1.5rem; }
+.build-motion { flex: 1; display: flex; justify-content: center; align-items: center; }
+.build-motion img { width: auto; height: auto; max-height: 360px; max-width: 100%; display: block; filter: drop-shadow(0 18px 24px rgba(0,0,0,.55)); }
