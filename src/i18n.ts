@@ -31,7 +31,7 @@ const en = {
   home: {
     title: 'Custom PVC Windows, Made in Winnipeg',
     kicker: 'Custom PVC windows — Winnipeg, Manitoba',
-    h1: ['Made to measure.', 'Built for Manitoba.'],
+    h1: ['Windows built for', 'Manitoba winters.'],
     lead: 'Custom PVC windows manufactured in Winnipeg, measured to your exact openings and built to order. Professionally installed, or supply only.',
     estimate: 'Estimate online', types: 'Window types', quote: 'Request a quote',
     points: ['Free on-site measurement', 'Manufactured in Winnipeg', 'Professional installation'],
@@ -198,7 +198,7 @@ const uk: typeof en = {
   home: {
     title: 'Пластикові вікна на замовлення, виготовлені у Вінніпезі',
     kicker: 'Пластикові вікна на замовлення — Вінніпег, Манітоба',
-    h1: ['За вашим розміром.', 'Для зим Манітоби.'],
+    h1: ['Вікна для', 'зим Манітоби.'],
     lead: 'Пластикові вікна на замовлення, виготовлені у Вінніпезі, точно за розміром ваших отворів. Професійний монтаж або лише постачання.',
     estimate: 'Розрахунок онлайн', types: 'Типи вікон', quote: 'Запросити ціну',
     points: ['Безкоштовний замір на місці', 'Виготовлено у Вінніпезі', 'Професійний монтаж'],
