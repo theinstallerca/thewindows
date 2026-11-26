@@ -1,5 +1,9 @@
 RewriteEngine On
 
+# One host: www.thewindows.ca -> thewindows.ca (301, permanent), keeping the path.
+RewriteCond %{HTTP_HOST} ^www\.thewindows\.ca$ [NC]
+RewriteRule ^(.*)$ https://thewindows.ca/$1 [R=301,L]
+
 # One address per page: /about.html -> /about, /index.html and /ua/index -> the folder (301, permanent).
 # THE_REQUEST is the address the visitor typed, so the internal rewrite below cannot loop back here.
 RewriteCond %{THE_REQUEST} \s/+(.*?/)?index(?:\.html)?[\s?] [NC]
