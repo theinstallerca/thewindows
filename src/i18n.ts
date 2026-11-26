@@ -91,9 +91,9 @@ const en = {
     },
     fixed: {
       title: 'Fixed Windows, Custom PVC, Winnipeg', h1: 'Fixed windows', opens: 'Does not open',
-      lead: 'Glass that does not open, in a frame that looks like a casement from outside. Choose it over a picture window when it sits beside opening units and the glass lines should match.',
+      lead: 'Its frame looks like a casement from outside. Choose it over a picture window when it sits beside opening units and the glass lines should match.',
       build: ['A fixed unit sets the glass directly in a wide welded frame: about 3 1/16" from the edge of the frame to the glass, so from outside it reads the same as our casement and awning. The profile itself is different.', 'The glass is set from the room side and held by a glazing bead.'],
-      fits: ['Beside or between casements, so every pane is the same size', 'Rows of matching units across a wide opening', 'Anywhere a picture window would look too slim next to its neighbours'],
+      fits: ['Beside or between casements or awnings', 'Larger windows, where its stronger frame adds rigidity', 'Anywhere a picture window would look too slim next to its neighbours'],
     },
   },
   windows: {
@@ -258,9 +258,9 @@ const uk: typeof en = {
     },
     fixed: {
       title: 'Глухі вікна (fixed) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (fixed)', opens: 'Не відкривається',
-      lead: 'Глухе скло в рамі, яка ззовні виглядає як поворотне вікно. Обирайте його замість picture, коли воно стоїть поруч із відкривними секціями і лінії скла мають збігатися.',
+      lead: 'Ззовні його рама виглядає як поворотне вікно. Обирайте його замість picture, коли воно стоїть поруч із відкривними секціями і лінії скла мають збігатися.',
       build: ['У вікні fixed скло стоїть прямо в широкій зварній рамі: близько 78 мм від краю рами до скла, тож ззовні воно виглядає як наші поворотні вікна та фрамуги. Сам профіль інший.', 'Скло встановлюється з боку кімнати й тримається штапиком.'],
-      fits: ['Поруч або між поворотними секціями, щоб усі шибки були однакові', 'Ряди однакових секцій у широкому отворі', 'Там, де picture виглядало б надто вузьким поруч із сусідами'],
+      fits: ['Поруч або між поворотними вікнами чи фрамугами', 'Більші вікна, де міцніша рама додає жорсткості', 'Там, де picture виглядало б надто вузьким поруч із сусідами'],
     },
   },
   windows: {
