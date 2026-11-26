@@ -454,3 +454,5 @@ h2.left { text-align: left; }
 .ti-foot img { height: 30px; width: auto; display: block; }
 .ti-foot span { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .ti-foot:hover span { color: var(--ink); }
+.ti-about { display: inline-block; margin: 0.25rem 0 1.1rem; }
+.ti-about img { height: 40px; width: auto; display: block; }

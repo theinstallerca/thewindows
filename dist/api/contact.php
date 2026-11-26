@@ -51,7 +51,7 @@ $body .= "Project:  $project\n\n";
 $body .= "Details:\n$message\n\n";
 $body .= "---\nIP: " . ($_SERVER['REMOTE_ADDR'] ?? '') . "\nTime: " . date('Y-m-d H:i:s') . "\n";
 
-$headers  = "From: The Windows website <$FROM>\r\n";
+$headers  = "From: TheWindows website <$FROM>\r\n";
 $headers .= "Reply-To: $name <$email>\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
