@@ -1,82 +1,82 @@
 {
  "https://thewindows.ca/": {
-  "fp": "3a771da120483efaa9824b7db6b0fc2df8ebe220",
+  "fp": "cadba82dc69b60cb65c76a7b35d3f336c4e541e9",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/": {
-  "fp": "1647961345599f12ca67d490590e049bfef0bfe4",
+  "fp": "57f2899a3b4f72f45cbc849429c2d9d0752e25f5",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/windows": {
-  "fp": "7d5259b3791b5906d1b0c2821e84bfe2e6b25cef",
+  "fp": "bb188c778b18dba234b8d891363b631dca8d2433",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/windows": {
-  "fp": "8db2538c60fba050be16ccd3d4d453a05007a55c",
+  "fp": "b9801c3712438216fcb7f1ddf4b652e1077bad0b",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/casement-windows": {
-  "fp": "4cba822718b68f753e56ed0b1a51601d7075b90c",
+  "fp": "3492a842382daacbe812d8435e453dbffd5cfc83",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/casement-windows": {
-  "fp": "112b4137483037aac15ff3266e3578bf9b0b34f1",
+  "fp": "48102a6c43faaabd75ee63bc371a6a6f2a896343",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/awning-windows": {
-  "fp": "9695dc4c039ccecbf6ba7cf9e61da97bf087024a",
+  "fp": "5c03308a9f3968832d52f0e96430c5e65fe95747",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/awning-windows": {
-  "fp": "bde5314c12a5a0e2b69b3145de89dfd47721dbc8",
+  "fp": "69db92723bc43c14d3375f594d74fdd60dd91cc8",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/picture-windows": {
-  "fp": "0f8b49345d016c377a51d16f7030be772756dc74",
+  "fp": "05f177567817d696328b10c101de555eee34e45f",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/picture-windows": {
-  "fp": "c74064c209b5a6d9df6494316d80f3c85a785780",
+  "fp": "ed10f8c8cd9d8178caf09f16dcbfddbcb24b4dad",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/fixed-windows": {
-  "fp": "9f9cda5f18061c98a1ce8d76295282469dd71bc3",
+  "fp": "76d5cd987e2a6c5e1cc228b86f7a0e1ed4d19f18",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/fixed-windows": {
-  "fp": "6cbd435d9584fe0af33718518b3320da11e7450c",
+  "fp": "38c4a8aeed5ed01956149c07b87f2124443fab4b",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/gallery": {
-  "fp": "eb9df4219509b7f15aeec739b7229547ab2fd69c",
-  "date": "2026-11-25"
+  "fp": "e4030fde1b7ecdb11a5a947270d2ed43f87ab0c3",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/gallery": {
-  "fp": "b6d10ab17566bf74c8262bfeaed1e410abfb5ee9",
-  "date": "2026-11-25"
+  "fp": "33200ec1bee1654d9b35af17bb24004ddb2fa8ca",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/about": {
-  "fp": "dae503f67dd5c98e9aae1a0c09766d937b9f4bdf",
-  "date": "2026-11-25"
+  "fp": "27d360b957f59f0ed15e29f535c21e9938e3ec42",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/about": {
-  "fp": "191e711e22e7ea0f51eafad32240b272c445efb0",
-  "date": "2026-11-25"
+  "fp": "55a6bdd0132b2432c0e342658b8317e2100aae34",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/estimate": {
-  "fp": "7a13e222f9099b3b175cdcfc55b9f5d193dab148",
+  "fp": "3629cdc3a6e2156e420a82d4eb52116a5ec3b411",
   "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/estimate": {
-  "fp": "5e0ffb505a91d0992632b8f6e294c247065ca92d",
-  "date": "2026-11-25"
+  "fp": "bd24b46b22a8f7bcf83eef70befb4a4a34192f74",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/contact": {
-  "fp": "179ab2e321ffd2c5b2b5ce75b6e37f8001651a39",
-  "date": "2026-11-25"
+  "fp": "534e5cf2446faccdacae89faa59a998c60945382",
+  "date": "2026-11-26"
  },
  "https://thewindows.ca/ua/contact": {
-  "fp": "3d4a8ff124674ff4f909d8e6cb82e8ba4f8eae7f",
-  "date": "2026-11-25"
+  "fp": "4bb92079bfa2dae99d17da668dbbc4051e74fe5b",
+  "date": "2026-11-26"
  }
 }

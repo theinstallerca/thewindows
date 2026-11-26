@@ -38,7 +38,7 @@ const schema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'HomeAndConstructionBusiness',
   '@id': site + '/#business',
-  name: 'The Windows',
+  name: 'TheWindows',
   description: s.meta.description,
   url: site + '/',
   telephone: phone.tel,
@@ -61,7 +61,7 @@ const breadcrumbs = crumbs && {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} · The Windows</title>
+    <title>{title} · TheWindows</title>
     <meta name="description" content={description} />
     {!noindex && <>
       <link rel="alternate" hreflang="en" href={`https://thewindows.ca${enUrl}`} />
@@ -70,8 +70,8 @@ const breadcrumbs = crumbs && {
       <link rel="canonical" href={canonical} />
     </>}
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="The Windows" />
-    <meta property="og:title" content={`${title} · The Windows`} />
+    <meta property="og:site_name" content="TheWindows" />
+    <meta property="og:title" content={`${title} · TheWindows`} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content={lang === 'uk' ? 'uk_UA' : 'en_CA'} />
@@ -102,7 +102,7 @@ const breadcrumbs = crumbs && {
     </div>
     <header class="site-header">
       <div class="container header-inner">
-        <a href={link(lang, '/')} class="brand" aria-label="The Windows home">
+        <a href={link(lang, '/')} class="brand" aria-label="TheWindows home">
           <img src={logo.src} alt="thewindows" width="381" height="52" />
         </a>
         <button class="nav-toggle" aria-expanded="false" aria-controls="nav" aria-label="Menu">
@@ -153,7 +153,7 @@ const breadcrumbs = crumbs && {
         </div>
       </div>
       <div class="container footer-bottom">
-        <span>© {new Date().getFullYear()} The Windows</span>
+        <span>© {new Date().getFullYear()} TheWindows</span>
         <span>{s.footer.city}</span>
       </div>
     </footer>

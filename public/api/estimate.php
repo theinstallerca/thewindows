@@ -67,8 +67,8 @@ $table
 <p style='color:#888;font-size:11px'>IP: " . $esc($_SERVER['REMOTE_ADDR'] ?? '') . " · " . date('Y-m-d H:i') . "</p>";
 
 $custHtml = $lang === 'UA'
-    ? "<p>Вітаємо, {$esc($name)}!</p><p>Ми отримали ваш запит на орієнтовний розрахунок і відповімо на цей email з орієнтовною ціною, зазвичай протягом одного робочого дня. Якщо ціна підійде — приїдемо на безкоштовний замір.</p>$table<p>Це орієнтовна ціна; остаточна підтверджується після заміру.</p><p>The Windows · Вінніпег · (204) 230-8145 · info@thewindows.ca</p>"
-    : "<p>Hi {$esc($name)},</p><p>We received your online estimate request and will reply to this email with a budgetary price, usually within one business day. If it fits your budget, we'll come out for a free measurement.</p>$table<p>This is a budgetary estimate; the final price is confirmed after on-site measurement.</p><p>The Windows · Winnipeg · (204) 230-8145 · info@thewindows.ca</p>";
+    ? "<p>Вітаємо, {$esc($name)}!</p><p>Ми отримали ваш запит на орієнтовний розрахунок і відповімо на цей email з орієнтовною ціною, зазвичай протягом одного робочого дня. Якщо ціна підійде — приїдемо на безкоштовний замір.</p>$table<p>Це орієнтовна ціна; остаточна підтверджується після заміру.</p><p>TheWindows · Вінніпег · (204) 230-8145 · info@thewindows.ca</p>"
+    : "<p>Hi {$esc($name)},</p><p>We received your online estimate request and will reply to this email with a budgetary price, usually within one business day. If it fits your budget, we'll come out for a free measurement.</p>$table<p>This is a budgetary estimate; the final price is confirmed after on-site measurement.</p><p>TheWindows · Winnipeg · (204) 230-8145 · info@thewindows.ca</p>";
 
 // ---- Attachments ------------------------------------------------------
 $attachments = [];
@@ -85,7 +85,7 @@ if (!empty($_FILES['preview']) && is_array($_FILES['preview']['tmp_name'])) {
 // ---- Send (multipart MIME) --------------------------------------------
 function sendMail(string $to, string $subject, string $html, array $attachments, string $from, string $replyTo = ''): bool {
     $b = 'b' . bin2hex(random_bytes(12));
-    $h  = "From: The Windows website <$from>\r\n";
+    $h  = "From: TheWindows website <$from>\r\n";
     if ($replyTo) $h .= "Reply-To: $replyTo\r\n";
     $h .= "MIME-Version: 1.0\r\nContent-Type: multipart/mixed; boundary=\"$b\"\r\n";
     $body  = "--$b\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$html\r\n";
@@ -99,6 +99,6 @@ function sendMail(string $to, string $subject, string $html, array $attachments,
 
 $sentShop = sendMail($TO, "[$lang] Online estimate request — $name", $shopHtml, $attachments, $FROM, "$name <$email>");
 if (!$sentShop) fail(500, 'Mail could not be sent');
-sendMail($email, $lang === 'UA' ? 'Ваш запит на розрахунок — The Windows' : 'Your estimate request — The Windows', $custHtml, $attachments, $FROM, $TO);
+sendMail($email, $lang === 'UA' ? 'Ваш запит на розрахунок — TheWindows' : 'Your estimate request — TheWindows', $custHtml, $attachments, $FROM, $TO);
 
 echo json_encode(['ok' => true]);
