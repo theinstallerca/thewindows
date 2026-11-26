@@ -80,8 +80,8 @@ const en = {
     awning: {
       title: 'Awning Windows, Custom PVC, Winnipeg', h1: 'Awning windows', opens: 'Top-hinged, opens outward',
       lead: 'Hinged at the top and opened outward from the bottom. The open sash sheds water like a small roof, so it can stay open in light rain.',
-      build: ['An awning uses the same frame and sash as our casement, turned so the hinges are at the top. Side by side, the two have the same sightlines.', 'The glass is set from the room side and held by a glazing bead. The screen sits on the inside.'],
-      fits: ['Above or below a picture window', 'Basements and bathrooms, set high in the wall for privacy', 'Anywhere you want air on a rainy day'],
+      build: ['An awning uses the same frame and sash as our casement. Side by side, the two have the same sightlines.', 'The glass is set from the room side and held by a glazing bead. The screen sits on the inside.'],
+      fits: ['Above or below a picture window', 'Basements, bathrooms and kitchens', 'Anywhere you want air on a rainy day'],
     },
     picture: {
       title: 'Picture Windows, Custom PVC, Winnipeg', h1: 'Picture windows', opens: 'Does not open',
@@ -247,8 +247,8 @@ const uk: typeof en = {
     awning: {
       title: 'Вікна-фрамуги (awning) з ПВХ на замовлення, Вінніпег', h1: 'Вікна-фрамуги', opens: 'Петлі зверху, назовні',
       lead: 'Петлі зверху, відкривається назовні знизу. Відчинена стулка відводить воду, як маленький дашок, тож її можна залишати відкритою в невеликий дощ.',
-      build: ['Фрамуга має ту саму раму й стулку, що й наше поворотне вікно, тільки петлі розташовані зверху. Поруч вони виглядають однаково.', 'Скло встановлюється з боку кімнати й тримається штапиком. Сітка стоїть зсередини.'],
-      fits: ['Над або під глухим вікном', 'Підвали та ванні кімнати, високо в стіні', 'Усюди, де потрібне провітрювання в дощ'],
+      build: ['Фрамуга має ту саму раму й стулку, що й наше поворотне вікно. Поруч вони виглядають однаково.', 'Скло встановлюється з боку кімнати й тримається штапиком. Сітка стоїть зсередини.'],
+      fits: ['Над або під глухим вікном', 'Підвали, ванні кімнати та кухні', 'Усюди, де потрібне провітрювання в дощ'],
     },
     picture: {
       title: 'Глухі вікна (picture) з ПВХ на замовлення, Вінніпег', h1: 'Глухі вікна (picture)', opens: 'Не відкривається',
