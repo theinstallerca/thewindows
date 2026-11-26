@@ -20,6 +20,11 @@ const specs = [[tp.specOpens, p.opens], [tp.specDepth, '82.6 mm · 3 1/4"'], [tp
 const sec = (sections as Record<string, { w: number; h: number; marks: number[][] }>)[kind];
 // the legend reads down the left column, then down the right
 const rows = Math.ceil((sashed ? 8 : 6) / 2);
+// A short looping clip under the text, where a type has one. Without the video file yet, its first frame is shown.
+const motions: Partial<Record<Kind, { poster: string; video?: string; w: number; h: number; alt: string }>> = {
+  casement: { poster: '/images/windows/casement-motion-poster.webp', w: 474, h: 720, alt: `${p.h1}: ${s.photo.outside}` },
+};
+const motion = motions[kind];
 const secKind = kind === 'awning' ? 'casement' : kind;
 const z = s.estimate;
 const trim = [tp.partBrickmould, tp.partCap, tp.partJamb];
@@ -47,10 +52,19 @@ const parts = sashed ? [tp.partFrame, tp.partSash, tp.partGlass, tp.partBead, ..
     </dl>
 
     <section class="panel build">
-      <div>
-        <span class="kicker">{tp.buildKicker}</span>
-        <h2>{tp.buildH}</h2>
-        {p.build.map((x) => <p>{x}</p>)}
+      <div class={motion ? 'build-text has-motion' : 'build-text'}>
+        <div>
+          <span class="kicker">{tp.buildKicker}</span>
+          <h2>{tp.buildH}</h2>
+          {p.build.map((x) => <p>{x}</p>)}
+        </div>
+        {motion && (
+          <div class="build-motion">
+            {motion.video
+              ? <video src={motion.video} poster={motion.poster} width={motion.w} height={motion.h} autoplay muted loop playsinline preload="metadata" aria-label={motion.alt}></video>
+              : <img src={motion.poster} width={motion.w} height={motion.h} alt={motion.alt} loading="lazy" />}
+          </div>
+        )}
       </div>
       <figure class="psec">
         <div class="psec-shot pv-zoomable" id="sec-shot" role="button" tabindex="0" title={z.zoomTip} data-large={`/images/windows/${secKind}-section-large.webp`}>
