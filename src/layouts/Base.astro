@@ -87,7 +87,7 @@ const breadcrumbs = crumbs && {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=3" />
   </head>
   <body>
-    <div class="topbar">
+    <div class="topbar" data-nosnippet>
       <div class="container topbar-inner">
         <a href={`tel:${phone.tel}`}>{s.top.tel} {phone.display}</a>
         <div class="topbar-links">
@@ -128,7 +128,7 @@ const breadcrumbs = crumbs && {
       <slot />
     </main>
 
-    <footer class="site-footer">
+    <footer class="site-footer" data-nosnippet>
       <div class="container footer-grid">
         <div>
           <img src={logo.src} alt="thewindows" width="249" height="34" />
